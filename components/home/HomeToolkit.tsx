@@ -1,12 +1,55 @@
 import styles from "../Home.module.css";
 
 const rows: [string, string[]][] = [
-  ["Design", ["Figma", "FigJam", "Framer", "Principle", "ProtoPie"]],
+  ["Design", ["Figma", "FigJam", "Framer"]],
   ["Development", ["React", "TypeScript", "HTML / CSS", "Node.js", "Tailwind CSS"]],
   ["AI", ["Claude", "Cursor", "ChatGPT", "GitHub Copilot", "v0"]],
-  ["Research", ["Maze", "Hotjar", "Dovetail", "UserTesting"]],
+  ["Research", ["Maze", "Miro", "UserTesting"]],
   ["Collaboration", ["Notion", "Jira", "Linear", "Slack", "GitHub"]],
 ];
+
+const iconSlugs: Record<string, string> = {
+  Figma: "figma",
+  FigJam: "figjam",
+  Framer: "framer",
+  Miro: "miro",
+  React: "react",
+  TypeScript: "typescript",
+  "HTML / CSS": "html5",
+  "Node.js": "nodedotjs",
+  "Tailwind CSS": "tailwindcss",
+  Claude: "claude",
+  Cursor: "cursor",
+  ChatGPT: "openai",
+  "GitHub Copilot": "githubcopilot",
+  v0: "vercel",
+  Maze: "maze",
+  UserTesting: "usertesting",
+  Notion: "notion",
+  Jira: "jira",
+  Linear: "linear",
+  Slack: "slack",
+  GitHub: "github",
+};
+
+function ToolChip({ name }: { name: string }) {
+  const slug = iconSlugs[name];
+
+  return (
+    <span className={styles.toolChip}>
+      {slug && (
+        <img
+          src={`https://cdn.simpleicons.org/${slug}`}
+          alt=""
+          className={styles.toolIcon}
+          width={14}
+          height={14}
+        />
+      )}
+      {name}
+    </span>
+  );
+}
 
 export default function HomeToolkit() {
   return (
@@ -29,7 +72,7 @@ export default function HomeToolkit() {
               <div className={styles.toolCategory}>{label}</div>
               <div className={styles.toolItems}>
                 {tools.map((t) => (
-                  <span key={t} className={styles.toolChip}>{t}</span>
+                  <ToolChip key={t} name={t} />
                 ))}
               </div>
             </div>
