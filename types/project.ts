@@ -1,0 +1,29 @@
+export interface DesignProject {
+  title: string
+  slug: string
+  industry: string
+  role: string
+  duration: string
+  year: number
+  summary: string
+  challenge: string
+  approach: string
+  solution: string
+  impact: string
+  reflection?: string
+  coverImage: string
+  gallery: string[]
+}
+
+export interface CodeProject {
+  title: string
+  slug: string
+  summary: string
+  stack: string[]
+  repository?: string
+  liveDemo?: string
+  aiTools?: string[]
+  technicalHighlights?: string[]
+  coverImage: string
+  gallery?: string[]
+}

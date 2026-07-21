@@ -2,25 +2,273 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111111;
+  --surface: #f5f5f4;
+  --surface-hover: #e8e8e8;
+  --border: #e0e0e0;
+  --muted: #888888;
+  --text-secondary: #333333;
+  --accent: #e8271a;
+  --accent-foreground: #ffffff;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono), "Geist Mono", "Roboto Mono", monospace;
+  --font-weight-display: 700;
+  --font-weight-heading: 600;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  .section-pad {
+    padding-top: var(--space-7);
+    padding-bottom: var(--space-7);
+  }
+  .muted-small {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  --space-7: 48px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+
+  --card-shadow: 0 6px 18px rgba(22, 22, 22, 0.06);
+  --card-hover-shadow: 0 18px 40px rgba(22, 22, 22, 0.08);
+  --transition-fast: 180ms;
+}
+
+[data-theme="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --surface: #1a1a1a;
+  --surface-hover: #2a2a2a;
+  --border: #333333;
+  --muted: #888888;
+  --text-secondary: #cccccc;
+  --accent: #ff5a4a;
+  --accent-foreground: #0a0a0a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Utility mappings used across components to keep tokens and tailwind utilities consistent */
+.text-muted {
+  color: var(--muted);
+}
+.border-border {
+  border-color: var(--border);
+}
+.bg-accent {
+  background: var(--accent);
+}
+.text-accent-foreground {
+  color: var(--accent-foreground);
+}
+.bg-surface {
+  background: var(--surface);
+}
+.bg-surface-hover {
+  background: var(--surface-hover);
+}
+.text-accent {
+  color: var(--accent);
+}
+.bg-background {
+  background: var(--background);
+}
+
+/* Typography primitives matching the provided design language */
+.display {
+  font-weight: var(--font-weight-display);
+  font-size: clamp(2.25rem, 4vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.heading {
+  font-weight: var(--font-weight-heading);
+  font-size: clamp(1.375rem, 2.2vw, 2.25rem);
+  line-height: 1.08;
+}
+
+.subheading {
+  font-weight: 600;
+  color: var(--muted);
+}
+.body {
+  line-height: 1.7;
+  color: var(--foreground);
+}
+.caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* Card treatment used for portfolio tiles */
+.card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  transition:
+    transform var(--transition-fast) ease,
+    box-shadow var(--transition-fast) ease;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--card-hover-shadow);
+}
+.card-inner {
+  padding: var(--space-5);
+}
+.card-image {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: #f3f3f3;
+}
+.card-title {
+  margin-top: var(--space-4);
+  font-weight: 600;
+}
+.card-meta {
+  margin-top: var(--space-2);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Snap behaviour and controls for hero carousel */
+.carousel-snap {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.carousel-snap > .carousel-item {
+  scroll-snap-align: center;
+}
+.carousel-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.carousel-button {
+  background: var(--background);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.carousel-button:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Button primitives to mirror the design language */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  padding: calc(var(--space-3)) calc(var(--space-5));
+  border-radius: 8px;
+  transition: all var(--transition-fast) ease;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+}
+
+/* Rhythm helpers */
+.section-pad {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-7);
+}
+.muted-small {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Pill tabs used on homepage featured work & work page */
+.tab-container {
+  display: inline-flex;
+  height: 40px;
+  padding: 4px;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid #dcdcd9;
+  background: #f9f9f8;
+  gap: 4px;
+}
+
+.tab-btn {
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--foreground);
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: var(--foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,0 +1,26 @@
+export const metadata = {
+  title: 'Design System CLI',
+  summary: 'A command-line tool that generates design system documentation and component scaffolding from design tokens.',
+  stack: ['TypeScript', 'Node.js', 'React', 'Tailwind CSS'],
+  repository: 'https://github.com/example/design-system-cli',
+  liveDemo: 'https://example.com/ds-cli',
+  aiTools: ['Claude', 'GitHub Copilot'],
+  technicalHighlights: [
+    'Parses Figma token exports into TypeScript types',
+    'Generates documentation sites automatically',
+    'Supports custom template engines',
+    'Handles 100+ token transformations per second',
+  ],
+  coverImage: '/images/placeholder-code.jpg',
+  gallery: [],
+}
+
+## Overview
+
+Design tokens are essential for maintaining consistency across products, but keeping documentation and components in sync with tokens is a manual effort. This CLI automates the pipeline.
+
+## Technical Details
+
+The tool reads JSON token files (compatible with the Design Tokens Format), validates them against a schema, and generates TypeScript types, CSS variables, component scaffolding, and documentation.
+
+Built with a plugin architecture so teams can extend it with their own generators.
