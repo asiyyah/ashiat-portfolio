@@ -1,8 +1,12 @@
 import { getAllDesignSlugs, getDesignProject } from "@/lib/projects";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import { Heading, Body, Subheading } from "@/components/ui/Typography";
+import Button from "@/components/ui/Button";
+import ScrollReveal from "@/components/motion/ScrollReveal";
+import BackLink from "@/components/ui/BackLink";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -22,6 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const RICH_LAYOUT_SLUGS = ["revenue-management-platform"];
+
 export default async function CaseStudyPage({ params }: Props) {
   const { slug } = await params;
   const project = await getDesignProject(slug);
@@ -31,12 +37,9 @@ export default async function CaseStudyPage({ params }: Props) {
       <Section>
         <div className="text-center max-w-3xl mx-auto">
           <Heading as="h1">Project not found</Heading>
-          <Link
-            href="/work"
-            className="mt-6 inline-block text-accent hover:underline"
-          >
+          <BackLink className="mt-6 inline-block text-accent hover:underline">
             &larr; Back to Work
-          </Link>
+          </BackLink>
         </div>
       </Section>
     );
@@ -45,15 +48,16 @@ export default async function CaseStudyPage({ params }: Props) {
   const MdxContent = (await import(`@/content/design/${slug}/index.mdx`))
     .default;
 
+  const useRichLayout = RICH_LAYOUT_SLUGS.includes(slug);
+
+  if (useRichLayout) {
+    return <RichCaseStudyLayout project={project} MdxContent={MdxContent} />;
+  }
+
   return (
     <Section>
       <div className="max-w-3xl mx-auto">
-        <Link
-          href="/work"
-          className="text-sm text-muted hover:text-foreground transition-colors"
-        >
-          &larr; Back to Work
-        </Link>
+        <BackLink>&larr; Back to Work</BackLink>
 
         <header className="mt-8 mb-16">
           <p className="caption mb-4">
@@ -103,5 +107,112 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
       </div>
     </Section>
+  );
+}
+
+function RichCaseStudyLayout({
+  project,
+  MdxContent,
+}: {
+  project: NonNullable<Awaited<ReturnType<typeof getDesignProject>>>;
+  MdxContent: React.ComponentType;
+}) {
+  return (
+    <article>
+      <div className="max-w-4xl mx-auto px-6">
+        <ScrollReveal>
+          <BackLink>&larr; Back to Work</BackLink>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <header className="mt-8 mb-12">
+            <p className="caption mb-4">{project.year}</p>
+            <Heading as="h1">{project.title}</Heading>
+            <div className="hero-tags mt-4">
+              <span className="text-xs px-3 py-1 rounded-full bg-foreground text-background font-medium">
+                Case Study
+              </span>
+              <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
+                {project.industry}
+              </span>
+              <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
+                Enterprise Design
+              </span>
+              <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
+                UI/UX Design
+              </span>
+            </div>
+          </header>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <section className="mb-12">
+            <div className="rounded-lg bg-surface p-4 md:p-6">
+              <div className="rounded-md overflow-hidden bg-background border border-border">
+                <Image
+                  src={project.coverImage}
+                  alt={`${project.title} dashboard overview`}
+                  width={1200}
+                  height={750}
+                  className="w-full h-auto"
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  priority
+                />
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <dl className="meta-table mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <dt>Role</dt>
+              <dd>{project.role}</dd>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <dt>Timeline</dt>
+              <dd>{project.duration}</dd>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <dt>Team</dt>
+              <dd>Sole Designer + 8 Engineers + CTO + Domain Experts</dd>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <dt>Platforms</dt>
+              <dd>Web Application (Desktop-first)</dd>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <dt>Tools</dt>
+              <dd>Figma, Notion, Linear, GitHub</dd>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <dt>Impact</dt>
+              <dd>
+                {project.impact}
+              </dd>
+            </div>
+          </dl>
+        </ScrollReveal>
+      </div>
+
+      <div className="case-study-content max-w-3xl mx-auto px-6">
+        <MdxContent />
+      </div>
+
+      <ScrollReveal>
+        <section className="cta-band mt-16">
+          <div className="max-w-3xl mx-auto">
+            <Heading as="h2" className="text-center">
+              Have a Project In Mind?
+            </Heading>
+            <div className="text-center mt-6">
+              <Button href="/contact" variant="primary">
+                Let&apos;s Talk
+              </Button>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+    </article>
   );
 }

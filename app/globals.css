@@ -262,6 +262,105 @@ body {
   color: var(--accent-foreground);
 }
 
+/* Case study meta table */
+.meta-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.meta-table dt {
+  font-weight: 600;
+  color: var(--foreground);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.meta-table dd {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Case study content styles */
+.case-study-content h2 {
+  font-weight: var(--font-weight-heading);
+  font-size: clamp(1.375rem, 2.2vw, 2.25rem);
+  line-height: 1.08;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.case-study-content h3 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--foreground);
+}
+.case-study-content h4 {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--foreground);
+}
+.case-study-content p {
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+.case-study-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+.case-study-content ul li {
+  line-height: 1.7;
+  margin-bottom: 0.35rem;
+}
+.case-study-content ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+.case-study-content ol li {
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+.case-study-content ol li strong {
+  color: var(--foreground);
+}
+.case-study-content ol li ul {
+  list-style: disc;
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+.case-study-content ol li ul li {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+/* Hero tags row */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--space-4);
+}
+
+/* CTA band */
+.cta-band {
+  background: var(--foreground);
+  color: var(--background);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+.cta-band h2 {
+  color: var(--background);
+  margin-bottom: 1.5rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

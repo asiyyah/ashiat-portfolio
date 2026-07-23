@@ -123,7 +123,17 @@ export default function PlaygroundCanvas() {
   }, [])
 
   return (
-    <div className="fixed inset-0 top-16 overflow-hidden bg-surface cursor-grab active:cursor-grabbing">
+    <div
+      className="fixed inset-0 top-16 overflow-hidden cursor-grab active:cursor-grabbing"
+      style={{
+        background: `
+          linear-gradient(to right, rgba(128,128,128,0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(128,128,128,0.08) 1px, transparent 1px),
+          var(--surface)
+        `,
+        backgroundSize: '48px 48px, 48px 48px, 100% 100%',
+      }}
+    >
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
         <p className="text-xs text-muted font-mono tracking-wider">
           drag to explore &middot; click to view

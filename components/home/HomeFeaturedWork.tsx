@@ -20,7 +20,7 @@ const designStudies: Study[] = [
     tags: ["Lead Designer", "Fintech", "2022–2024"],
     impact: "Reduced reconciliation time by 60%",
     tools: "Figma / React / TypeScript / D3.js / Design System",
-    image: "/images/case-study-1.png",
+    image: "/images/Thumbnail.png",
     slug: "revenue-management-platform",
   },
   {

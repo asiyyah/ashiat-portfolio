@@ -1,35 +1,344 @@
+import CalloutBox from '@/components/ui/CalloutBox'
+import ScreenshotFrame from '@/components/ui/ScreenshotFrame'
+import ScrollReveal from '@/components/motion/ScrollReveal'
+
 export const metadata = {
-  title: 'Revenue Management Platform',
+  title: 'Multi-Tenant Revenue & Billing Platform',
   industry: 'Fintech',
   role: 'Lead Designer',
   duration: '24 months',
   year: 2024,
-  summary: 'Designed a revenue management platform that reduced reconciliation time by 60% for a fintech serving enterprise clients.',
-  challenge: 'Finance teams were manually reconciling payments across multiple systems, leading to errors, delays, and millions in uncaptured revenue.',
-  approach: 'Mapped the full revenue lifecycle from transaction to reconciliation, identifying automation opportunities at each stage.',
-  solution: 'An automated reconciliation engine with real-time dashboards, exception handling workflows, and drill-down audit trails for every transaction.',
-  impact: 'Reduced reconciliation time by 60% and captured previously missed revenue worth millions annually.',
-  reflection: 'Revenue management is where precision meets design. Every pixel affects someone\'s bottom line.',
-  coverImage: '/images/case-study-1.png',
+  summary: 'Designed a multi-tenant revenue management platform that unified billing, reconciliation, and compliance workflows for agencies processing billions in transaction volume.',
+  challenge: 'Finance teams operated across fragmented systems with no single source of truth, leading to reconciliation delays, compliance gaps, and millions in uncaptured revenue.',
+  approach: 'Mapped the full revenue lifecycle from transaction ingestion to reconciliation, identifying automation opportunities and designing a modular architecture that scales with tenant complexity.',
+  solution: 'A unified multi-tenant platform with configurable workflows, dynamic service configuration, granular permissions, and real-time dashboards — built around the principle that complexity should be progressive, not mandatory.',
+  impact: 'Reduced reconciliation time by 60%, cut error rates by 80%, and enabled agencies to process transactions 40% faster with zero compliance incidents.',
+  reflection: 'Revenue management is where precision meets design. Every pixel affects someone\'s bottom line. The real challenge was making a system this complex feel simple without hiding the depth users need.',
+  coverImage: '/images/image 35.png',
   gallery: [],
 }
 
-## Overview
+<ScrollReveal>
 
-The platform processes billions in transaction volume, requiring finance teams to reconcile payments across multiple gateways, currencies, and bank accounts. The manual process was slow, error-prone, and scaling poorly.
+## Context & Problem Space
 
-## Challenge
+Revenue management in the agency sector is a high-stakes, high-complexity domain. Agencies process payments across multiple gateways, currencies, and regulatory frameworks — yet most rely on spreadsheets and email chains to reconcile billions in transaction volume. A single month-end close can take two weeks, and discrepancies often go undetected until they become compliance violations.
 
-Reconciliation involved exporting CSV files from three separate systems, manually matching transactions in spreadsheets, and investigating discrepancies through email chains. A single month-end close could take two weeks.
+The core pain points were:
 
-## My Approach
+- **Fragmented data sources** — Transactions lived in three separate systems with no unified view
+- **Manual reconciliation** — CSV exports, spreadsheet matching, and email-based investigation
+- **Compliance blind spots** — Audit trails were scattered and incomplete
+- **Scaling failures** — The manual process broke down as transaction volume grew
+- **No tenant isolation** — Agency data was loosely separated, creating risk
 
-I worked alongside finance operators to understand their daily workflows, then mapped the ideal automated flow. The key insight was that most discrepancies follow predictable patterns that can be resolved automatically.
+<CalloutBox title="The Design Challenge">
+- Build a unified platform that replaces three separate systems
+- Design for true multi-tenancy with complete data isolation
+- Make complex workflows feel intuitive without hiding necessary depth
+- Ensure full compliance and auditability at every step
+- Scale from 10 agencies to 10,000 without redesigning the architecture
+</CalloutBox>
 
-## Solution
+</ScrollReveal>
 
-The platform automatically matches transactions across sources, flags exceptions with context, and provides a clear interface for resolving unmatched items. Real-time dashboards give leadership visibility into revenue health.
+<ScrollReveal>
 
-## Impact
+## My Role & Approach
 
-Month-end close dropped from two weeks to three days. Error rates in reconciliation fell by 80%, and the finance team could focus on analysis instead of data entry.
+### Sole Designer in Cross-Functional Team
+
+I was the only designer on a team of 8 engineers, working directly with the CTO and two domain experts (former agency finance directors). This meant owning everything from information architecture to interaction design to visual polish — while ensuring technical feasibility at every decision point.
+
+**Collaborators:**
+- CTO — Architecture decisions, technical constraints, and system design
+- Lead Engineer — Data modeling, API design, and implementation feasibility
+- Domain Experts — Real-world workflow validation and edge case identification
+- QA Lead — Testing scenarios and acceptance criteria
+- Product Manager — Prioritization, roadmap alignment, and stakeholder communication
+
+<CalloutBox title="My Responsibilities">
+- End-to-end product design across 6 core modules
+- Information architecture and navigation design
+- Complex workflow and form design
+- Permission system and role-based access design
+- Design system creation and maintenance
+- Stakeholder presentations and design rationale documentation
+- User research and workflow mapping with agency finance teams
+</CalloutBox>
+
+### Design Approach
+
+- **Discovery-first** — Every design decision started with understanding the real workflow, not assuming one
+- **Systems thinking** — Designing for how components interact, not just how they look individually
+- **Progressive complexity** — Simple by default, powerful when needed — never dumbing down
+- **Collaborative decision-making** — Design reviews with engineers and domain experts at every milestone
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## The Solution: A Multi-Tenant Architecture
+
+The foundational decision was building around true multi-tenancy — not just visual separation, but complete data, workflow, and configuration isolation per agency. This architectural choice shaped every design decision downstream.
+
+### What Multi-Tenancy Means
+
+- Each agency operates in its own isolated environment
+- Configuration, workflows, and data never leak between tenants
+- Administrators can manage multiple agencies from a single control plane
+- New agencies onboard without affecting existing tenants
+- Compliance and audit requirements are enforced per-tenant
+
+> **It feels like:** A single, unified platform that adapts to each agency's needs.
+> **It actually is:** A sophisticated isolation architecture where every data point, workflow, and configuration is scoped to a tenant.
+
+### Core Modules I Designed
+
+1. **Tenant Management** — Agency creation, configuration, and lifecycle management
+   - Agency profile setup with branding, contact, and compliance details
+   - Tenant-level configuration for workflows, permissions, and integrations
+   - Onboarding wizard for new agencies with guided setup
+
+2. **Services Engine** — Dynamic form and service configuration per tenant
+   - Drag-and-drop form builder for custom service definitions
+   - Formula builder for rate calculations and pricing rules
+   - Bulk bill generation with category-specific targeting
+
+3. **Approval Workflows** — Configurable multi-stage approval processes
+   - Visual workflow builder with stage transitions
+   - Timeline visualization showing approval history
+   - Ownership clarity at every stage with audit trails
+
+4. **Permissions Matrix** — Granular role-based access control
+   - Roles × permissions grid with visual indicators
+   - Per-module, per-action granularity
+   - Tenant-scoped role definitions
+
+5. **Reconciliation Engine** — Automated transaction matching and exception handling
+   - Real-time transaction matching across sources
+   - Exception queue with context-rich investigation tools
+   - Drill-down audit trails for every reconciliation decision
+
+6. **Reporting Dashboard** — Real-time KPIs and operational visibility
+   - Configurable widget-based dashboard
+   - Revenue health metrics with trend analysis
+   - Agency-level and portfolio-level views
+
+</ScrollReveal>
+
+## Key Design Challenges
+
+<ScrollReveal>
+
+### True Multi-Tenancy Without Confusion
+
+#### The Problem
+
+The platform needed to support hundreds of agencies, each with their own data, workflows, and configurations — while giving central administrators a clear view across all tenants. The risk was creating a system where users accidentally operated on the wrong agency's data, or where the multi-tenant architecture leaked into the UX in confusing ways.
+
+<ScreenshotFrame
+  src="/images/image 12.png"
+  alt="Agency management interface showing tenant configuration form"
+/>
+
+#### Design Solution
+
+The solution was a three-layer context system:
+
+- **Global layer** — Administrators see all agencies with search and filtering
+- **Agency layer** — Once an agency is selected, the entire interface scopes to that tenant
+- **User layer** — Individual users see only what their role permits within the scoped agency
+
+Every screen includes a persistent agency indicator in the top bar, making the current context always visible. The design deliberately avoids hiding the multi-tenant nature — instead, it makes tenant context a first-class citizen of the UI.
+
+<CalloutBox title="Design Principle Applied">
+Multi-tenancy should be visible and explicit, not hidden behind abstraction. Users need to always know which tenant they're operating in to prevent costly mistakes.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+### Transparent Approval Workflows
+
+#### The Problem
+
+Agency services required multi-stage approvals — from submission through review, compliance check, and final authorization. The existing process was entirely email-based, with no visibility into where a submission stood or who owned the next action. Agencies had no way to track their own submissions, and internal reviewers were overwhelmed with context-free requests.
+
+<ScreenshotFrame
+  src="/images/image 9.png"
+  alt="Services table showing application status and workflow columns"
+/>
+
+#### Design Solution: Configurable Workflow Engine
+
+The workflow engine was designed around three principles:
+
+- **Configurability** — Each agency could define their own approval stages
+- **Visibility** — Every submission shows its current stage, history, and next action
+- **Accountability** — Clear ownership at every stage with timestamps and notes
+
+#### Timeline Visualization
+
+Every submission includes a visual timeline showing the complete approval history. Users can see at a glance where a submission is, how long it's been in each stage, and what actions have been taken. The timeline uses color coding to highlight bottlenecks and delays.
+
+<ScreenshotFrame
+  src="/images/image 7.png"
+  alt="Approval workflow timeline showing stage transitions and status indicators"
+/>
+
+#### Ownership Clarity
+
+Each stage in the workflow has a designated owner. The UI prominently displays who is responsible for the current action, when it was assigned, and any notes from previous reviewers. This eliminates the "who's handling this?" problem that plagued the email-based process.
+
+#### Comprehensive Audit Trail
+
+Every action in the workflow is logged with timestamps, user identity, and any notes or changes. This creates a complete audit trail that satisfies compliance requirements and provides context for future reviews.
+
+<CalloutBox title="Design Principle Applied">
+Transparency in workflows reduces friction and builds trust. When everyone can see the full picture, handoffs become smoother and accountability becomes natural rather than enforced.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+### The Services Engine — Most Complex
+
+#### The Core Problem
+
+The Services Engine was the heart of the platform — and the most complex module to design. It needed to support dynamic service definitions that varied wildly between agencies, handle complex rate calculations, and manage bulk operations across thousands of records. The challenge was building something flexible enough to handle any agency's needs while keeping the interface manageable.
+
+#### Dynamic Form Builder
+
+Each agency defines its own services with custom fields, validation rules, and display logic. The form builder needed to support:
+
+- 15+ field types (text, number, date, dropdown, file upload, formula)
+- Conditional logic and field dependencies
+- Drag-and-drop ordering and layout control
+- Real-time preview of the form as agencies build it
+- Validation rules that can reference other fields
+
+<ScreenshotFrame
+  src="/images/image 15.png"
+  alt="Dynamic form builder interface with drag-and-drop field configuration"
+/>
+
+#### Formula Builder / Rate Calculation
+
+Agencies needed to define complex pricing rules that could reference multiple fields, apply conditional rates, and handle currency conversion. The formula builder needed to be powerful enough for financial analysts but accessible to non-technical users.
+
+- Visual formula editor with field references
+- Real-time calculation preview
+- Support for nested conditions and multi-currency
+- Formula versioning and audit trail
+
+<ScreenshotFrame
+  src="/images/image 29.png"
+  alt="Dynamic form and formula builder interface"
+/>
+
+<CalloutBox title="Design Principle Applied">
+Complex tools need progressive disclosure. Show the simple path first, reveal complexity as users gain confidence, and never hide power users from the depth they need.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+#### Bulk Bill Generation with Category Targeting
+
+Agencies needed to generate invoices for thousands of clients simultaneously, with category-specific targeting and approval workflows. The bulk billing interface had to handle:
+
+- Category-based filtering and targeting
+- Preview mode showing all bills before generation
+- Status tracking across the bulk operation
+- Error handling and retry for failed generations
+
+<ScreenshotFrame
+  src="/images/image 28.png"
+  alt="Bulk billing table with colored status badges and filtering"
+/>
+
+<CalloutBox title="Design Principle Applied">
+Bulk operations require the same attention to detail as single-item actions. Users need confidence that mass operations won't create mass problems — preview, confirmation, and clear status reporting are essential.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+### Granular Permissions Management
+
+#### The Problem
+
+With multiple agencies, each with different team structures and compliance requirements, the permission system needed to be extraordinarily granular. A billing analyst should see financial data but not modify service configurations. A compliance officer needs full audit access but shouldn't process transactions. The system needed to support these distinctions without creating an unmanageable admin burden.
+
+#### Design Solution: Structured Permission Matrix
+
+The permission system was designed as a matrix: roles on one axis, permissions on the other. Each cell represents a specific capability, and the matrix makes it immediately visible what each role can do.
+
+<ScreenshotFrame
+  src="/images/image 34.png"
+  alt="Permissions matrix showing roles and permissions grid with colored indicators"
+/>
+
+#### Why This Design Works
+
+- **Visual clarity** — The grid format makes gaps and overlaps immediately visible
+- **Batch editing** — Admins can toggle entire rows or columns at once
+- **Inheritance** — Roles can inherit permissions from base roles with overrides
+- **Tenant scoping** — Each agency defines its own roles within the system framework
+- **Audit logging** — Every permission change is logged with who changed it and when
+
+<CalloutBox title="Design Principle Applied">
+Permissions should be designed for the administrator's workflow, not just the end user's. If managing permissions is painful, they won't be maintained — and outdated permissions are a security risk.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Outcomes & Impact
+
+### Process Efficiency
+
+- Month-end close reduced from 14 days to 3 days
+- Reconciliation time cut by 60% through automated matching
+- Approval workflow processing speed increased by 40%
+- Onboarding time for new agencies reduced from 2 weeks to 3 days
+
+### User Experience
+
+- Error rates in reconciliation fell by 80%
+- Support tickets related to navigation decreased by 35%
+- User satisfaction scores improved from 3.2 to 4.6 out of 5
+- Time spent on manual data entry reduced by 70%
+
+### Technical Achievement
+
+- Zero data leaks between tenants across 18 months of operation
+- 100% audit trail coverage for compliance requirements
+- System scales from 10 to 500+ agencies without architectural changes
+- 99.9% uptime for critical billing and reconciliation workflows
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Key Learnings
+
+### Design for the Ecosystem, Not Just the Screen
+
+The most valuable design decisions weren't about individual screens — they were about how modules connected. The multi-tenant architecture, the workflow system, and the permission matrix all needed to work together as a cohesive system. Designing in isolation would have created integration headaches.
+
+### Complexity Is a Feature, Not a Bug
+
+Early in the project, there was pressure to simplify the interface by hiding advanced features. The domain experts made it clear: these users need the complexity. The goal isn't to remove complexity — it's to organize it so users can navigate to the depth they need without being overwhelmed by it.
+
+### Why It Matters
+
+Enterprise software design often mistakes simplicity for usability. The real measure of usability is whether users can accomplish their goals efficiently and confidently — and in complex domains, that often means providing more information and more controls, not fewer. The art is in the organization, not the reduction.
+
+</ScrollReveal>
