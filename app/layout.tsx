@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
+import ThemeInit from "./ThemeInit";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,24 +33,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('theme');
-                  if (!theme) {
-                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  }
-                  document.documentElement.setAttribute('data-theme', theme);
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col">
+        <ThemeInit />
         <CustomCursor label="You" />
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>

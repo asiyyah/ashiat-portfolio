@@ -19,7 +19,7 @@ const designStudies: Study[] = [
     title: "Revenue Management Platform",
     tags: ["Lead Designer", "Fintech", "2022–2024"],
     impact: "Reduced reconciliation time by 60%",
-    tools: "Figma / React / TypeScript / D3.js / Design System",
+    tools: "Figma / Design System",
     image: "/images/Thumbnail.png",
     slug: "revenue-management-platform",
   },

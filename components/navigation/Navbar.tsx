@@ -49,7 +49,7 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         <Link href="/" className="heading">
-          Portfolio
+          Ashiat Abdulkadir
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

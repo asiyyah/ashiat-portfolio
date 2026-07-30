@@ -2,18 +2,18 @@ import Image from "next/image";
 import styles from "../Home.module.css";
 
 const images = [
-  { src: "/images/case-study-1.png", alt: "Revenue Management Platform" },
-  { src: "/images/case-study-2.png", alt: "Government Digital Services" },
-  { src: "/images/case-study-3.png", alt: "Fintech Dashboard" },
-  { src: "/images/case-study-4.png", alt: "Compliance Platform" },
-  { src: "/images/case-study-5.png", alt: "SaaS Administration System" },
-  { src: "/images/case-study-6.png", alt: "Enterprise Operations Platform" },
-  { src: "/images/case-study-1.png", alt: "Revenue Management Platform" },
-  { src: "/images/case-study-2.png", alt: "Government Digital Services" },
-  { src: "/images/case-study-3.png", alt: "Fintech Dashboard" },
-  { src: "/images/case-study-4.png", alt: "Compliance Platform" },
-  { src: "/images/case-study-5.png", alt: "SaaS Administration System" },
-  { src: "/images/case-study-6.png", alt: "Enterprise Operations Platform" },
+  { src: "/images/Rectangle 3.png", alt: "Design showcase 3" },
+  { src: "/images/Rectangle 1.png", alt: "Design showcase 1" },
+  { src: "/images/Rectangle 5.png", alt: "Design showcase 5" },
+  { src: "/images/Rectangle 2.png", alt: "Design showcase 2" },
+  { src: "/images/Rectangle 6.png", alt: "Design showcase 6" },
+  { src: "/images/Rectangle 4.png", alt: "Design showcase 4" },
+  { src: "/images/Rectangle 5.png", alt: "Design showcase 5" },
+  { src: "/images/Rectangle 3.png", alt: "Design showcase 3" },
+  { src: "/images/Rectangle 1.png", alt: "Design showcase 1" },
+  { src: "/images/Rectangle 6.png", alt: "Design showcase 6" },
+  { src: "/images/Rectangle 4.png", alt: "Design showcase 4" },
+  { src: "/images/Rectangle 2.png", alt: "Design showcase 2" },
 ];
 
 export default function HomeHero() {
