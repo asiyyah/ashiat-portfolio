@@ -4,15 +4,25 @@ import { useEffect } from "react";
 
 export default function ThemeInit() {
   useEffect(() => {
-    try {
-      let theme = localStorage.getItem("theme");
-      if (!theme) {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-      }
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const applySystemTheme = (matches: boolean) => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") return;
+
+      const theme = matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", theme);
-    } catch (e) {}
+      window.dispatchEvent(new CustomEvent("themechange", { detail: theme }));
+    };
+
+    const handleSystemChange = (event: MediaQueryListEvent) => {
+      applySystemTheme(event.matches);
+    };
+
+    applySystemTheme(systemTheme.matches);
+    systemTheme.addEventListener("change", handleSystemChange);
+
+    return () => systemTheme.removeEventListener("change", handleSystemChange);
   }, []);
 
   return null;

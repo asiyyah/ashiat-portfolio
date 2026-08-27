@@ -1,0 +1,224 @@
+import {
+  StoryChapter,
+  StoryPrinciples,
+  StoryQuote,
+  StorySection,
+  StorySplit,
+  StoryVisual,
+} from "@/components/case-study/SpendToolStory";
+
+export const metadata = {
+  title: 'SpendTool — Admin Mobile Experience',
+  industry: 'B2B Fintech',
+  role: 'Product Designer — Solo',
+  duration: 'Self-initiated concept',
+  year: 2026,
+  summary: 'A ground-up exploration of the mobile experience finance administrators need to monitor spend, resolve requests, and control company money away from their desks.',
+  challenge: 'Finance administrators carry the highest level of responsibility in a spend platform, yet mobile products often give them a reduced employee experience instead of the context and controls their role requires.',
+  approach: 'Started with the decisions an administrator needs to make, then organised the product around four questions: Is everything okay? What needs my decision? What can I control? How are we spending?',
+  solution: 'A focused mobile workspace connecting company health, approval requests, cards, budgets, and analytics through clear status, progressive detail, and deliberate safety rails.',
+  impact: 'A complete admin-side mobile concept that turns fragmented financial signals into a coherent decision-making system.',
+  reflection: 'Designing for administrators is not about shrinking a desktop dashboard. It is about preserving context, confidence, and control at the moment a decision must be made.',
+  coverImage: '/images/Spend-tool/SpendTool-Thumbnail-2.png',
+  coverWidth: 1516,
+  coverHeight: 1896,
+  gallery: [],
+  aspectRatio: 'portrait',
+  featured: true,
+  team: 'Independent concept — sole product designer',
+  platforms: 'Mobile application (iOS concept)',
+  tools: 'Figma, FigJam, systems mapping, prototyping',
+  tags: ['Mobile UX', 'Admin Systems'],
+}
+
+<StorySection>
+
+<StoryChapter number="01 · Context and framing" title="Why spend management—and why the admin side." />
+
+Spend management products have a well-documented employee-experience problem: most attention goes to expense submission. The admin side is consistently underserved, even though that is where financial control lives.
+
+The African B2B context sharpens the problem. Corporate-card penetration is lower, teams often share a single card, and the resulting trust, fraud, and control implications are real. SpendTool explores an admin experience from the ground up—mobile first and grounded in that operational context.
+
+<StoryPrinciples items={[
+  { title: 'Reimbursement model', description: 'The employee spends first, submits later, and policy violations surface after the fact. Control is retrospective.' },
+  { title: 'Card-first model', description: 'Limits, restrictions, and budget assignments are configured before a card is used. The card becomes the policy layer.' },
+]} />
+
+<StoryQuote>
+  Setup thinking stays on the web. Mobile exists for the moment something needs the administrator’s attention or action right now.
+</StoryQuote>
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="02 · Product understanding" title="Requests and approvals look similar but operate at different levels." />
+
+Treating Requests and Approvals as interchangeable creates an information architecture that confuses both the administrator and the product logic.
+
+<StoryPrinciples items={[
+  { title: 'Requests · Operational', description: 'Individual, time-stamped spend events tied to an amount and a person. This is an inbox—urgent and time-sensitive.' },
+  { title: 'Approvals · Structural', description: 'The engine that determines who approves what, escalation triggers, and sign-off rules. It is configuration, not an inbox.' },
+]} />
+
+Requests therefore earn a permanent bottom-navigation destination. Approval logic appears inside each request as context—such as “Triggered by: Spend above ₦50k rule”—while full workflow configuration remains on the web.
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="03 · Navigation architecture" title="Four tabs, each answering one administrator question." />
+
+<StorySplit src="/images/Spend-tool/overview-screen-updated.png" alt="Question-led product model for Home, Requests, Tools, and Analysis" width={1122} height={1976}>
+  <h3>A question-led architecture</h3>
+
+  1. **Home:** Is everything okay with our money?
+  2. **Requests:** Does something need my decision right now?
+  3. **Tools:** Do I need to act on something specific?
+  4. **Analysis:** How have we been spending?
+
+  Urgency determines the order. Financial health and decisions come first; reflective reporting comes last.
+</StorySplit>
+
+<StoryPrinciples items={[
+  { title: 'Home', description: 'Wallet balance, budget utilisation, and pending work provide financial health in under five seconds.' },
+  { title: 'Requests', description: 'A transaction inbox that stays one tap away and explains which policy triggered each item.' },
+  { title: 'Tools', description: 'Cards and Budgets get complete mobile actions; Team is limited; setup-heavy Approval configuration stays on web.' },
+  { title: 'Analysis', description: 'Trend data is valuable but less urgent, so it occupies the final navigation position.' },
+]} />
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="04 · Home screen" title="The financial-health view answers one question: is everything okay?" />
+
+<StorySplit src="/images/Spend-tool/home.png" alt="SpendTool administrator home screen showing wallet, budgets, and pending requests" width={820} height={1758} reverse>
+  <h3>Designed for a five-second read</h3>
+
+  - **Wallet balance:** The complete figure is shown while typical balances permit it; abbreviation is reserved for larger scales.
+  - **Budget health:** Department budgets use utilisation bars so financial pressure is visible without another tap.
+  - **Pending scope:** The request count appears in both the section heading and navigation state.
+  - **No card carousel:** Individual cards belong in the Cards module. Home represents organisational health, not inventory.
+</StorySplit>
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="05 · Requests" title="The transaction inbox—not a mobile approvals module." />
+
+<StorySplit src="/images/Spend-tool/requests.png" alt="SpendTool transaction inbox with pending, flagged, and approved states" width={1122} height={1976}>
+  <h3>The rule travels with the request</h3>
+
+  Every request carries the policy that caused it to appear, so administrators understand why attention is required without opening a separate Approvals module.
+
+  Pending items require action. Flagged items require investigation. Approved items remain as historical context. Filter counts communicate the full queue before it is narrowed.
+</StorySplit>
+
+<StoryVisual src="/images/Spend-tool/pending-request.png" alt="SpendTool request detail showing transaction context and approval actions" width={2288} height={2200} caption="Transaction context is visible before approve or decline" wide />
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="06 · Tools module" title="Mobile access is explicit about what it can—and cannot—do." />
+
+<StorySplit src="/images/Spend-tool/spendtools-module.png" alt="SpendTool modules separated into full and limited mobile access" width={1122} height={2040} reverse>
+  <h3>Two honest tiers</h3>
+
+  Cards and Budgets provide complete mobile action sets. Team offers limited access for viewing and deactivation. Approval configuration is deliberately labelled as web-only rather than represented by a partial mobile experience.
+
+  Live badges communicate what is inside each module before entry, and the web CTA gives setup-heavy work a clear destination.
+</StorySplit>
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="07 · Card issuance" title="One action becomes five isolated decisions." />
+
+Issuing a company card combines identity, card type, budget, spend limits, and final verification. Compressing these decisions into a single form would increase cognitive load and make costly mistakes easier.
+
+<StoryPrinciples items={[
+  { title: '01 · Assignee', description: 'Search and filter the team rather than relying on a list that fails as the organisation grows.' },
+  { title: '02 · Card type', description: 'Choose virtual or physical with operational differences explained at the decision point.' },
+  { title: '03 · Budget', description: 'Assign the card while seeing each budget’s remaining capacity.' },
+  { title: '04 · Limits', description: 'Set monthly and per-transaction controls within the available budget balance.' },
+  { title: '05 · Review', description: 'Confirm the complete policy package before issuing the card.' },
+]} />
+
+<StoryVisual src="/images/Spend-tool/Assign card.png" alt="Connected five-step SpendTool card issuance flow" width={2600} height={5532} caption="A stepped bottom sheet isolates one consequential decision at a time" />
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="08 · Card controls" title="Freeze and deactivate share a row—but carry different weight." />
+
+Freeze is a reversible state change; deactivate is permanent. Their interaction patterns need to communicate that difference before the administrator acts.
+
+<StoryVisual src="/images/Spend-tool/card states.png" alt="Active and frozen SpendTool card states shown side by side" width={2512} height={2094} caption="The card visual and primary action both reflect its current state" wide />
+
+<StoryPrinciples items={[
+  { title: 'State is visible', description: 'The frozen card is muted and the primary action changes from Freeze to Unfreeze.' },
+  { title: 'Language predicts outcome', description: 'Action labels describe exactly what will happen instead of relying on generic confirmation copy.' },
+  { title: 'Permanent action gets friction', description: 'Deactivation names the cardholder, surfaces consequences, and requires a deliberate second step.' },
+]} />
+
+<StoryVisual src="/images/Spend-tool/card-deactivate.png" alt="SpendTool permanent card deactivation confirmation" width={2512} height={2200} caption="Two-step friction is intentional when an action cannot be reversed" wide />
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="09 · Budgets" title="The wallet is the ceiling; budgets are named envelopes." />
+
+The wallet establishes the available pool before the administrator considers departmental allocations. Budgets then show usage, remaining value, assigned cards, and paused states as parts of that larger financial system.
+
+<StoryVisual src="/images/Spend-tool/budgets.png" alt="SpendTool budgets list and budget top-up flow" width={1900} height={2078} caption="Top-up previews the movement from wallet balance to a named budget" wide />
+
+<StoryPrinciples items={[
+  { title: 'Wallet first', description: 'The total pool and unallocated balance establish the administrator’s financial ceiling.' },
+  { title: 'Preview movement', description: 'Top-up shows current and resulting balances before money is reassigned.' },
+  { title: 'Paused means paused', description: 'A dimmed budget and explicit badge communicate inactivity before any label is read.' },
+  { title: 'Show operational impact', description: 'Pause confirmation names how many linked cards will be blocked from new transactions.' },
+]} />
+
+<StoryVisual src="/images/Spend-tool/budget-config.png" alt="SpendTool budget detail, pause confirmation, and paused budget states" width={2662} height={2124} caption="Before, confirmation, and resulting state for pausing a department budget" wide />
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="10 · Team" title="Deactivating a member freezes their card—but does not destroy it." />
+
+<StorySplit src="/images/Spend-tool/members-deactivate.png" alt="SpendTool team list showing active and deactivated members" width={1122} height={2040}>
+  <h3>Separate the person from the financial instrument</h3>
+
+  Deactivated members become visually distinct through reduced emphasis and status treatment. Member detail exposes linked cards and their current states before an administrator makes another decision.
+
+  Deactivating the person freezes their card rather than permanently cancelling it. Permanent card deactivation remains a separate Cards-module action, keeping two different levels of consequence cleanly separated.
+</StorySplit>
+
+</StorySection>
+
+<StorySection>
+
+<StoryChapter number="11 · Reflection" title="The most consequential decisions were structural, not visual." />
+
+The work was shaped by questions that precede interface styling: what belongs on mobile versus web, how requests differ from approval rules, and where friction should be removed or deliberately added.
+
+<StoryPrinciples items={[
+  { title: 'Role context shapes everything', description: 'The administrator and employee experiences of the same system are fundamentally different products.' },
+  { title: 'Mobile forces honesty', description: 'Every feature must justify its presence against an urgent question. If it cannot, it belongs on the web.' },
+  { title: 'Friction is a design tool', description: 'Knowing where to add resistance—and where to remove it—is essential in financial product design.' },
+]} />
+
+<StoryQuote>
+  The best fintech UX is not invisible. It is legible—the administrator always knows what state things are in, what they can do, and what will happen when they do it.
+</StoryQuote>
+
+Natural extensions include the employee-side mobile experience, a deeper Analysis module, and the full web counterpart where the configuration deliberately excluded from mobile would live.
+
+</StorySection>

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const RICH_LAYOUT_SLUGS = ["revenue-management-platform"];
+const RICH_LAYOUT_SLUGS = ["revenue-management-platform", "spend-tool"];
 
 function backDestination(from: string | undefined): string {
   if (from === "home") return "/";
@@ -132,7 +132,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
           )}
         </div>
 
-        <div className="mt-16">
+        <div className="case-study-content mt-16">
           <MdxContent />
         </div>
       </div>
@@ -167,12 +167,14 @@ function RichCaseStudyLayout({
               <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
                 {project.industry}
               </span>
-              <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
-                Enterprise Design
-              </span>
-              <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
-                UI/UX Design
-              </span>
+              {(project.tags ?? ["Enterprise Design", "UI/UX Design"]).map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border"
+                >
+                  {tag}
+                </span>
+              ))}
             </div>
           </header>
         </ScrollReveal>
@@ -184,8 +186,8 @@ function RichCaseStudyLayout({
                 <Image
                   src={project.coverImage}
                   alt={`${project.title} dashboard overview`}
-                  width={1200}
-                  height={750}
+                  width={project.coverWidth ?? 1200}
+                  height={project.coverHeight ?? 750}
                   className="w-full h-auto"
                   sizes="(max-width: 768px) 100vw, 768px"
                   priority
@@ -207,15 +209,15 @@ function RichCaseStudyLayout({
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <dt>Team</dt>
-              <dd>Sole Designer + 8 Engineers + CTO + Domain Experts</dd>
+              <dd>{project.team ?? "Sole Designer + 8 Engineers + CTO + Domain Experts"}</dd>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <dt>Platforms</dt>
-              <dd>Web Application (Desktop-first)</dd>
+              <dd>{project.platforms ?? "Web Application (Desktop-first)"}</dd>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <dt>Tools</dt>
-              <dd>Figma, Notion, Linear, GitHub</dd>
+              <dd>{project.tools ?? "Figma, Notion, Linear, GitHub"}</dd>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <dt>Impact</dt>
@@ -231,20 +233,6 @@ function RichCaseStudyLayout({
         <MdxContent />
       </div>
 
-      <ScrollReveal>
-        <section className="cta-band mt-16">
-          <div className="max-w-3xl mx-auto">
-            <Heading as="h2" className="text-center">
-              Have a Project In Mind?
-            </Heading>
-            <div className="text-center mt-6">
-              <Button href="/contact" variant="primary">
-                Let&apos;s Talk
-              </Button>
-            </div>
-          </div>
-        </section>
-      </ScrollReveal>
     </article>
   );
 }

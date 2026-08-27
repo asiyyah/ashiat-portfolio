@@ -356,18 +356,6 @@ body {
   margin-top: var(--space-4);
 }
 
-/* CTA band */
-.cta-band {
-  background: var(--foreground);
-  color: var(--background);
-  padding: 4rem 1.5rem;
-  text-align: center;
-}
-.cta-band h2 {
-  color: var(--background);
-  margin-bottom: 1.5rem;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -14,7 +14,7 @@ export const metadata = {
   solution: 'A unified multi-tenant platform with configurable workflows, dynamic service configuration, granular permissions, and real-time dashboards — built around the principle that complexity should be progressive, not mandatory.',
   impact: 'Reduced reconciliation time by 60%, cut error rates by 80%, and enabled agencies to process transactions 40% faster with zero compliance incidents.',
   reflection: 'Revenue management is where precision meets design. Every pixel affects someone\'s bottom line. The real challenge was making a system this complex feel simple without hiding the depth users need.',
-  coverImage: '/images/Thumbnail.png',
+  coverImage: '/images/rms-project/Thumbnail.png',
   gallery: [],
 }
 
@@ -146,7 +146,7 @@ The foundational decision was building around true multi-tenancy — not just vi
 The platform needed to support hundreds of agencies, each with their own data, workflows, and configurations — while giving central administrators a clear view across all tenants. The risk was that users could accidentally operate on the wrong agency's data, or that the multi-tenant architecture could leak into the UX in confusing ways.
 
 <ScreenshotFrame
-  src="/images/image 12.png"
+  src="/images/rms-project/image 12.png"
   alt="Agency management interface showing tenant configuration form"
 />
 
@@ -181,7 +181,7 @@ Agencies had different approval chains (some 1-step, others 4+ steps). Manual pr
 During interviews, "Where is this bill stuck?" was the #1 complaint. Applications disappeared into queues for weeks with no accountability.
 
 <ScreenshotFrame
-  src="/images/image 9.png"
+  src="/images/rms-project/image 9.png"
   alt="Services table showing application status and workflow columns"
 />
 
@@ -198,7 +198,7 @@ Each agency defines their approval chain:
 Every submission includes a visual timeline showing the complete approval history. Users can see at a glance where a submission is, how long it's been in each stage, and what actions have been taken. The timeline uses color coding to highlight bottlenecks and delays.
 
 <ScreenshotFrame
-  src="/images/image 7.png"
+  src="/images/rms-project/image 7.png"
   alt="Approval workflow timeline showing stage transitions and status indicators"
 />
 
@@ -254,8 +254,13 @@ Each agency had different formulas (fixed rates vs. calculated: base + (weight �
 Non-technical users built 20+ field forms in under 30 minutes (vs. 2-3 weeks with developer support).
 
 <ScreenshotFrame
-  src="/images/image 15.png"
-  alt="Dynamic form builder interface with drag-and-drop field configuration"
+  src="/images/rms-project/form-builder.png"
+  alt="Application form builder showing configurable form sections"
+/>
+
+<ScreenshotFrame
+  src="/images/rms-project/dynamic-form-builder.png"
+  alt="Dynamic form builder interface with field types and live field configuration"
 />
 
 #### Part B: Formula Builder & Parameter Mapping
@@ -276,8 +281,8 @@ Broke complex formula creation into focused steps:
 - Visual builder with formula type selection and rate inputs
 
 <ScreenshotFrame
-  src="/images/image 29.png"
-  alt="Dynamic form and formula builder interface"
+  src="/images/rms-project/modal-based-config.png"
+  alt="Modal-based formula configuration with mapped form parameters"
 />
 
 <CalloutBox title="Design Principle Applied">
@@ -298,7 +303,7 @@ Broke complex formula creation into focused steps:
 Agencies now generate 1,000+ bills in minutes (vs. days of manual processing) with zero duplicate billing incidents.
 
 <ScreenshotFrame
-  src="/images/image 28.png"
+  src="/images/rms-project/bulk-billing.png"
   alt="Bulk billing table with colored status badges and filtering"
 />
 
@@ -334,7 +339,7 @@ Enterprise systems require fine-grained access control, but permission matrices 
 - "Create Admin User" (clear)
 
 <ScreenshotFrame
-  src="/images/image 34.png"
+  src="/images/rms-project/permissions.png"
   alt="Permissions matrix showing roles and permissions grid with colored indicators"
 />
 

@@ -15,6 +15,12 @@ export interface DesignProject {
   gallery: string[]
   aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide'
   featured?: boolean
+  team?: string
+  platforms?: string
+  tools?: string
+  tags?: string[]
+  coverWidth?: number
+  coverHeight?: number
 }
 
 export interface CodeProject {
@@ -26,7 +32,7 @@ export interface CodeProject {
   liveDemo?: string
   aiTools?: string[]
   technicalHighlights?: string[]
-  coverImage: string
+  coverImage?: string
   gallery?: string[]
   aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide'
   featured?: boolean

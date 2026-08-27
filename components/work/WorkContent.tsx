@@ -9,11 +9,13 @@ import type { DesignProject, CodeProject } from "@/types/project";
 interface WorkContentProps {
   designProjects: DesignProject[];
   codeProjects: CodeProject[];
+  initialTab?: TabKey;
 }
 
 type TabKey = "design" | "code";
 
-// Curated grid configuration for visual rhythm
+// Shared homepage rhythm: a balanced 8/4 lead row, three equal cards, then a
+// full-width closing card.
 interface CardLayoutConfig {
   colSpanClass: string;
   aspectClass: string;
@@ -28,22 +30,22 @@ const DESIGN_LAYOUT_PATTERN: CardLayoutConfig[] = [
   },
   {
     colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectStandard,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
-  },
-  {
-    colSpanClass: styles.colSpan4,
     aspectClass: styles.aspectPortrait,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
     colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectStandard,
+    aspectClass: styles.aspectSquare,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
     colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectStandard,
+    aspectClass: styles.aspectSquare,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  },
+  {
+    colSpanClass: styles.colSpan4,
+    aspectClass: styles.aspectSquare,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
@@ -56,12 +58,12 @@ const DESIGN_LAYOUT_PATTERN: CardLayoutConfig[] = [
 const CODE_LAYOUT_PATTERN: CardLayoutConfig[] = [
   {
     colSpanClass: styles.colSpan7,
-    aspectClass: styles.aspectWide,
+    aspectClass: styles.aspectLandscape,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 58vw",
   },
   {
     colSpanClass: styles.colSpan5,
-    aspectClass: styles.aspectStandard,
+    aspectClass: styles.aspectLandscape,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 42vw",
   },
   {
@@ -74,6 +76,13 @@ const CODE_LAYOUT_PATTERN: CardLayoutConfig[] = [
     aspectClass: styles.aspectLandscape,
     imageSizes: "(max-width: 768px) 100vw, 50vw",
   },
+];
+
+const CODE_COVER_VARIANTS = [
+  styles.codeCoverCoral,
+  styles.codeCoverInk,
+  styles.codeCoverSage,
+  styles.codeCoverSand,
 ];
 
 function getLayoutConfig(
@@ -99,8 +108,9 @@ function getLayoutConfig(
 export default function WorkContent({
   designProjects,
   codeProjects,
+  initialTab = "design",
 }: WorkContentProps) {
-  const [activeTab, setActiveTab] = useState<TabKey>("design");
+  const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
 
   return (
     <section className={styles.workSection}>
@@ -136,7 +146,7 @@ export default function WorkContent({
                   activeTab === "design" ? styles.filterBtnActive : ""
                 }`}
               >
-                Design
+                Product Design
               </button>
               <button
                 id="tab-code"
@@ -150,7 +160,7 @@ export default function WorkContent({
                   activeTab === "code" ? styles.filterBtnActive : ""
                 }`}
               >
-                Code
+                Built with Code
               </button>
             </div>
           </div>
@@ -169,8 +179,7 @@ export default function WorkContent({
                 {designProjects.map((project, index) => {
                   const layout = getLayoutConfig(
                     index,
-                    DESIGN_LAYOUT_PATTERN,
-                    project.aspectRatio
+                    DESIGN_LAYOUT_PATTERN
                   );
 
                   return (
@@ -248,54 +257,55 @@ export default function WorkContent({
                 {codeProjects.map((project, index) => {
                   const layout = getLayoutConfig(
                     index,
-                    CODE_LAYOUT_PATTERN,
-                    project.aspectRatio
+                    CODE_LAYOUT_PATTERN
                   );
 
                   return (
-                    <div
-                      key={project.slug}
-                      className={layout.colSpanClass}
-                    >
-                      <Link
-                        href={`/work/${project.slug}?from=work`}
-                        className={styles.cardLink}
-                        aria-label={project.title}
-                      >
+                    <article key={project.slug} className={layout.colSpanClass}>
+                      <div className={styles.cardLink}>
                         <div
                           className={`${styles.imageWrapper} ${layout.aspectClass}`}
                         >
-                          <Image
-                            src={project.coverImage}
-                            alt={project.title}
-                            fill
-                            sizes={layout.imageSizes}
-                            className={styles.image}
-                            priority={index === 0}
-                          />
-                          <div
-                            className={styles.arrowBadge}
-                            aria-hidden="true"
-                          >
-                            ↗
-                          </div>
+                          {project.coverImage ? (
+                            <Image
+                              src={project.coverImage}
+                              alt={project.title}
+                              fill
+                              sizes={layout.imageSizes}
+                              className={styles.image}
+                              priority={index === 0}
+                            />
+                          ) : (
+                            <div className={`${styles.codeCover} ${CODE_COVER_VARIANTS[index % CODE_COVER_VARIANTS.length]}`}>
+                              <span className={styles.codeCoverLabel}>Live build · 0{index + 1}</span>
+                              <strong className={styles.codeCoverTitle}>{project.title}</strong>
+                              <span className={styles.codeCoverMark} aria-hidden="true">↗</span>
+                            </div>
+                          )}
                         </div>
 
                         <div className={styles.cardMeta}>
                           <div className={styles.cardTagRow}>
-                            <span className={styles.cardCategory}>
-                              {project.stack?.slice(0, 3).join(" · ") || "Engineering"}
-                            </span>
+                            <span className={styles.cardCategory}>Independent build</span>
                           </div>
 
-                          <h2 className={styles.cardTitle}>{project.title}</h2>
+                          <div className={styles.codeTitleRow}>
+                            <h2 className={styles.cardTitle}>{project.title}</h2>
 
-                          {project.summary && (
-                            <p className={styles.cardImpact}>{project.summary}</p>
-                          )}
+                            {project.liveDemo && (
+                              <a
+                                href={project.liveDemo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.liveLink}
+                              >
+                                View live project ↗
+                              </a>
+                            )}
+                          </div>
                         </div>
-                      </Link>
-                    </div>
+                      </div>
+                    </article>
                   );
                 })}
               </div>

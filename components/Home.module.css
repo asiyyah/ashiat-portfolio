@@ -781,12 +781,31 @@
 
 /* ─── CTA BAND ───────────────────────────────────────────────────── */
 .ctaBand {
-  background: #0d0d0d;
-  color: #ffffff;
+  --cta-background: #0d0d0d;
+  --cta-foreground: #ffffff;
+  --cta-secondary: rgba(255, 255, 255, 0.8);
+  --cta-muted: rgba(255, 255, 255, 0.6);
+  --cta-glow: rgba(255, 255, 255, 0.15);
+  --cta-button-background: #ffffff;
+  --cta-button-foreground: #0d0d0d;
+  --cta-button-hover: #f0f0f0;
+  background: var(--cta-background);
+  color: var(--cta-foreground);
   padding: 120px 0;
   position: relative;
   overflow: hidden;
   border-top: 1px solid var(--border);
+}
+
+:global([data-theme="dark"]) .ctaBand {
+  --cta-background: #ffffff;
+  --cta-foreground: #111111;
+  --cta-secondary: rgba(17, 17, 17, 0.78);
+  --cta-muted: rgba(17, 17, 17, 0.58);
+  --cta-glow: rgba(17, 17, 17, 0.1);
+  --cta-button-background: #111111;
+  --cta-button-foreground: #ffffff;
+  --cta-button-hover: #292929;
 }
 
 .ctaBand::before {
@@ -797,7 +816,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(200, 200, 200, 0.08) 40%, rgba(150, 150, 150, 0.03) 60%, transparent 75%);
+  background: radial-gradient(circle, var(--cta-glow) 0%, transparent 72%);
   filter: blur(50px);
   opacity: 0.9;
   pointer-events: none;
@@ -812,7 +831,7 @@
   width: 340px;
   height: 340px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(180, 180, 180, 0.05) 50%, transparent 70%);
+  background: radial-gradient(circle, var(--cta-glow) 0%, transparent 70%);
   filter: blur(30px);
   opacity: 0.75;
   pointer-events: none;
@@ -828,7 +847,7 @@
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--cta-secondary);
   font-family: var(--font-mono);
   margin-bottom: 24px;
   display: flex;
@@ -836,12 +855,20 @@
   gap: 10px;
 }
 
+.ctaBandDot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: currentColor;
+}
+
 .ctaBandTitle {
   font-size: clamp(36px, 5.5vw, 80px);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.035em;
-  color: #ffffff !important;
+  color: var(--cta-foreground) !important;
   margin: 0 0 24px;
   max-width: 800px;
 }
@@ -849,13 +876,13 @@
 .ctaBandTitleSerif {
   font-family: var(--font-display);
   font-style: italic;
-  color: #ffffff !important;
+  color: var(--cta-foreground) !important;
   font-weight: 700;
 }
 
 .ctaBandLead {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--cta-secondary);
   max-width: 440px;
   margin-bottom: 40px;
   line-height: 1.65;
@@ -869,8 +896,8 @@
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  background: #ffffff;
-  color: #0d0d0d;
+  background: var(--cta-button-background);
+  color: var(--cta-button-foreground);
   border: none;
   padding: 16px 32px;
   cursor: pointer;
@@ -881,9 +908,9 @@
 }
 
 .ctaBandBtn:hover {
-  background: #f0f0f0;
+  background: var(--cta-button-hover);
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 32px var(--cta-glow);
 }
 
 .ctaSocialLinks {
@@ -897,51 +924,59 @@
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--cta-muted);
   text-decoration: none;
   font-family: var(--font-mono);
   transition: color 200ms ease;
 }
 
 .ctaSocialLink:hover {
-  color: #ffffff;
+  color: var(--cta-foreground);
 }
 
 /* Tab styles kept for work section */
 .tabContainer {
   display: inline-flex;
-  height: 40px;
-  padding: 4px;
+  min-height: 46px;
+  padding: 5px;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 999px;
   border: 1px solid var(--border);
-  background: var(--surface);
-  gap: 4px;
+  background: color-mix(in srgb, var(--surface) 78%, var(--foreground) 4%);
+  gap: 5px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .tabBtn {
-  height: 32px;
-  padding: 0 14px;
+  min-height: 34px;
+  padding: 0 18px;
   border: none;
-  border-radius: 2px;
+  border-radius: 999px;
   background: transparent;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: background 150ms ease, color 150ms ease;
+  font-weight: 600;
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   white-space: nowrap;
 }
 
 .tabBtn:hover {
   color: var(--foreground);
+  transform: translateY(-1px);
 }
 
 .tabBtnActive {
-  background: var(--background);
-  color: var(--foreground);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  background: var(--foreground);
+  color: var(--background);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
+.tabBtnActive:hover {
+  background: var(--foreground);
+  color: var(--background);
 }
 
 /* ─── Responsive ──────────────────────────────────────────────────── */

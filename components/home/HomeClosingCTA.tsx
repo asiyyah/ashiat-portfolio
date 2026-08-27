@@ -5,7 +5,7 @@ export default function HomeClosingCTA() {
     <section className={styles.ctaBand}>
       <div className={styles.container}>
         <div className={styles.ctaBandEyebrow}>
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255, 255, 255, 0.85)", display: "inline-block", flexShrink: 0 }} />
+          <span className={styles.ctaBandDot} />
           Open to work · Q4 2025
         </div>
 
