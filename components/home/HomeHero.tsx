@@ -2,18 +2,18 @@ import Image from "next/image";
 import styles from "../Home.module.css";
 
 const images = [
-  { src: "/images/Rectangle 3.png", alt: "Design showcase 3" },
-  { src: "/images/Rectangle 1.png", alt: "Design showcase 1" },
-  { src: "/images/Rectangle 5.png", alt: "Design showcase 5" },
-  { src: "/images/Rectangle 2.png", alt: "Design showcase 2" },
-  { src: "/images/Rectangle 6.png", alt: "Design showcase 6" },
-  { src: "/images/Rectangle 4.png", alt: "Design showcase 4" },
-  { src: "/images/Rectangle 5.png", alt: "Design showcase 5" },
-  { src: "/images/Rectangle 3.png", alt: "Design showcase 3" },
-  { src: "/images/Rectangle 1.png", alt: "Design showcase 1" },
-  { src: "/images/Rectangle 6.png", alt: "Design showcase 6" },
-  { src: "/images/Rectangle 4.png", alt: "Design showcase 4" },
-  { src: "/images/Rectangle 2.png", alt: "Design showcase 2" },
+  { src: "/images/ticker-images/Rectangle 3.png", alt: "Design showcase 3" },
+  { src: "/images/ticker-images/Rectangle 1.png", alt: "Design showcase 1" },
+  { src: "/images/ticker-images/Rectangle 5.png", alt: "Design showcase 5" },
+  { src: "/images/ticker-images/Rectangle 2.png", alt: "Design showcase 2" },
+  { src: "/images/ticker-images/Rectangle 6.png", alt: "Design showcase 6" },
+  { src: "/images/ticker-images/Rectangle 4.png", alt: "Design showcase 4" },
+  { src: "/images/ticker-images/Rectangle 5.png", alt: "Design showcase 5" },
+  { src: "/images/ticker-images/Rectangle 3.png", alt: "Design showcase 3" },
+  { src: "/images/ticker-images/Rectangle 1.png", alt: "Design showcase 1" },
+  { src: "/images/ticker-images/Rectangle 6.png", alt: "Design showcase 6" },
+  { src: "/images/ticker-images/Rectangle 4.png", alt: "Design showcase 4" },
+  { src: "/images/ticker-images/Rectangle 2.png", alt: "Design showcase 2" },
 ];
 
 export default function HomeHero() {
