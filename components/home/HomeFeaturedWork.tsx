@@ -83,22 +83,22 @@ const LAYOUT_PATTERN: Array<{
   },
   {
     colSpanClass: workStyles.colSpan4,
-    aspectClass: workStyles.aspectStandard,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
-  },
-  {
-    colSpanClass: workStyles.colSpan4,
     aspectClass: workStyles.aspectPortrait,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
     colSpanClass: workStyles.colSpan4,
-    aspectClass: workStyles.aspectStandard,
+    aspectClass: workStyles.aspectSquare,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
     colSpanClass: workStyles.colSpan4,
-    aspectClass: workStyles.aspectStandard,
+    aspectClass: workStyles.aspectSquare,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  },
+  {
+    colSpanClass: workStyles.colSpan4,
+    aspectClass: workStyles.aspectSquare,
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
