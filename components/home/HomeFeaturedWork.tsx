@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import styles from "../Home.module.css";
+import workStyles from "../work/Work.module.css";
 
 interface Study {
   title: string;
@@ -69,49 +70,97 @@ const codeStudies: Study[] = [];
 
 type Tab = "design" | "code";
 
-function WorkCard({
+// Curated 12-column grid layout for visual rhythm (mirrors the Work page)
+const LAYOUT_PATTERN: Array<{
+  colSpanClass: string;
+  aspectClass: string;
+  imageSizes: string;
+}> = [
+  {
+    colSpanClass: workStyles.colSpan8,
+    aspectClass: workStyles.aspectWide,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw",
+  },
+  {
+    colSpanClass: workStyles.colSpan4,
+    aspectClass: workStyles.aspectStandard,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  },
+  {
+    colSpanClass: workStyles.colSpan4,
+    aspectClass: workStyles.aspectPortrait,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  },
+  {
+    colSpanClass: workStyles.colSpan4,
+    aspectClass: workStyles.aspectStandard,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  },
+  {
+    colSpanClass: workStyles.colSpan4,
+    aspectClass: workStyles.aspectStandard,
+    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+  },
+  {
+    colSpanClass: workStyles.colSpan12,
+    aspectClass: workStyles.aspectWide,
+    imageSizes: "(max-width: 768px) 100vw, 100vw",
+  },
+];
+
+function HomeWorkCard({
   study,
-  isLarge,
+  layout,
+  index,
 }: {
   study: Study;
-  isLarge: boolean;
+  layout: { colSpanClass: string; aspectClass: string; imageSizes: string };
+  index: number;
 }) {
   const href = study.slug ? `/work/${study.slug}?from=home` : "/work";
+  const category = study.tags[1] || study.tags[0] || "";
+  const role = study.tags[0] || "";
 
   return (
-    <a
-      href={href}
-      className={`${styles.workCard} ${isLarge ? styles.workCardLarge : styles.workCardSmall}`}
-      aria-label={study.title}
-    >
-      {/* Image */}
-      <div className={styles.workCardImage}>
-        <Image
-          src={study.image}
-          alt={study.title}
-          fill
-          sizes={isLarge ? "(min-width: 960px) 55vw, 100vw" : "(min-width: 960px) 30vw, 100vw"}
-          style={{ objectFit: "cover" }}
-        />
-      </div>
-
-      {/* Gradient overlay */}
-      <div className={styles.workCardOverlay} />
-
-      {/* Arrow icon */}
-      <div className={styles.workCardArrow} aria-hidden="true">↗</div>
-
-      {/* Metadata */}
-      <div className={styles.workCardMeta}>
-        <div className={styles.workCardTags}>
-          {study.tags.map((t) => (
-            <span key={t} className={styles.workCardTag}>{t}</span>
-          ))}
+    <div className={layout.colSpanClass}>
+      <Link
+        href={href}
+        className={workStyles.cardLink}
+        aria-label={study.title}
+      >
+        <div
+          className={`${workStyles.imageWrapper} ${layout.aspectClass}`}
+        >
+          <Image
+            src={study.image}
+            alt={study.title}
+            fill
+            sizes={layout.imageSizes}
+            className={workStyles.image}
+            priority={index === 0}
+          />
+          <div className={workStyles.arrowBadge} aria-hidden="true">
+            ↗
+          </div>
         </div>
-        <h3 className={styles.workCardTitle}>{study.title}</h3>
-        <p className={styles.workCardImpact}>{study.impact}</p>
-      </div>
-    </a>
+
+        <div className={workStyles.cardMeta}>
+          <div className={workStyles.cardTagRow}>
+            <span className={workStyles.cardCategory}>{role}</span>
+            {category && category !== role && (
+              <>
+                <span className={workStyles.cardDivider}>·</span>
+                <span className={workStyles.cardRole}>{category}</span>
+              </>
+            )}
+          </div>
+          <h3 className={workStyles.cardTitle}>{study.title}</h3>
+          {study.impact && (
+            <p className={workStyles.cardImpact}>{study.impact}</p>
+          )}
+        </div>
+      </Link>
+    </div>
   );
 }
 
@@ -119,16 +168,6 @@ export default function HomeFeaturedWork() {
   const [activeTab, setActiveTab] = useState<Tab>("design");
 
   const studies = activeTab === "design" ? designStudies : codeStudies;
-
-  // Split into rows: alternating large-left, large-right
-  const rows: Array<{ large: Study; small: Study; isLargeLeft: boolean }> = [];
-  for (let i = 0; i + 1 < studies.length; i += 2) {
-    rows.push({
-      large: studies[i],
-      small: studies[i + 1],
-      isLargeLeft: rows.length % 2 === 0,
-    });
-  }
 
   return (
     <section className={styles.sectionNoTop}>
@@ -162,24 +201,14 @@ export default function HomeFeaturedWork() {
 
         {studies.length > 0 ? (
           <>
-            <div className={styles.workGrid}>
-              {rows.map((row, i) => (
-                <div
-                  key={i}
-                  className={`${styles.workRow} ${row.isLargeLeft ? styles.workRowA : styles.workRowB}`}
-                >
-                  {row.isLargeLeft ? (
-                    <>
-                      <WorkCard study={row.large} isLarge={true} />
-                      <WorkCard study={row.small} isLarge={false} />
-                    </>
-                  ) : (
-                    <>
-                      <WorkCard study={row.small} isLarge={false} />
-                      <WorkCard study={row.large} isLarge={true} />
-                    </>
-                  )}
-                </div>
+            <div className={workStyles.grid}>
+              {studies.map((study, index) => (
+                <HomeWorkCard
+                  key={study.slug ?? study.title}
+                  study={study}
+                  layout={LAYOUT_PATTERN[index % LAYOUT_PATTERN.length]}
+                  index={index}
+                />
               ))}
             </div>
 
