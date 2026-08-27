@@ -8,11 +8,12 @@
   --border: #e0e0e0;
   --muted: #888888;
   --text-secondary: #333333;
-  --accent: #e8271a;
+  --accent: #111111;
   --accent-foreground: #ffffff;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono), "Geist Mono", "Roboto Mono", monospace;
+  --font-display: var(--font-display), "Playfair Display", Georgia, serif;
   --font-weight-display: 700;
   --font-weight-heading: 600;
 
@@ -49,7 +50,7 @@
   --border: #333333;
   --muted: #888888;
   --text-secondary: #cccccc;
-  --accent: #ff5a4a;
+  --accent: #ededed;
   --accent-foreground: #0a0a0a;
 }
 
@@ -249,6 +250,12 @@ body {
 
 .tab-btn:hover {
   color: var(--foreground);
+}
+
+.tab-btn:focus-visible {
+  outline: none;
+  color: var(--foreground);
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--accent);
 }
 
 .tab-btn.active {

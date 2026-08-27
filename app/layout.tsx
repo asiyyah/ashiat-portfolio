@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
@@ -16,8 +16,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const playfair = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Product Designer — Enterprise SaaS, Fintech & Digital Systems",
+  title: "Ashiat Abdulkadir — Product Designer & Design Engineer",
   description:
     "Portfolio of a product designer specialising in enterprise SaaS, fintech, compliance platforms, and complex product workflows.",
 };
@@ -30,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

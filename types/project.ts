@@ -13,6 +13,8 @@ export interface DesignProject {
   reflection?: string
   coverImage: string
   gallery: string[]
+  aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide'
+  featured?: boolean
 }
 
 export interface CodeProject {
@@ -26,4 +28,6 @@ export interface CodeProject {
   technicalHighlights?: string[]
   coverImage: string
   gallery?: string[]
+  aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide'
+  featured?: boolean
 }

@@ -15,16 +15,34 @@ test('navigation works', async ({ page }) => {
 
 test('work tabs switch correctly', async ({ page }) => {
   await page.goto('/work')
-  await page.getByRole('tab', { name: 'Code Projects' }).click()
-  await expect(page.getByRole('tab', { name: 'Code Projects' })).toHaveAttribute('aria-selected', 'true')
-  await page.getByRole('tab', { name: 'Product Design' }).click()
-  await expect(page.getByRole('tab', { name: 'Product Design' })).toHaveAttribute('aria-selected', 'true')
+  await page.getByRole('tab', { name: 'Code' }).click()
+  await expect(page.getByRole('tab', { name: 'Code' })).toHaveAttribute('aria-selected', 'true')
+  await page.getByRole('tab', { name: 'Design' }).click()
+  await expect(page.getByRole('tab', { name: 'Design' })).toHaveAttribute('aria-selected', 'true')
 })
 
 test('case study page renders', async ({ page }) => {
   await page.goto('/work/enterprise-dashboard')
   await expect(page.locator('h1')).toContainText('Enterprise Dashboard')
   await expect(page).toHaveTitle(/Enterprise Dashboard/)
+})
+
+test('back from project opened via work returns to work', async ({ page }) => {
+  await page.goto('/work/enterprise-dashboard?from=work')
+  await page.getByRole('button', { name: /back/i }).click()
+  await expect(page).toHaveURL('/work')
+})
+
+test('back from project opened via home returns to home', async ({ page }) => {
+  await page.goto('/work/enterprise-dashboard?from=home')
+  await page.getByRole('button', { name: /back/i }).click()
+  await expect(page).toHaveURL('/')
+})
+
+test('back from directly visited project defaults to work', async ({ page }) => {
+  await page.goto('/work/enterprise-dashboard')
+  await page.getByRole('button', { name: /back/i }).click()
+  await expect(page).toHaveURL('/work')
 })
 
 test('playground loads', async ({ page }) => {

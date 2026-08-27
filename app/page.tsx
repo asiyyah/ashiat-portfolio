@@ -12,15 +12,14 @@ import {
 export default function Page() {
   return (
     <div className={styles.page}>
-      <main>
-        <HomeHero />
-        <HomeFeaturedWork />
-        <HomeExpertise />
-        <HomeProcess />
-        <HomeToolkit />
-        <HomeTestimonials />
-        <HomeClosingCTA />
-      </main>
+      <HomeHero />
+      <HomeFeaturedWork />
+      <HomeExpertise />
+      <HomeProcess />
+      <HomeToolkit />
+      <HomeTestimonials />
+      <HomeClosingCTA />
     </div>
   );
 }
+

@@ -20,43 +20,65 @@ export default function HomeHero() {
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
-        <div className={styles.eyebrow}>
-          <span className={styles.eyebrowDot} />
-          PRODUCT DESIGN + DESIGN ENGINEERING
-        </div>
+        <div className={styles.heroInner}>
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} />
+            PRODUCT DESIGN + DESIGN ENGINEERING
+          </div>
 
-        <h1 className={styles.heroTitle}>
-          Designing complex digital products that scale&nbsp;— from enterprise
-          platforms to AI-powered systems.
-        </h1>
+          <h1 className={styles.heroTitle}>
+            Designing complex digital products that scale&nbsp;— from enterprise
+            platforms to AI-powered systems.
+          </h1>
 
-        <p className={styles.heroLead}>
-          A senior systems designer bridging the gap between product strategy,
-          rigorous UX architectures, and production-grade code. Decades spent
-          helping financial institutions, government agencies, and AI scale-ups
-          turn systemic chaos into precise interfaces.
-        </p>
+          <p className={styles.heroLead}>
+            A senior systems designer bridging the gap between product strategy,
+            rigorous UX architectures, and production-grade code. Decades spent
+            helping financial institutions, government agencies, and AI scale-ups
+            turn systemic chaos into precise interfaces.
+          </p>
 
-        <div className={styles.ctaRow}>
-          <button className={styles.btnPrimary}>VIEW SELECTED WORK →</button>
-          <button className={styles.btnOutline}>DOWNLOAD RESUME ⬇</button>
-        </div>
-
-        <div className={styles.tickerWrapper}>
-          <div className={styles.tickerTrack}>
-            {images.map((img, i) => (
-              <div key={i} className={styles.tickerItem}>
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="220px"
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-            ))}
+          <div className={styles.ctaRow}>
+            <a href="/work" className={styles.btnPrimary}>
+              VIEW SELECTED WORK →
+            </a>
+            <a href="/contact" className={styles.btnOutline}>
+              DOWNLOAD RESUME ⬇
+            </a>
           </div>
         </div>
+      </div>
+
+      {/* Full-width image ticker */}
+      <div className={styles.tickerWrapper}>
+        <div className={styles.tickerTrack}>
+          {[...images, ...images].map((img, i) => (
+            <div key={i} className={styles.tickerItem}>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(max-width: 640px) 220px, (max-width: 960px) 260px, 300px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Hero project showcase animation */}
+      <div className={styles.heroScene} hidden>
+        <video
+          className={styles.heroSceneVideo}
+          src="/hero-scene.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          tabIndex={-1}
+        />
       </div>
     </section>
   );

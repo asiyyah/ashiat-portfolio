@@ -57,8 +57,10 @@ export default function HomeToolkit() {
       <div className={styles.container}>
         <div className={styles.toolkitIntro}>
           <div>
-            <div className={styles.eyebrow}><span className={styles.eyebrowDot} />04 · TOOLS &amp; STACK</div>
-            <h2 className={styles.sectionTitle}>The toolkit.</h2>
+            <div className={styles.eyebrow}><span className={styles.eyebrowDot} />04 · Tools &amp; Stack</div>
+            <h2 className={styles.sectionTitle}>
+              The <em className={styles.sectionTitleSerif}>toolkit</em>
+            </h2>
           </div>
           <p className={styles.toolkitLead}>
             Tools are means, not ends. I am fluent across the design-to-production

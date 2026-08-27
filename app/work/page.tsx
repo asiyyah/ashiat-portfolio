@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { getAllDesignProjects, getAllCodeProjects } from "@/lib/projects";
 import WorkContent from "@/components/work/WorkContent";
-import { Heading, Body } from "@/components/ui/Typography";
-import Section from "@/components/ui/Section";
+
 export const metadata: Metadata = {
   title: "Work — Product Design & Code Projects",
   description:
-    "A curated selection of product design and development projects spanning enterprise SaaS, fintech, and compliance.",
+    "Selected work across enterprise SaaS, fintech platforms, compliance systems, and code projects.",
 };
 
 export default async function WorkPage() {
@@ -14,21 +13,16 @@ export default async function WorkPage() {
     getAllDesignProjects(),
     getAllCodeProjects(),
   ]);
-  return (
-    <Section>
-      <div className="max-w-7xl mx-auto">
-        <Heading as="h1" className="text-5xl md:text-6xl">
-          Work
-        </Heading>
-        <Body className="mt-4 max-w-xl" as="p">
-          A curated selection of product design and development projects.
-        </Body>
+  const orderedDesignProjects = [...designProjects].sort((a, b) => {
+    if (a.slug === "revenue-management-platform") return -1;
+    if (b.slug === "revenue-management-platform") return 1;
+    return 0;
+  });
 
-        <WorkContent
-          designProjects={designProjects}
-          codeProjects={codeProjects}
-        />
-      </div>
-    </Section>
+  return (
+    <WorkContent
+      designProjects={orderedDesignProjects}
+      codeProjects={codeProjects}
+    />
   );
 }

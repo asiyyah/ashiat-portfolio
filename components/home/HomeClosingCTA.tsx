@@ -2,23 +2,35 @@ import styles from "../Home.module.css";
 
 export default function HomeClosingCTA() {
   return (
-    <section className={styles.ctaSection}>
+    <section className={styles.ctaBand}>
       <div className={styles.container}>
-        <div className={styles.eyebrow}><span className={styles.eyebrowDot} />INITIATE INQUIRY</div>
-        <h2 className={styles.ctaTitle}>
-          Let&apos;s design and build something precise.
-        </h2>
-        <p className={styles.ctaLead}>
-          Currently accepting select advisory roles, design system consultancies,
-          and core product design+engineering partnerships for Q3 2025.
-        </p>
-        <div className={styles.ctaRow}>
-          <button className={styles.btnPrimary}>SECURE EMAIL PORTAL →</button>
+        <div className={styles.ctaBandEyebrow}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(255, 255, 255, 0.85)", display: "inline-block", flexShrink: 0 }} />
+          Open to work · Q4 2025
         </div>
-        <div className={styles.ctaLinks}>
-          <a className={styles.ctaSocialLink} href="#">LINKEDIN</a>
-          <a className={styles.ctaSocialLink} href="#">GITHUB</a>
-          <a className={styles.ctaSocialLink} href="#">TWITTER / X</a>
+
+        <h2 className={styles.ctaBandTitle}>
+          Let&apos;s build something{" "}
+          <em className={styles.ctaBandTitleSerif}>worth</em>{" "}
+          using.
+        </h2>
+
+        <p className={styles.ctaBandLead}>
+          Currently accepting select advisory roles, design system consultancies,
+          and core product design + engineering partnerships.
+        </p>
+
+        <a
+          href="/contact"
+          className={styles.ctaBandBtn}
+        >
+          Start a conversation →
+        </a>
+
+        <div className={styles.ctaSocialLinks}>
+          <a className={styles.ctaSocialLink} href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a className={styles.ctaSocialLink} href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a className={styles.ctaSocialLink} href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter / X</a>
         </div>
       </div>
     </section>
