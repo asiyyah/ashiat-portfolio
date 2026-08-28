@@ -1,3 +1,5 @@
+export type ProjectType = 'product-design' | 'ui-design' | 'code'
+
 export interface DesignProject {
   title: string
   slug: string
@@ -21,6 +23,7 @@ export interface DesignProject {
   tags?: string[]
   coverWidth?: number
   coverHeight?: number
+  projectType: Exclude<ProjectType, 'code'>
 }
 
 export interface CodeProject {
@@ -36,4 +39,7 @@ export interface CodeProject {
   gallery?: string[]
   aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide'
   featured?: boolean
+  projectType: 'code'
 }
+
+export type PortfolioProject = DesignProject | CodeProject

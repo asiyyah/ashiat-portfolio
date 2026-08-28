@@ -5,72 +5,13 @@ import Image from "next/image";
 import { useState } from "react";
 import styles from "../Home.module.css";
 import workStyles from "../work/Work.module.css";
-import { codeProjects as allCodeProjects } from "@/lib/code-projects";
-import type { CodeProject } from "@/types/project";
+import type { CodeProject, DesignProject, PortfolioProject, ProjectType } from "@/types/project";
 
-interface Study {
-  title: string;
-  tags: string[];
-  impact: string;
-  tools: string;
-  image: string;
-  slug?: string;
-}
-
-const designStudies: Study[] = [
-  {
-    title: "Revenue Management Platform",
-    tags: ["Lead Designer", "Fintech", "2022–2024"],
-    impact: "Reduced reconciliation time by 60%",
-    tools: "Figma / Design System",
-    image: "/images/rms-project/Thumbnail.png",
-    slug: "revenue-management-platform",
-  },
-  {
-    title: "SpendTool",
-    tags: ["Product Designer", "B2B Fintech", "2026"],
-    impact: "A mobile control layer for finance administrators",
-    tools: "Mobile UX / Admin Systems / Figma",
-    image: "/images/Spend-tool/SpendTool-Thumbnail-2.png",
-    slug: "spend-tool",
-  },
-  {
-    title: "Fintech Dashboard",
-    tags: ["Product Designer", "Fintech", "2023"],
-    impact: "Real-time portfolio analytics for institutional clients",
-    tools: "Figma Enterprise / WebSockets / Data Density Optimization",
-    image: "/images/case-study-3.png",
-    slug: "fintech-payment-platform",
-  },
-  {
-    title: "Compliance Platform",
-    tags: ["Lead Designer", "RegTech", "2023"],
-    impact: "Automated 80% of manual compliance workflows",
-    tools: "Audit Ledger / State Machines / React Native",
-    image: "/images/case-study-4.png",
-    slug: "compliance-system",
-  },
-  {
-    title: "SaaS Administration System",
-    tags: ["Senior Designer", "Enterprise", "2021–2023"],
-    impact: "Unified admin experience for 500K+ users",
-    tools: "Multi-tenant UI / Figma Code / RBAC Engine",
-    image: "/images/case-study-5.png",
-    slug: "saas-administration-system",
-  },
-  {
-    title: "Enterprise Operations Platform",
-    tags: ["Lead Designer", "Enterprise", "2020–2021"],
-    impact: "Streamlined operations across 14 departments",
-    tools: "Process Mapping / Internal API Portal / Tailwind CSS",
-    image: "/images/case-study-6.png",
-    slug: "enterprise-dashboard",
-  },
+const tabs: Array<{ id: ProjectType; label: string }> = [
+  { id: "product-design", label: "Product Design" },
+  { id: "ui-design", label: "UI Design" },
+  { id: "code", label: "Built with Code" },
 ];
-
-const codeStudies = allCodeProjects.slice(0, 4);
-
-type Tab = "design" | "code";
 
 // Curated 12-column grid layout for visual rhythm (mirrors the Work page)
 const LAYOUT_PATTERN: Array<{
@@ -112,18 +53,30 @@ const CODE_COVER_VARIANTS = [
   workStyles.codeCoverSand,
 ];
 
+function getHomeLayout(index: number, project?: DesignProject) {
+  const layout = LAYOUT_PATTERN[index % LAYOUT_PATTERN.length];
+  if (!project || project.projectType !== "ui-design" || !project.aspectRatio) return layout;
+
+  const aspectClasses = {
+    portrait: workStyles.aspectPortrait,
+    wide: workStyles.aspectWide,
+    square: workStyles.aspectSquare,
+    landscape: workStyles.aspectLandscape,
+  };
+
+  return { ...layout, aspectClass: aspectClasses[project.aspectRatio] };
+}
+
 function HomeWorkCard({
   study,
   layout,
   index,
 }: {
-  study: Study;
+  study: DesignProject;
   layout: { colSpanClass: string; aspectClass: string; imageSizes: string };
   index: number;
 }) {
-  const href = study.slug ? `/work/${study.slug}?from=home` : "/work";
-  const category = study.tags[1] || study.tags[0] || "";
-  const role = study.tags[0] || "";
+  const href = `/work/${study.slug}?from=home`;
 
   return (
     <div className={layout.colSpanClass}>
@@ -136,7 +89,7 @@ function HomeWorkCard({
           className={`${workStyles.imageWrapper} ${layout.aspectClass}`}
         >
           <Image
-            src={study.image}
+            src={study.coverImage}
             alt={study.title}
             fill
             sizes={layout.imageSizes}
@@ -150,11 +103,11 @@ function HomeWorkCard({
 
         <div className={workStyles.cardMeta}>
           <div className={workStyles.cardTagRow}>
-            <span className={workStyles.cardCategory}>{role}</span>
-            {category && category !== role && (
+            <span className={workStyles.cardCategory}>{study.role}</span>
+            {study.industry && (
               <>
                 <span className={workStyles.cardDivider}>·</span>
-                <span className={workStyles.cardRole}>{category}</span>
+                <span className={workStyles.cardRole}>{study.industry}</span>
               </>
             )}
           </div>
@@ -209,10 +162,35 @@ function HomeCodeCard({
   );
 }
 
-export default function HomeFeaturedWork() {
-  const [activeTab, setActiveTab] = useState<Tab>("design");
+export default function HomeFeaturedWork({ projects }: { projects: PortfolioProject[] }) {
+  const [activeTab, setActiveTab] = useState<ProjectType>("product-design");
+  const featuredOrder = ["revenue-management-platform", "spend-tool"];
+  const designProjects = projects
+    .filter((project): project is DesignProject => project.projectType === activeTab)
+    .filter((project) => project.featured !== false)
+    .sort((a, b) => {
+      const aIndex = featuredOrder.indexOf(a.slug);
+      const bIndex = featuredOrder.indexOf(b.slug);
+      if (aIndex === -1 && bIndex === -1) return 0;
+      if (aIndex === -1) return 1;
+      if (bIndex === -1) return -1;
+      return aIndex - bIndex;
+    })
+    .slice(0, 4);
+  const codeStudies = projects
+    .filter((project): project is CodeProject => project.projectType === "code")
+    .filter((project) => project.featured !== false)
+    .slice(0, 4);
+  const activeProjects = activeTab === "code" ? codeStudies : designProjects;
 
-  const studies = designStudies.slice(0, 4);
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (index + direction + tabs.length) % tabs.length;
+    setActiveTab(tabs[nextIndex].id);
+    document.getElementById(`home-tab-${tabs[nextIndex].id}`)?.focus();
+  };
 
   return (
     <section className={styles.sectionNoTop}>
@@ -224,49 +202,62 @@ export default function HomeFeaturedWork() {
               01 · Selected Work
             </div>
             <h2 className={styles.sectionTitle}>
-              Case studies in <em className={styles.sectionTitleSerif}>utility</em>
+              Designed and built with <em className={styles.sectionTitleSerif}>intent</em>
             </h2>
           </div>
 
           <div>
             {/* Tab switcher */}
             <div className={styles.tabContainer} role="tablist" aria-label="Featured work categories">
-              {(["design", "code"] as Tab[]).map((tab) => (
+              {tabs.map((tab, index) => (
                 <button
-                  key={tab}
+                  key={tab.id}
+                  id={`home-tab-${tab.id}`}
                   type="button"
                   role="tab"
-                  aria-selected={activeTab === tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`${styles.tabBtn} ${activeTab === tab ? styles.tabBtnActive : ""}`}
+                  aria-selected={activeTab === tab.id}
+                  aria-controls="home-work-panel"
+                  tabIndex={activeTab === tab.id ? 0 : -1}
+                  onKeyDown={(event) => handleTabKeyDown(event, index)}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`${styles.tabBtn} ${activeTab === tab.id ? styles.tabBtnActive : ""}`}
                 >
-                  {tab === "design" ? "Product Design" : "Built with Code"}
+                  {tab.label}
                 </button>
               ))}
             </div>
           </div>
         </div>
 
-        {activeTab === "design" ? (
+        {activeProjects.length === 0 ? (
+          <div id="home-work-panel" role="tabpanel" className={workStyles.emptyState}>
+            <p className={workStyles.emptyText}>
+              {tabs.find((tab) => tab.id === activeTab)?.label} projects coming soon.
+            </p>
+            <p className={workStyles.emptySubtext}>Selected work will appear here.</p>
+          </div>
+        ) : activeTab !== "code" ? (
           <>
-            <div className={workStyles.grid}>
-              {studies.map((study, index) => (
+            <div id="home-work-panel" role="tabpanel" className={workStyles.gridAnimated}>
+              <div className={workStyles.grid}>
+              {designProjects.map((study, index) => (
                 <HomeWorkCard
-                  key={study.slug ?? study.title}
+                  key={study.slug}
                   study={study}
-                  layout={LAYOUT_PATTERN[index % LAYOUT_PATTERN.length]}
+                  layout={getHomeLayout(index, study)}
                   index={index}
                 />
               ))}
+              </div>
             </div>
 
-            <Link href="/work?tab=design" className={styles.workViewAll}>
+            <Link href={`/work?tab=${activeTab}`} className={styles.workViewAll}>
               View all projects →
             </Link>
           </>
         ) : (
           <>
-            <div className={workStyles.grid}>
+            <div id="home-work-panel" role="tabpanel" className={`${workStyles.grid} ${workStyles.gridAnimated}`}>
               {codeStudies.map((project, index) => (
                 <HomeCodeCard
                   key={project.slug}

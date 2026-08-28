@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import type { DesignProject, CodeProject } from '@/types/project'
+import type { DesignProject, CodeProject, PortfolioProject } from '@/types/project'
+import { codeProjects } from '@/lib/code-projects'
 
 const designDir = path.join(process.cwd(), 'content/design')
 const codeDir = path.join(process.cwd(), 'content/code')
@@ -30,7 +31,11 @@ export function getAllCodeSlugs(): string[] {
 export async function getDesignProject(slug: string): Promise<DesignProject | null> {
   try {
     const mod = await import(`@/content/design/${slug}/index.mdx`)
-    return { ...mod.metadata, slug } as DesignProject
+    return {
+      ...mod.metadata,
+      slug,
+      projectType: mod.metadata.projectType === 'ui-design' ? 'ui-design' : 'product-design',
+    } as DesignProject
   } catch {
     return null
   }
@@ -45,7 +50,7 @@ export async function getAllDesignProjects(): Promise<DesignProject[]> {
 export async function getCodeProject(slug: string): Promise<CodeProject | null> {
   try {
     const mod = await import(`@/content/code/${slug}/index.mdx`)
-    return { ...mod.metadata, slug } as CodeProject
+    return { ...mod.metadata, slug, projectType: 'code' } as CodeProject
   } catch {
     return null
   }
@@ -55,4 +60,9 @@ export async function getAllCodeProjects(): Promise<CodeProject[]> {
   const slugs = getAllCodeSlugs()
   const projects = await Promise.all(slugs.map(getCodeProject))
   return projects.filter((p): p is CodeProject => p !== null)
+}
+
+export async function getAllPortfolioProjects(): Promise<PortfolioProject[]> {
+  const designProjects = await getAllDesignProjects()
+  return [...designProjects, ...codeProjects]
 }

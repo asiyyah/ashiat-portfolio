@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Heading, Body, Caption, Subheading } from "@/components/ui/Typography";
 import Section from "@/components/ui/Section";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "About — Product Designer",
@@ -59,7 +60,7 @@ export default function AboutPage() {
   return (
     <Section>
       <div className="max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row items-start gap-12 mb-24">
+        <ScrollReveal className="flex flex-col md:flex-row items-start gap-12 mb-24">
           <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-surface-hover flex-shrink-0" />
           <div>
             <Heading as="h1" className="text-5xl md:text-6xl">
@@ -72,9 +73,9 @@ export default function AboutPage() {
               strategy and execution.
             </Body>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <section className="mb-24">
+        <ScrollReveal className="mb-24">
           <Heading className="mb-8">Career</Heading>
           <div className="space-y-8">
             {timeline.map((item) => (
@@ -87,9 +88,9 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </section>
+        </ScrollReveal>
 
-        <section className="mb-24">
+        <ScrollReveal className="mb-24">
           <Heading className="mb-8">Design Philosophy</Heading>
           <div className="space-y-6 text-muted leading-relaxed">
             <Body as="p">
@@ -108,9 +109,9 @@ export default function AboutPage() {
               feasible.
             </Body>
           </div>
-        </section>
+        </ScrollReveal>
 
-        <section className="mb-24">
+        <ScrollReveal className="mb-24">
           <Heading className="mb-8">Working Style</Heading>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {workingStyles.map((item) => (
@@ -127,9 +128,9 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </section>
+        </ScrollReveal>
 
-        <section>
+        <ScrollReveal>
           <Heading className="mb-8">Tools &amp; Stack</Heading>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {toolCategories.map((cat) => (
@@ -147,7 +148,7 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-        </section>
+        </ScrollReveal>
       </div>
     </Section>
   );

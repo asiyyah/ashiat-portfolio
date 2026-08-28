@@ -452,6 +452,15 @@
     width: 100%;
   }
 
+  .filterContainer {
+    width: 100%;
+  }
+
+  .filterBtn {
+    flex: 1;
+    padding: 0 12px;
+  }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -488,6 +497,12 @@
 
   .cardTitle {
     font-size: 16px;
+  }
+
+  .filterBtn {
+    padding: 0 8px;
+    font-size: 9px;
+    letter-spacing: 0.25px;
   }
 }
 

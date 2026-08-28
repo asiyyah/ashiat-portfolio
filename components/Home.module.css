@@ -1005,6 +1005,16 @@
     gap: 16px;
   }
 
+  .sectionHeaderRow > div:last-child,
+  .tabContainer {
+    width: 100%;
+  }
+
+  .tabBtn {
+    flex: 1;
+    padding: 0 12px;
+  }
+
   .sectionLead {
     text-align: left;
     max-width: 100%;
@@ -1038,6 +1048,12 @@
 }
 
 @media (max-width: 640px) {
+  .tabBtn {
+    padding: 0 8px;
+    font-size: 9px;
+    letter-spacing: 0.25px;
+  }
+
   .container {
     padding: 0 20px;
   }

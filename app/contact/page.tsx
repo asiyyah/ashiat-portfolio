@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Heading, Body } from "@/components/ui/Typography";
 import Button from "@/components/ui/Button";
 import Section from "@/components/ui/Section";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Contact — Get in Touch",
@@ -19,7 +20,7 @@ const links = [
 export default function ContactPage() {
   return (
     <Section>
-      <div className="max-w-2xl mx-auto text-center">
+      <ScrollReveal className="max-w-2xl mx-auto text-center">
         <Heading as="h1" className="text-5xl md:text-6xl">
           Get in Touch
         </Heading>
@@ -48,7 +49,7 @@ export default function ContactPage() {
             Download Resume
           </Button>
         </div>
-      </div>
+      </ScrollReveal>
     </Section>
   );
 }

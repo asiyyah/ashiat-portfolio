@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../Home.module.css";
 
 const images = [
@@ -39,9 +40,9 @@ export default function HomeHero() {
           </p>
 
           <div className={styles.ctaRow}>
-            <a href="/work" className={styles.btnPrimary}>
+            <Link href="/work" className={styles.btnPrimary}>
               VIEW SELECTED WORK →
-            </a>
+            </Link>
             <a href="/contact" className={styles.btnOutline}>
               DOWNLOAD RESUME ⬇
             </a>

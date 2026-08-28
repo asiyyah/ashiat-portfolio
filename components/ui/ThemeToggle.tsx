@@ -23,11 +23,6 @@ export default function ThemeToggle() {
       }
     };
 
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    if (currentTheme === "light" || currentTheme === "dark") {
-      setTheme(currentTheme);
-    }
-
     window.addEventListener("themechange", handleThemeChange);
     return () => window.removeEventListener("themechange", handleThemeChange);
   }, []);

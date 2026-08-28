@@ -4,15 +4,23 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Work.module.css";
-import type { DesignProject, CodeProject } from "@/types/project";
+import type { DesignProject, CodeProject, ProjectType } from "@/types/project";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 interface WorkContentProps {
   designProjects: DesignProject[];
+  uiProjects: DesignProject[];
   codeProjects: CodeProject[];
   initialTab?: TabKey;
 }
 
-type TabKey = "design" | "code";
+type TabKey = ProjectType;
+
+const tabs: Array<{ id: TabKey; label: string }> = [
+  { id: "product-design", label: "Product Design" },
+  { id: "ui-design", label: "UI Design" },
+  { id: "code", label: "Built with Code" },
+];
 
 // Shared homepage rhythm: a balanced 8/4 lead row, three equal cards, then a
 // full-width closing card.
@@ -107,10 +115,20 @@ function getLayoutConfig(
 
 export default function WorkContent({
   designProjects,
+  uiProjects,
   codeProjects,
-  initialTab = "design",
+  initialTab = "product-design",
 }: WorkContentProps) {
   const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
+
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    const direction = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (index + direction + tabs.length) % tabs.length;
+    setActiveTab(tabs[nextIndex].id);
+    document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
+  };
 
   return (
     <section className={styles.workSection}>
@@ -134,44 +152,34 @@ export default function WorkContent({
               role="tablist"
               aria-label="Work categories"
             >
-              <button
-                id="tab-design"
-                role="tab"
-                type="button"
-                aria-selected={activeTab === "design"}
-                aria-controls="panel-design"
-                tabIndex={activeTab === "design" ? 0 : -1}
-                onClick={() => setActiveTab("design")}
-                className={`${styles.filterBtn} ${
-                  activeTab === "design" ? styles.filterBtnActive : ""
-                }`}
-              >
-                Product Design
-              </button>
-              <button
-                id="tab-code"
-                role="tab"
-                type="button"
-                aria-selected={activeTab === "code"}
-                aria-controls="panel-code"
-                tabIndex={activeTab === "code" ? 0 : -1}
-                onClick={() => setActiveTab("code")}
-                className={`${styles.filterBtn} ${
-                  activeTab === "code" ? styles.filterBtnActive : ""
-                }`}
-              >
-                Built with Code
-              </button>
+              {tabs.map((tab, index) => (
+                <button
+                  key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  type="button"
+                  aria-selected={activeTab === tab.id}
+                  aria-controls={`panel-${tab.id}`}
+                  tabIndex={activeTab === tab.id ? 0 : -1}
+                  onKeyDown={(event) => handleTabKeyDown(event, index)}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`${styles.filterBtn} ${
+                    activeTab === tab.id ? styles.filterBtnActive : ""
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
             </div>
           </div>
         </header>
 
         {/* Design Tab Panel */}
-        {activeTab === "design" && (
+        {activeTab === "product-design" && (
           <div
-            id="panel-design"
+            id="panel-product-design"
             role="tabpanel"
-            aria-labelledby="tab-design"
+            aria-labelledby="tab-product-design"
             className={styles.gridAnimated}
           >
             {designProjects.length > 0 ? (
@@ -183,9 +191,10 @@ export default function WorkContent({
                   );
 
                   return (
-                    <div
+                    <ScrollReveal
                       key={project.slug}
                       className={layout.colSpanClass}
+                      delay={(index % 2) * 0.06}
                     >
                       <Link
                         href={`/work/${project.slug}?from=work`}
@@ -229,7 +238,7 @@ export default function WorkContent({
                           )}
                         </div>
                       </Link>
-                    </div>
+                    </ScrollReveal>
                   );
                 })}
               </div>
@@ -239,6 +248,59 @@ export default function WorkContent({
                 <p className={styles.emptySubtext}>
                   Check back soon for new case studies.
                 </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === "ui-design" && (
+          <div
+            id="panel-ui-design"
+            role="tabpanel"
+            aria-labelledby="tab-ui-design"
+            className={styles.gridAnimated}
+          >
+            {uiProjects.length > 0 ? (
+              <div className={styles.grid}>
+                {uiProjects.map((project, index) => {
+                  const layout = getLayoutConfig(index, DESIGN_LAYOUT_PATTERN, project.aspectRatio);
+
+                  return (
+                    <ScrollReveal key={project.slug} className={layout.colSpanClass} delay={(index % 2) * 0.06}>
+                      <Link
+                        href={`/work/${project.slug}?from=work`}
+                        className={styles.cardLink}
+                        aria-label={`${project.title} - ${project.industry}`}
+                      >
+                        <div className={`${styles.imageWrapper} ${layout.aspectClass}`}>
+                          <Image
+                            src={project.coverImage}
+                            alt={project.title}
+                            fill
+                            sizes={layout.imageSizes}
+                            className={styles.image}
+                            priority={index === 0}
+                          />
+                          <div className={styles.arrowBadge} aria-hidden="true">↗</div>
+                        </div>
+                        <div className={styles.cardMeta}>
+                          <div className={styles.cardTagRow}>
+                            <span className={styles.cardCategory}>{project.industry}</span>
+                            <span className={styles.cardDivider}>·</span>
+                            <span className={styles.cardRole}>{project.role}</span>
+                          </div>
+                          <h2 className={styles.cardTitle}>{project.title}</h2>
+                          {project.impact && <p className={styles.cardImpact}>{project.impact}</p>}
+                        </div>
+                      </Link>
+                    </ScrollReveal>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className={styles.emptyState}>
+                <p className={styles.emptyText}>UI Design projects coming soon.</p>
+                <p className={styles.emptySubtext}>Polished interface explorations will appear here.</p>
               </div>
             )}
           </div>
@@ -261,7 +323,12 @@ export default function WorkContent({
                   );
 
                   return (
-                    <article key={project.slug} className={layout.colSpanClass}>
+                    <ScrollReveal
+                      key={project.slug}
+                      className={layout.colSpanClass}
+                      delay={(index % 2) * 0.06}
+                    >
+                      <article>
                       <div className={styles.cardLink}>
                         <div
                           className={`${styles.imageWrapper} ${layout.aspectClass}`}
@@ -305,7 +372,8 @@ export default function WorkContent({
                           </div>
                         </div>
                       </div>
-                    </article>
+                      </article>
+                    </ScrollReveal>
                   );
                 })}
               </div>

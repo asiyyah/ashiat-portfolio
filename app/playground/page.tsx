@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PlaygroundCanvas from "@/components/playground/PlaygroundCanvas";
+import ScrollReveal from "@/components/motion/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Playground — Design Exploration",
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function PlaygroundPage() {
-  return <PlaygroundCanvas />;
+  return <ScrollReveal><PlaygroundCanvas /></ScrollReveal>;
 }

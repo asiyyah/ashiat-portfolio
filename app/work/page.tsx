@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { getAllDesignProjects } from "@/lib/projects";
-import { codeProjects } from "@/lib/code-projects";
+import { getAllPortfolioProjects } from "@/lib/projects";
+import type { CodeProject, DesignProject, ProjectType } from "@/types/project";
 import WorkContent from "@/components/work/WorkContent";
 
 export const metadata: Metadata = {
@@ -14,11 +14,15 @@ export default async function WorkPage({
 }: {
   searchParams: Promise<{ tab?: string | string[] }>;
 }) {
-  const designProjects = await getAllDesignProjects();
+  const projects = await getAllPortfolioProjects();
   const requestedTab = (await searchParams).tab;
-  const initialTab = requestedTab === "code" ? "code" : "design";
+  const initialTab: ProjectType = requestedTab === "code" || requestedTab === "ui-design"
+    ? requestedTab
+    : "product-design";
   const featuredOrder = ["revenue-management-platform", "spend-tool"];
-  const orderedDesignProjects = [...designProjects].sort((a, b) => {
+  const orderedDesignProjects = projects
+    .filter((project): project is DesignProject => project.projectType === "product-design")
+    .sort((a, b) => {
     const aIndex = featuredOrder.indexOf(a.slug);
     const bIndex = featuredOrder.indexOf(b.slug);
 
@@ -26,11 +30,18 @@ export default async function WorkPage({
     if (aIndex === -1) return 1;
     if (bIndex === -1) return -1;
     return aIndex - bIndex;
-  });
+    });
+  const uiProjects = projects.filter(
+    (project): project is DesignProject => project.projectType === "ui-design"
+  );
+  const codeProjects = projects.filter(
+    (project): project is CodeProject => project.projectType === "code"
+  );
 
   return (
     <WorkContent
       designProjects={orderedDesignProjects}
+      uiProjects={uiProjects}
       codeProjects={codeProjects}
       initialTab={initialTab}
     />
