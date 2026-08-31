@@ -1,0 +1,358 @@
+import CalloutBox from "@/components/ui/CalloutBox";
+import ScrollReveal from "@/components/motion/ScrollReveal";
+import { StoryVisual } from "@/components/case-study/SpendToolStory";
+
+export const metadata = {
+  title: 'HireWise — AI Job Search Assistant',
+  industry: 'AI · Career Technology',
+  role: 'End-to-End UX/UI Designer',
+  duration: '8 weeks',
+  year: 2026,
+  summary: 'An AI-powered job-search assistant designed to make discovery, application management, and interview preparation more focused, trustworthy, and humane.',
+  challenge: 'Job seekers navigate fragmented platforms, irrelevant listings, repetitive application work, poor progress visibility, and an increasing number of misleading job posts—all while receiving little useful feedback.',
+  approach: 'Synthesised patterns from job-seeking communities, audited competing tools, mapped three representative job-seeker journeys, and prioritised a focused set of safety, preparation, and tracking features.',
+  solution: 'A unified assistant that evaluates job-post credibility, supports role-specific interview practice, provides actionable feedback, and organises applications through an intelligent tracker.',
+  impact: 'A complete research-to-prototype product concept that reframes AI as a transparent coach and safety layer rather than an opaque decision-maker.',
+  reflection: 'The strongest opportunity was not simply automating applications. It was restoring clarity, confidence, and agency to a process defined by uncertainty.',
+  coverImage: '/images/HireWise/HireWise Case Study Cover.png',
+  thumbnailImage: '/images/HireWise/HireWise thumbnail-1.png',
+  coverWidth: 2048,
+  coverHeight: 1536,
+  gallery: [],
+  aspectRatio: 'wide',
+  featured: true,
+  team: 'Independent concept — sole product designer',
+  platforms: 'Responsive web application',
+  tools: 'Figma, FigJam, Notion, ChatGPT',
+  tags: ['AI Product Design', 'User Research', 'Career Technology'],
+  projectType: 'product-design',
+}
+
+<ScrollReveal>
+
+## 01 · Context and framing
+
+Job searching has become a fragmented workflow spread across job boards, documents, spreadsheets, messaging platforms, and interview-preparation tools. Candidates spend significant time filtering irrelevant listings, rewriting similar applications, and tracking conversations manually—often without knowing whether their effort is improving their chances.
+
+The emotional cost is equally important. Rejection without feedback, recruiter ghosting, misleading job descriptions, and fake postings make the process feel unsafe and demoralising.
+
+<CalloutBox title="The design challenge">
+  Design a unified job-search experience that reduces repetitive work while helping candidates make safer, more informed decisions and improve through useful feedback.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 02 · Research and discovery
+
+The discovery phase combined secondary research, competitive analysis, and quote mining from job-seeking communities. Discussions across Reddit, LinkedIn, Glassdoor, and social platforms revealed recurring problems that conventional job boards address poorly.
+
+### Research methods
+
+- Analysed discussions from job-seeking and recruitment communities.
+- Compared LinkedIn, Indeed, Teal, Huntr, Jobscan, and Big Interview.
+- Clustered repeated pain points through affinity mapping.
+- Used Jobs-to-be-Done framing to distinguish functional needs from emotional needs.
+
+### Five recurring patterns
+
+1. **Information overload:** Candidates spend more time filtering than applying.
+2. **The tailoring paradox:** Every application demands customisation, but candidates receive no validation that their changes are effective.
+3. **The tracking gap:** Spreadsheets and manual boards become unreliable as application volume grows.
+4. **The trust crisis:** Misleading requirements, suspicious employers, and exploitative test projects waste time and expose personal information.
+5. **Emotional burnout:** The absence of feedback makes progress difficult to recognise and rejection harder to process.
+
+<CalloutBox title="Core research insight">
+  Productivity alone would not solve the problem. Candidates needed a product that combined efficiency with protection, transparency, and visible progress.
+</CalloutBox>
+
+<StoryVisual
+  src="/images/HireWise/Painpoint summary table.png"
+  alt="HireWise research pain-point summary table"
+  width={2880}
+  height={1816}
+  wide
+  caption="Research synthesis — recurring functional and emotional pain points across the job-search journey."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 03 · Designing for different job-seeker realities
+
+Three personas helped test whether the product model could support meaningfully different circumstances without becoming overly broad.
+
+### Vanessa · Early-career designer
+
+A recent graduate pursuing her first remote product-design role. She needs help tailoring applications, understanding why she is being overlooked, and maintaining a consistent search process.
+
+### Daniel · Experienced career switcher
+
+A backend engineer moving toward AI-focused roles. His challenge is translating existing experience into a new professional narrative and judging whether vague job descriptions genuinely match his skills.
+
+### Aisha · Freelancer moving into full-time work
+
+A marketing strategist with strong project experience but limited conventional employment history. She needs to communicate transferable value, identify remote-friendly employers, and reduce the risk of automatic screening systems misreading her background.
+
+Across all three journeys, the underlying need was the same: help candidates decide where to invest effort, present themselves clearly, and learn from each attempt.
+
+<StoryVisual
+  src="/images/HireWise/User Journey Mapping.png"
+  alt="HireWise user journey map"
+  width={2880}
+  height={1816}
+  wide
+  caption="Journey mapping connected candidate actions, friction points, emotions, and product opportunities."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 04 · Product scope and prioritisation
+
+The feature set was prioritised using the MoSCoW method. The first release focused on the points where candidates lose the most time, confidence, or control.
+
+### Must have
+
+- Personalised job discovery and fit signals
+- Job-description credibility analysis
+- Tailored application support
+- Application tracking and reminders
+- Role-specific interview preparation
+- Structured interview feedback
+
+### Later phases
+
+- Job-description summaries
+- Email and LinkedIn import
+- Encouragement and progress coaching
+- Voice-based interview practice
+- Community check-ins and success stories
+
+Full recruiter chat, tax tools, and a complete applicant-tracking system remained outside the product’s purpose.
+
+<StoryVisual
+  src="/images/HireWise/🎯 Feature Prioritization.png"
+  alt="HireWise must-have feature prioritisation board"
+  width={2770}
+  height={1594}
+  wide
+  caption="MoSCoW prioritisation kept the first release focused on safety, preparation, feedback, and tracking."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 05 · Information architecture
+
+The architecture follows the candidate’s journey instead of mirroring the structure of a traditional job board:
+
+1. **Discover:** Find relevant opportunities and understand fit.
+2. **Evaluate:** Review role quality, credibility, and potential red flags.
+3. **Apply:** Tailor application materials with transparent AI assistance.
+4. **Track:** Monitor every application, next step, and follow-up.
+5. **Prepare:** Practise role-specific interviews and review feedback.
+
+This sequence keeps AI embedded within tasks rather than isolating it as a separate destination. The product explains recommendations at the moment they affect a decision.
+
+<StoryVisual
+  src="/images/HireWise/HireWise sitemap.png"
+  alt="HireWise product sitemap"
+  width={2880}
+  height={2214}
+  wide
+  caption="The sitemap follows the candidate journey from discovery and evaluation through preparation and tracking."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 06 · Product feature 01 — Red Flag Detector
+
+Fake postings and engagement-farming recruiters create a safety problem, not merely an inconvenience. HireWise analyses job descriptions before candidates invest time or disclose personal information.
+
+The detector looks for signals such as:
+
+- Compensation that conflicts with the required experience level
+- Vague responsibilities or missing company information
+- Unverified employers
+- Requests for sensitive information too early
+- Unpaid test projects with disproportionate scope
+- Entry-level roles carrying unrealistic experience requirements
+
+Warnings appear directly on job cards using verified, caution, and high-risk states. An expandable explanation shows why a role was flagged. Candidates retain control and may continue after acknowledging the warning.
+
+<CalloutBox title="Design principle">
+  AI-generated warnings must be explainable. The interface surfaces evidence and preserves the candidate’s final decision instead of presenting an opaque verdict.
+</CalloutBox>
+
+<StoryVisual
+  src="/images/HireWise/JD Red Flag Detector.png"
+  alt="HireWise job-description Red Flag Detector screens"
+  width={2880}
+  height={2214}
+  wide
+  caption="Evidence-based warnings help candidates assess questionable listings without removing their control."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 07 · Product feature 02 — AI-powered interview prep module
+
+Generic interview lists rarely reflect a candidate’s actual role, seniority, or industry. HireWise creates a preparation space organised around the opportunity the candidate is pursuing.
+
+### Role-based question bank
+
+Questions are grouped into behavioural, technical, case-study, and company-specific categories. Recommendations respond to job title, seniority, industry, and the requirements in the saved job description.
+
+### AI mock interview
+
+The practice interface removes unrelated navigation and focuses attention on the current question. A timer introduces realistic pressure, while voice-to-text, pause, and resume controls support different practice styles.
+
+<StoryVisual
+  src="/images/HireWise/Interview prep_.png"
+  alt="HireWise role-based interview question bank"
+  width={2596}
+  height={2214}
+  wide
+  caption="1. Role-Based Question Bank — targeted preparation based on the saved role and its requirements."
+/>
+
+<StoryVisual
+  src="/images/HireWise/Mock interview.png"
+  alt="HireWise AI mock interview interface"
+  width={2880}
+  height={2214}
+  wide
+  caption="2. AI Mock Interview — a focused practice environment with realistic pacing and flexible response controls."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 08 · Product feature 03 — Interview feedback & skill reinforcement
+
+A score alone does not help candidates improve. The feedback experience converts each mock interview into a practical learning loop.
+
+The result includes:
+
+- An overall performance summary and improvement trend
+- Question-by-question evaluation
+- The candidate’s answer alongside specific suggestions
+- A model response for comparison
+- Skills demonstrated and skills requiring stronger evidence
+- Clear next steps to practise again, review similar questions, or save notes
+
+Strengths and improvement areas are visually separated, and the language remains growth-focused. Candidates can move between their answer and the model answer without losing context.
+
+<StoryVisual
+  src="/images/HireWise/Interview Feedback.png"
+  alt="HireWise interview feedback and skill reinforcement screens"
+  width={2118}
+  height={2214}
+  wide
+  caption="Feedback turns each practice session into an actionable learning loop rather than a standalone score."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 09 · Product feature 04 — AI-powered application tracker
+
+Manual trackers often fail because updating them becomes another task. HireWise brings discovery and tracking into one flow so applications can be recorded automatically.
+
+Candidates can switch between timeline, kanban, and list views depending on whether they need chronology, pipeline visibility, or detailed comparison. Smart reminders surface applications that need follow-up, while notes, attachments, and interview details stay connected to each opportunity.
+
+The tracker is designed to answer three questions quickly:
+
+- Where is each application now?
+- What needs attention next?
+- Am I making measurable progress?
+
+<StoryVisual
+  src="/images/HireWise/Application Tracker.png"
+  alt="HireWise AI-powered application tracker"
+  width={2880}
+  height={2214}
+  wide
+  caption="A connected application pipeline keeps status, next actions, reminders, and opportunity details in one place."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 10 · Design system highlights
+
+The interface needed to feel calm and dependable across dense job listings, high-attention interview sessions, safety warnings, and progress-tracking views. A compact design system established consistent visual rules before those experiences were assembled.
+
+### Visual foundations
+
+Helvetica Neue provides a neutral, highly legible typographic foundation, with a defined hierarchy covering display headings, section titles, body copy, labels, and compact metadata. The colour system pairs deep navy and blue with a secondary violet scale, while semantic red, yellow, green, and orange tokens communicate risk, caution, success, and progress consistently.
+
+<StoryVisual
+  src="/images/HireWise/Type & color system.png"
+  alt="HireWise typography and colour system"
+  width={2880}
+  height={2214}
+  wide
+  caption="Typography and colour foundations create a consistent hierarchy and a reusable semantic language across the product."
+/>
+
+### Reusable components
+
+The component library standardises recurring patterns such as job cards, interview-session cards, match indicators, skill tags, progress states, actions, and saved-item controls. Variants were designed to accommodate different information densities without changing the underlying interaction model.
+
+This system made the four core product features feel connected: the same status language, spacing logic, border treatment, and interaction patterns carry from job evaluation through interview preparation and application tracking.
+
+<StoryVisual
+  src="/images/HireWise/Component library.png"
+  alt="HireWise reusable component library"
+  width={2880}
+  height={2214}
+  wide
+  caption="Reusable cards, tags, status indicators, and controls support consistency across the core product workflows."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 11 · Key learnings
+
+### Safety can create trust faster than convenience
+
+The original direction emphasised tailoring and tracking. Research showed that protecting candidates from exploitative or misleading listings was equally valuable and more differentiating.
+
+### Emotional design is functional design
+
+Job search products operate in a context of rejection and uncertainty. Progress states, feedback language, reminders, and errors must acknowledge that emotional reality.
+
+### Fragmentation is the real competitor
+
+Candidates did not need another isolated tool. The stronger proposition was reducing the number of disconnected systems required to discover, apply, track, and prepare.
+
+### AI should augment agency
+
+Candidates valued recommendations, explanations, and coaching—but still wanted final control. Transparency became a product requirement rather than an optional detail.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 12 · Reflection
+
+HireWise reframes job searching as a guided and protected experience rather than an application-volume contest. Its value comes from connecting functional support—discovery, tailoring, tracking, and preparation—with the confidence candidates need to continue.
+
+The concept demonstrates how AI can make a complex workflow more humane when it explains its reasoning, reinforces learning, and leaves consequential decisions with the person using it.
+
+</ScrollReveal>

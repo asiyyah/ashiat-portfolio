@@ -205,7 +205,7 @@ export default function WorkContent({
                           className={`${styles.imageWrapper} ${layout.aspectClass}`}
                         >
                           <Image
-                            src={project.coverImage}
+                            src={project.thumbnailImage ?? project.coverImage}
                             alt={project.title}
                             fill
                             sizes={layout.imageSizes}
@@ -268,7 +268,7 @@ export default function WorkContent({
                     <>
                       <div className={`${styles.imageWrapper} ${layout.aspectClass}`}>
                         <Image
-                          src={project.coverImage}
+                          src={project.thumbnailImage ?? project.coverImage}
                           alt={project.title}
                           fill
                           sizes={layout.imageSizes}

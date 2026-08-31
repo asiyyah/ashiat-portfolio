@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const RICH_LAYOUT_SLUGS = ["revenue-management-platform", "spend-tool"];
+const RICH_LAYOUT_SLUGS = ["revenue-management-platform", "spend-tool", "hirewise"];
 
 function backDestination(from: string | undefined): string {
   if (from === "home") return "/";

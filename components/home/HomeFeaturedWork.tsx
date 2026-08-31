@@ -81,7 +81,7 @@ function HomeWorkCard({
     <>
       <div className={`${workStyles.imageWrapper} ${layout.aspectClass}`}>
         <Image
-          src={study.coverImage}
+          src={study.thumbnailImage ?? study.coverImage}
           alt={study.title}
           fill
           sizes={layout.imageSizes}
@@ -180,7 +180,7 @@ function HomeCodeCard({
 
 export default function HomeFeaturedWork({ projects }: { projects: PortfolioProject[] }) {
   const [activeTab, setActiveTab] = useState<ProjectType>("product-design");
-  const featuredOrder = ["revenue-management-platform", "spend-tool"];
+  const featuredOrder = ["revenue-management-platform", "spend-tool", "hirewise"];
   const designProjects = projects
     .filter((project): project is DesignProject => project.projectType === activeTab)
     .filter((project) => project.featured !== false)

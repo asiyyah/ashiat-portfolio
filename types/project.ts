@@ -14,6 +14,7 @@ export interface DesignProject {
   impact: string
   reflection?: string
   coverImage: string
+  thumbnailImage?: string
   gallery: string[]
   aspectRatio?: 'landscape' | 'portrait' | 'square' | 'wide'
   featured?: boolean

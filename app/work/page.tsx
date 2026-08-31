@@ -19,7 +19,7 @@ export default async function WorkPage({
   const initialTab: ProjectType = requestedTab === "code" || requestedTab === "ui-design"
     ? requestedTab
     : "product-design";
-  const featuredOrder = ["revenue-management-platform", "spend-tool"];
+  const featuredOrder = ["revenue-management-platform", "spend-tool", "hirewise"];
   const orderedDesignProjects = projects
     .filter((project): project is DesignProject => project.projectType === "product-design")
     .sort((a, b) => {
