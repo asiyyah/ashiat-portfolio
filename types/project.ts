@@ -24,6 +24,7 @@ export interface DesignProject {
   coverWidth?: number
   coverHeight?: number
   projectType: Exclude<ProjectType, 'code'>
+  externalUrl?: string
 }
 
 export interface CodeProject {

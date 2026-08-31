@@ -264,35 +264,40 @@ export default function WorkContent({
               <div className={styles.grid}>
                 {uiProjects.map((project, index) => {
                   const layout = getLayoutConfig(index, DESIGN_LAYOUT_PATTERN, project.aspectRatio);
+                  const cardContent = (
+                    <>
+                      <div className={`${styles.imageWrapper} ${layout.aspectClass}`}>
+                        <Image
+                          src={project.coverImage}
+                          alt={project.title}
+                          fill
+                          sizes={layout.imageSizes}
+                          className={styles.image}
+                          priority={index === 0}
+                        />
+                        {project.externalUrl && <div className={styles.arrowBadge} aria-hidden="true">↗</div>}
+                      </div>
+                      <div className={styles.cardMeta}>
+                        <div className={styles.cardTagRow}>
+                          <span className={styles.cardCategory}>{project.industry}</span>
+                          <span className={styles.cardDivider}>·</span>
+                          <span className={styles.cardRole}>{project.role}</span>
+                        </div>
+                        <h2 className={styles.cardTitle}>{project.title}</h2>
+                        {project.impact && <p className={styles.cardImpact}>{project.impact}</p>}
+                      </div>
+                    </>
+                  );
 
                   return (
                     <ScrollReveal key={project.slug} className={layout.colSpanClass} delay={(index % 2) * 0.06}>
-                      <Link
-                        href={`/work/${project.slug}?from=work`}
-                        className={styles.cardLink}
-                        aria-label={`${project.title} - ${project.industry}`}
-                      >
-                        <div className={`${styles.imageWrapper} ${layout.aspectClass}`}>
-                          <Image
-                            src={project.coverImage}
-                            alt={project.title}
-                            fill
-                            sizes={layout.imageSizes}
-                            className={styles.image}
-                            priority={index === 0}
-                          />
-                          <div className={styles.arrowBadge} aria-hidden="true">↗</div>
-                        </div>
-                        <div className={styles.cardMeta}>
-                          <div className={styles.cardTagRow}>
-                            <span className={styles.cardCategory}>{project.industry}</span>
-                            <span className={styles.cardDivider}>·</span>
-                            <span className={styles.cardRole}>{project.role}</span>
-                          </div>
-                          <h2 className={styles.cardTitle}>{project.title}</h2>
-                          {project.impact && <p className={styles.cardImpact}>{project.impact}</p>}
-                        </div>
-                      </Link>
+                      {project.externalUrl ? (
+                        <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" className={styles.cardLink} aria-label={project.title}>
+                          {cardContent}
+                        </a>
+                      ) : (
+                        <article className={styles.cardLink}>{cardContent}</article>
+                      )}
                     </ScrollReveal>
                   );
                 })}

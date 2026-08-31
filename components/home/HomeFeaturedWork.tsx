@@ -77,46 +77,51 @@ function HomeWorkCard({
   index: number;
 }) {
   const href = `/work/${study.slug}?from=home`;
+  const cardContent = (
+    <>
+      <div className={`${workStyles.imageWrapper} ${layout.aspectClass}`}>
+        <Image
+          src={study.coverImage}
+          alt={study.title}
+          fill
+          sizes={layout.imageSizes}
+          className={workStyles.image}
+          priority={index === 0}
+        />
+        {(study.projectType === "product-design" || study.externalUrl) && (
+          <div className={workStyles.arrowBadge} aria-hidden="true">↗</div>
+        )}
+      </div>
+
+      <div className={workStyles.cardMeta}>
+        <div className={workStyles.cardTagRow}>
+          <span className={workStyles.cardCategory}>{study.role}</span>
+          {study.industry && (
+            <>
+              <span className={workStyles.cardDivider}>·</span>
+              <span className={workStyles.cardRole}>{study.industry}</span>
+            </>
+          )}
+        </div>
+        <h3 className={workStyles.cardTitle}>{study.title}</h3>
+        {study.impact && <p className={workStyles.cardImpact}>{study.impact}</p>}
+      </div>
+    </>
+  );
 
   return (
     <div className={layout.colSpanClass}>
-      <Link
-        href={href}
-        className={workStyles.cardLink}
-        aria-label={study.title}
-      >
-        <div
-          className={`${workStyles.imageWrapper} ${layout.aspectClass}`}
-        >
-          <Image
-            src={study.coverImage}
-            alt={study.title}
-            fill
-            sizes={layout.imageSizes}
-            className={workStyles.image}
-            priority={index === 0}
-          />
-          <div className={workStyles.arrowBadge} aria-hidden="true">
-            ↗
-          </div>
-        </div>
-
-        <div className={workStyles.cardMeta}>
-          <div className={workStyles.cardTagRow}>
-            <span className={workStyles.cardCategory}>{study.role}</span>
-            {study.industry && (
-              <>
-                <span className={workStyles.cardDivider}>·</span>
-                <span className={workStyles.cardRole}>{study.industry}</span>
-              </>
-            )}
-          </div>
-          <h3 className={workStyles.cardTitle}>{study.title}</h3>
-          {study.impact && (
-            <p className={workStyles.cardImpact}>{study.impact}</p>
-          )}
-        </div>
-      </Link>
+      {study.projectType === "product-design" ? (
+        <Link href={href} className={workStyles.cardLink} aria-label={study.title}>
+          {cardContent}
+        </Link>
+      ) : study.externalUrl ? (
+        <a href={study.externalUrl} target="_blank" rel="noopener noreferrer" className={workStyles.cardLink} aria-label={study.title}>
+          {cardContent}
+        </a>
+      ) : (
+        <article className={workStyles.cardLink}>{cardContent}</article>
+      )}
     </div>
   );
 }
@@ -134,11 +139,22 @@ function HomeCodeCard({
     <article className={layout.colSpanClass}>
       <div className={workStyles.cardLink}>
         <div className={`${workStyles.imageWrapper} ${layout.aspectClass}`}>
-          <div className={`${workStyles.codeCover} ${CODE_COVER_VARIANTS[index % CODE_COVER_VARIANTS.length]}`}>
-            <span className={workStyles.codeCoverLabel}>Live build · 0{index + 1}</span>
-            <strong className={workStyles.codeCoverTitle}>{project.title}</strong>
-            <span className={workStyles.codeCoverMark} aria-hidden="true">↗</span>
-          </div>
+          {project.coverImage ? (
+            <Image
+              src={project.coverImage}
+              alt={project.title}
+              fill
+              sizes={layout.imageSizes}
+              className={workStyles.image}
+              priority={index === 0}
+            />
+          ) : (
+            <div className={`${workStyles.codeCover} ${CODE_COVER_VARIANTS[index % CODE_COVER_VARIANTS.length]}`}>
+              <span className={workStyles.codeCoverLabel}>Live build · 0{index + 1}</span>
+              <strong className={workStyles.codeCoverTitle}>{project.title}</strong>
+              <span className={workStyles.codeCoverMark} aria-hidden="true">↗</span>
+            </div>
+          )}
         </div>
 
         <div className={workStyles.cardMeta}>

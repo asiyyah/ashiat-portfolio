@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import type { DesignProject, CodeProject, PortfolioProject } from '@/types/project'
 import { codeProjects } from '@/lib/code-projects'
+import { uiProjects } from '@/lib/ui-projects'
 
 const designDir = path.join(process.cwd(), 'content/design')
 const codeDir = path.join(process.cwd(), 'content/code')
@@ -64,5 +65,5 @@ export async function getAllCodeProjects(): Promise<CodeProject[]> {
 
 export async function getAllPortfolioProjects(): Promise<PortfolioProject[]> {
   const designProjects = await getAllDesignProjects()
-  return [...designProjects, ...codeProjects]
+  return [...designProjects, ...uiProjects, ...codeProjects]
 }
