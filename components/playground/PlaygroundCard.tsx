@@ -69,7 +69,11 @@ export default function PlaygroundCard({
         >
           <div
             className="w-full max-h-[calc(100vh-3rem)] overflow-y-auto bg-surface rounded-lg border border-border p-4 md:p-8"
-            style={{ maxWidth: aspectRatio < 1 ? 'min(90vw, 32rem)' : 'min(90vw, 64rem)' }}
+            style={{
+              maxWidth: aspectRatio < 1
+                ? 'min(90vw, 32rem)'
+                : `min(90vw, calc(${70 * aspectRatio}vh + 4rem), 64rem)`,
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-6">
@@ -92,7 +96,7 @@ export default function PlaygroundCard({
               </button>
             </div>
             <div
-              className="w-full max-h-[70vh] rounded-lg overflow-hidden bg-surface-hover flex items-center justify-center"
+              className="w-full rounded-lg overflow-hidden bg-transparent flex items-center justify-center"
               style={{ aspectRatio }}
             >
               {visual}
