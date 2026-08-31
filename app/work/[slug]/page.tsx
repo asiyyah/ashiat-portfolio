@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const RICH_LAYOUT_SLUGS = ["revenue-management-platform", "spend-tool", "hirewise"];
+const RICH_LAYOUT_SLUGS = ["revenue-management-platform", "spend-tool", "hirewise", "payup"];
 
 function backDestination(from: string | undefined): string {
   if (from === "home") return "/";
@@ -182,7 +182,7 @@ function RichCaseStudyLayout({
         <ScrollReveal>
           <section className="mb-12">
             <div className="rounded-lg bg-surface p-4 md:p-6">
-              <div className="rounded-md overflow-hidden bg-background border border-border">
+              <div className={`rounded-md overflow-hidden ${project.slug === "payup" ? "bg-transparent" : "border border-border bg-background"}`}>
                 <Image
                   src={project.coverImage}
                   alt={`${project.title} dashboard overview`}

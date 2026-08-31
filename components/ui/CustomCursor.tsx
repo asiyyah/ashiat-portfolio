@@ -74,7 +74,8 @@ export default function CustomCursor({ label = 'You' }: CustomCursorProps) {
           className="w-3 h-3 rounded-full -translate-x-1/2 -translate-y-1/2"
           style={{
             background: 'var(--accent)',
-            boxShadow: '0 0 12px rgba(232, 39, 26, 0.3)',
+            boxShadow:
+              '0 0 12px color-mix(in srgb, var(--accent) 30%, transparent)',
           }}
         />
         <div

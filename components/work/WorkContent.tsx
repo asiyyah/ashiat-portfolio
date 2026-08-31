@@ -202,7 +202,7 @@ export default function WorkContent({
                         aria-label={`${project.title} - ${project.industry}`}
                       >
                         <div
-                          className={`${styles.imageWrapper} ${layout.aspectClass}`}
+                          className={`${styles.imageWrapper} ${layout.aspectClass} ${project.slug === "payup" ? styles.payupBackdrop : ""}`}
                         >
                           <Image
                             src={project.thumbnailImage ?? project.coverImage}

@@ -79,7 +79,9 @@ function HomeWorkCard({
   const href = `/work/${study.slug}?from=home`;
   const cardContent = (
     <>
-      <div className={`${workStyles.imageWrapper} ${layout.aspectClass}`}>
+      <div
+        className={`${workStyles.imageWrapper} ${layout.aspectClass} ${study.slug === "payup" ? workStyles.payupBackdrop : ""}`}
+      >
         <Image
           src={study.thumbnailImage ?? study.coverImage}
           alt={study.title}
@@ -180,7 +182,7 @@ function HomeCodeCard({
 
 export default function HomeFeaturedWork({ projects }: { projects: PortfolioProject[] }) {
   const [activeTab, setActiveTab] = useState<ProjectType>("product-design");
-  const featuredOrder = ["revenue-management-platform", "spend-tool", "hirewise"];
+  const featuredOrder = ["revenue-management-platform", "spend-tool", "hirewise", "payup"];
   const designProjects = projects
     .filter((project): project is DesignProject => project.projectType === activeTab)
     .filter((project) => project.featured !== false)

@@ -1,0 +1,255 @@
+import CalloutBox from "@/components/ui/CalloutBox";
+import ScrollReveal from "@/components/motion/ScrollReveal";
+import { StoryVisual } from "@/components/case-study/SpendToolStory";
+
+export const metadata = {
+  title: 'PayUp — Payment Tracking & Invoicing for Freelancers',
+  industry: 'Fintech · Payments',
+  role: 'UX/UI & Web Designer',
+  duration: 'Nov 20, 2023 – Jan 15, 2024',
+  year: 2024,
+  summary: 'A responsive payment-management platform that helps freelancers create invoices, automate reminders, receive payments, and understand their cash flow in one place.',
+  challenge: 'Freelancers often manage invoices, client follow-ups, payment gateways, and financial records across disconnected tools, increasing the risk of late payments, missed invoices, and unclear cash flow.',
+  approach: 'Surveyed freelance professionals, reviewed competing invoicing and payment products, translated recurring needs into four focused workflows, and iterated responsive prototypes through usability feedback.',
+  solution: 'A unified dashboard for creating branded invoices, scheduling reminders, connecting payment methods, recording transactions, and monitoring payment status.',
+  impact: 'A complete responsive product concept that reduces administrative friction and gives independent professionals clearer control over how and when they are paid.',
+  reflection: 'Designing for money required more than adding financial features. The experience had to make every status, action, and consequence immediately understandable.',
+  coverImage: '/images/PayUp/PayUp-thumbnail-grey.png',
+  thumbnailImage: '/images/PayUp/PayUp-thumbnail-grey.png',
+  coverWidth: 2911,
+  coverHeight: 2072,
+  gallery: [],
+  aspectRatio: 'wide',
+  featured: true,
+  team: 'Independent project — sole product designer',
+  platforms: 'Responsive web and mobile application',
+  tools: 'Figma, FigJam, Google Docs',
+  tags: ['Fintech', 'Invoicing', 'Payment Tracking'],
+  projectType: 'product-design',
+}
+
+<ScrollReveal>
+
+## 01 · Context and framing
+
+Getting paid is one of the most important parts of freelance work, yet the process is often held together with separate invoice tools, spreadsheets, email threads, and manual reminders. As client volume grows, freelancers can lose track of what has been sent, what is overdue, and which follow-up should happen next.
+
+PayUp brings those tasks into one responsive workspace. It is designed to reduce the administrative burden around client payments while giving freelancers a clear, current view of their income.
+
+<CalloutBox title="The design challenge">
+  How might we help freelancers invoice clients, follow up on outstanding payments, and understand cash flow without requiring a complex accounting system?
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 02 · Goals and success criteria
+
+The product direction centred on three goals:
+
+- Simplify everyday financial management for freelance professionals.
+- Reduce the time and stress involved in invoicing, reminders, and receiving payments.
+- Encourage clearer freelancer accountability and better client payment habits.
+
+Success meant making the most important information visible at a glance while keeping creation and follow-up flows short enough to become part of a freelancer’s routine.
+
+<StoryVisual
+  src="/images/PayUp/PayUp_Dashboard.png"
+  alt="PayUp dashboard with revenue, invoice, and recent activity information"
+  width={2048}
+  height={1458}
+  wide
+  caption="The dashboard prioritises payment health, recent activity, outstanding invoices, and revenue visibility."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 03 · Research and discovery
+
+An online survey gathered input from freelance professionals across locations and disciplines. The format supported anonymous responses and made it possible to identify recurring patterns in how freelancers track invoices, follow up with clients, and reconcile payments.
+
+The research considered three broad groups: younger freelancers establishing their businesses, professionals balancing freelance work with other commitments, and experienced independents growing toward agency models.
+
+### What the research needed to uncover
+
+- Where payment-management workflows break down
+- Which repetitive tasks create the most stress
+- What information freelancers need before taking action
+- How needs change as the number of clients and projects increases
+
+<CalloutBox title="Core insight">
+  Freelancers did not only need a faster invoice creator. They needed one connected view of the relationship between clients, invoices, reminders, payments, and cash flow.
+</CalloutBox>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 04 · Competitive landscape and product scope
+
+The competitive review examined Upwork, Freelancer, Harvest, Wave, and Stripe. Marketplace tools connect payments to work sourced inside their ecosystems, while accounting and payment products often introduce more complexity than an independent professional needs.
+
+PayUp’s opportunity was to sit between those categories: focused enough for everyday freelance work, but complete enough to replace manual tracking.
+
+The first product scope was organised around four connected capabilities:
+
+1. Invoice creation and sending
+2. Automated payment reminders
+3. Flexible payment collection
+4. Payment tracking and reporting
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 05 · Product feature 01 — Invoice creation and sending
+
+The invoice workspace combines client information, project details, line items, rates, due dates, totals, and payment information in one guided flow. Clear grouping reduces the effort required to review an invoice before sending it.
+
+The invoice dashboard then provides a searchable record of drafts and sent invoices, with visible paid, pending, and overdue states. Freelancers can also choose from reusable templates instead of rebuilding presentation details for every client.
+
+<StoryVisual
+  src="/images/PayUp/PayUp Invoice page.png"
+  alt="PayUp invoice management dashboard"
+  width={2270}
+  height={1820}
+  wide
+  caption="Invoice management — search, filter, create, and review invoice status from one workspace."
+/>
+
+<StoryVisual
+  src="/images/PayUp/Invoice creation page.png"
+  alt="PayUp invoice creation form"
+  width={2132}
+  height={1820}
+  wide
+  caption="A structured creation flow keeps client, project, total, payment, reminder, and sending actions in context."
+/>
+
+<StoryVisual
+  src="/images/PayUp/Invoice Templates.png"
+  alt="PayUp reusable invoice templates"
+  width={2270}
+  height={1762}
+  wide
+  caption="Reusable templates give freelancers presentation flexibility without adding repetitive setup work."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 06 · Product feature 02 — Automated payment reminders
+
+Following up on late payments can be uncomfortable and easy to postpone. PayUp lets freelancers schedule reminders while creating an invoice or return later to configure the date, frequency, delivery channel, and message.
+
+Default messages provide a quick starting point, while custom copy preserves the freelancer’s relationship with each client. Reminder status and client responses stay connected to the invoice instead of becoming another email thread to manage.
+
+<StoryVisual
+  src="/images/PayUp/Set reminder.png"
+  alt="PayUp payment reminder setup"
+  width={2132}
+  height={1724}
+  wide
+  caption="Reminder settings turn an awkward manual follow-up into a predictable, configurable workflow."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 07 · Product feature 03 — Flexible payment collection
+
+Freelancers can connect familiar gateways such as Stripe, PayPal, Square, and Paystack, then offer clients suitable payment options without moving outside the invoicing workflow. Support for bank accounts, cards, and gateway integrations makes the product relevant across different markets and client preferences.
+
+The platform updates related invoice and payment states after a transaction, reducing the need to reconcile information manually.
+
+<StoryVisual
+  src="/images/PayUp/Payment Gateway.png"
+  alt="PayUp supported payment gateway integrations"
+  width={2128}
+  height={1606}
+  wide
+  caption="Payment integrations accommodate regional and international client preferences."
+/>
+
+<StoryVisual
+  src="/images/PayUp/Settings.png"
+  alt="PayUp payment option settings"
+  width={2128}
+  height={1606}
+  wide
+  caption="Freelancers can manage bank, card, and PayPal payment options from a consistent settings area."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 08 · Product feature 04 — Payment tracking and reporting
+
+The payment workspace makes revenue, average payment time, pending amounts, and overdue payments visible before the user reaches the transaction table. Search and filtering support quick reconciliation across clients and projects.
+
+Payments received outside a connected gateway can still be recorded against an invoice. The modal keeps the task focused by asking only for the invoice, date, payment method, and resulting status.
+
+<StoryVisual
+  src="/images/PayUp/Payment tracking.png"
+  alt="PayUp payment tracking and reporting dashboard"
+  width={2270}
+  height={1976}
+  wide
+  caption="Payment tracking combines headline indicators with searchable, filterable transaction records."
+/>
+
+<StoryVisual
+  src="/images/PayUp/Record Payment.png"
+  alt="PayUp record new payment form"
+  width={2132}
+  height={1724}
+  wide
+  caption="Manual payment recording keeps offline and externally processed transactions reflected in the same system."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 09 · Design decisions and challenges
+
+### Supporting different levels of experience
+
+PayUp needed to work for freelancers sending their first professional invoice and experienced independents managing a growing client list. Familiar table patterns, plain-language labels, visible status colours, and progressively disclosed settings reduce the learning burden.
+
+### Maintaining focus
+
+The potential feature set could easily expand into full accounting or project management. Prioritising invoicing, reminders, collection, and tracking protected the core experience from unnecessary complexity.
+
+### Designing financial trust
+
+Money-related interfaces require clarity. Consistent status treatments, confirmation points, labelled totals, and a visible connection between invoices and payments help users understand what has happened and what requires attention.
+
+### Accounting for a global audience
+
+Supporting different payment providers and methods made the concept more useful across markets, including freelancers working from Nigeria with international clients.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## 10 · Learnings and reflection
+
+Research kept the design grounded in the everyday realities of freelance work rather than assumptions about financial software. Feedback and iteration helped translate those needs into shorter, more direct workflows.
+
+The project reinforced four lessons:
+
+- Empathy should shape both the interface and the product scope.
+- Data and usability feedback are most useful when they lead to specific design changes.
+- Accessibility includes cultural context, regional payment habits, and different levels of financial confidence.
+- Clear product storytelling helps users understand not only how a feature works, but why it matters.
+
+PayUp demonstrates how a focused financial product can give freelancers more than administrative efficiency. By making invoice and payment status visible, connecting related actions, and automating uncomfortable follow-ups, it helps independent professionals approach cash flow with greater confidence.
+
+</ScrollReveal>
