@@ -10,6 +10,7 @@ interface PlaygroundCardProps {
   visual: React.ReactNode
   style?: React.CSSProperties
   isDragging: boolean
+  aspectRatio?: number
 }
 
 export default function PlaygroundCard({
@@ -18,6 +19,7 @@ export default function PlaygroundCard({
   visual,
   style,
   isDragging,
+  aspectRatio = 4 / 3,
 }: PlaygroundCardProps) {
   const [open, setOpen] = useState(false)
   const wasDragging = useRef(false)
@@ -42,7 +44,10 @@ export default function PlaygroundCard({
         onPointerMove={() => { if (isDragging) wasDragging.current = true }}
       >
         <div className="rounded-xl border border-border bg-background overflow-hidden shadow-sm hover:shadow-md transition-shadow w-full h-full">
-          <div className="aspect-[4/3] overflow-hidden bg-surface">
+          <div
+            className="overflow-hidden bg-surface"
+            style={{ aspectRatio }}
+          >
             {visual}
           </div>
           <div className="p-3">
@@ -63,7 +68,8 @@ export default function PlaygroundCard({
           aria-label={title}
         >
           <div
-            className="max-w-3xl w-full bg-surface rounded-lg border border-border p-8"
+            className="w-full max-h-[calc(100vh-3rem)] overflow-y-auto bg-surface rounded-lg border border-border p-4 md:p-8"
+            style={{ maxWidth: aspectRatio < 1 ? 'min(90vw, 32rem)' : 'min(90vw, 64rem)' }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-6">
@@ -85,7 +91,10 @@ export default function PlaygroundCard({
                 </svg>
               </button>
             </div>
-            <div className="aspect-[16/9] rounded-lg overflow-hidden bg-surface-hover flex items-center justify-center">
+            <div
+              className="w-full max-h-[70vh] rounded-lg overflow-hidden bg-surface-hover flex items-center justify-center"
+              style={{ aspectRatio }}
+            >
               {visual}
             </div>
           </div>

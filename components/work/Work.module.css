@@ -136,6 +136,19 @@
   gap: 36px 32px;
 }
 
+.masonryGrid {
+  columns: 3;
+  column-gap: 32px;
+}
+
+.masonryItem {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 36px;
+  break-inside: avoid;
+  vertical-align: top;
+}
+
 /* Column spans for curated rhythm */
 .colSpan12 {
   grid-column: span 12;
@@ -277,7 +290,7 @@
 }
 
 .cardLink:hover .imageWrapper {
-  border-color: var(--foreground);
+  border-color: var(--card-hover-border);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
@@ -416,6 +429,11 @@
 
 /* ─── Responsive Media Queries ───────────────────────────────────── */
 @media (max-width: 1024px) {
+  .masonryGrid {
+    columns: 2;
+    column-gap: 28px;
+  }
+
   .grid {
     grid-template-columns: repeat(6, 1fr);
     gap: 28px;
@@ -469,6 +487,14 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+
+  .masonryGrid {
+    columns: 1;
+  }
+
+  .masonryItem {
+    margin-bottom: 32px;
   }
 
   .colSpan12,

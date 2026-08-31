@@ -42,14 +42,14 @@ const DESIGN_LAYOUT_PATTERN: CardLayoutConfig[] = [
     imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
   {
-    colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectSquare,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+    colSpanClass: styles.colSpan6,
+    aspectClass: styles.aspectLandscape,
+    imageSizes: "(max-width: 768px) 100vw, 50vw",
   },
   {
-    colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectSquare,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
+    colSpanClass: styles.colSpan6,
+    aspectClass: styles.aspectLandscape,
+    imageSizes: "(max-width: 768px) 100vw, 50vw",
   },
   {
     colSpanClass: styles.colSpan4,
@@ -261,7 +261,7 @@ export default function WorkContent({
             className={styles.gridAnimated}
           >
             {uiProjects.length > 0 ? (
-              <div className={styles.grid}>
+              <div className={styles.masonryGrid}>
                 {uiProjects.map((project, index) => {
                   const layout = getLayoutConfig(index, DESIGN_LAYOUT_PATTERN, project.aspectRatio);
                   const cardContent = (
@@ -290,7 +290,7 @@ export default function WorkContent({
                   );
 
                   return (
-                    <ScrollReveal key={project.slug} className={layout.colSpanClass} delay={(index % 2) * 0.06}>
+                    <ScrollReveal key={project.slug} className={styles.masonryItem} delay={(index % 3) * 0.04}>
                       {project.externalUrl ? (
                         <a href={project.externalUrl} target="_blank" rel="noopener noreferrer" className={styles.cardLink} aria-label={project.title}>
                           {cardContent}

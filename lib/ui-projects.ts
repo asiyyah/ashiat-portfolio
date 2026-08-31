@@ -17,6 +17,17 @@ const uiProjectSeeds: UIProjectSeed[] = [
   { title: "MindEase", slug: "mindease", coverImage: "/images/ui-designs/MindEase Presentation 3.png", aspectRatio: "portrait" },
   { title: "Seedly Onboarding", slug: "seedly-onboarding", coverImage: "/images/ui-designs/Seedly onboarding.png", aspectRatio: "square" },
   { title: "SnapStyle", slug: "snapstyle", coverImage: "/images/ui-designs/SnapStyle Presentation 2.png", aspectRatio: "square" },
+  { title: "HopePath Charity Website", slug: "hopepath-charity-website", coverImage: "/images/ui-designs/Charity website mock.png", aspectRatio: "wide" },
+  { title: "Finance Management App", slug: "finance-management-app", coverImage: "/images/ui-designs/Finance management twitter post 4.png", aspectRatio: "landscape" },
+  { title: "Wandermate Destination Experience", slug: "wandermate-destination-experience", coverImage: "/images/ui-designs/Wandermate post 4.png", aspectRatio: "landscape" },
+  { title: "Crypto Market Interface", slug: "crypto-market-interface", coverImage: "/images/ui-designs/Crypto trading interface.png", aspectRatio: "landscape" },
+  { title: "Web3 Social Tipping", slug: "web3-social-tipping", coverImage: "/images/ui-designs/Web3 social media app post 3.png", aspectRatio: "landscape" },
+  { title: "Web3 Creator Profile", slug: "web3-creator-profile", coverImage: "/images/ui-designs/Web3 social media app x post 2.png", aspectRatio: "landscape" },
+  { title: "CipherTrade Landing Page", slug: "ciphertrade-landing-page", coverImage: "/images/ui-designs/Cipher trade_.png", aspectRatio: "landscape" },
+  { title: "CipherTrade Features", slug: "ciphertrade-features", coverImage: "/images/ui-designs/Cipher trade features X post.png", aspectRatio: "wide" },
+  { title: "Crypto Wallet Import", slug: "crypto-wallet-import", coverImage: "/images/ui-designs/Import wallet mockup 1.png", aspectRatio: "landscape" },
+  { title: "Crypto Wallet Dashboard", slug: "crypto-wallet-dashboard", coverImage: "/images/ui-designs/Crypto wallet mockup.png", aspectRatio: "square" },
+  { title: "Fashion Ecommerce App", slug: "fashion-ecommerce-app", coverImage: "/images/ui-designs/Fashion ecommerce app Twitter post - 2.png", aspectRatio: "landscape" },
 ];
 
 export const uiProjects: DesignProject[] = uiProjectSeeds.map((project) => ({
