@@ -43,7 +43,7 @@ export default function CustomCursor({ label = 'You' }: CustomCursorProps) {
     const onMove = (e: MouseEvent) => {
       cursorX.set(e.clientX)
       cursorY.set(e.clientY)
-      if (!visible) setVisible(true)
+      setVisible(true)
     }
 
     const onLeave = () => setVisible(false)
@@ -58,7 +58,7 @@ export default function CustomCursor({ label = 'You' }: CustomCursorProps) {
       document.removeEventListener('mouseleave', onLeave)
       document.removeEventListener('mouseenter', onEnter)
     }
-  }, [isFinePointer, visible, cursorX, cursorY])
+  }, [isFinePointer, cursorX, cursorY])
 
   if (!isFinePointer) return null
 

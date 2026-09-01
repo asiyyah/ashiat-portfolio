@@ -6,7 +6,6 @@ import {
   HomeProcess,
   HomeToolkit,
   HomeTestimonials,
-  HomeClosingCTA,
 } from "@/components/home";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import { getAllPortfolioProjects } from "@/lib/projects";
@@ -22,7 +21,6 @@ export default async function Page() {
       <ScrollReveal><HomeProcess /></ScrollReveal>
       <ScrollReveal><HomeToolkit /></ScrollReveal>
       <ScrollReveal><HomeTestimonials /></ScrollReveal>
-      <ScrollReveal><HomeClosingCTA /></ScrollReveal>
     </div>
   );
 }

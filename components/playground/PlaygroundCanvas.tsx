@@ -242,6 +242,7 @@ export default function PlaygroundCanvas() {
         overscrollBehaviorY: 'none',
       }}
     >
+      <h1 className="sr-only">Playground</h1>
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 pointer-events-none w-[min(88vw,36rem)] text-center">
         <p className="text-sm leading-relaxed text-foreground">
           A collection of concepts, experiments, and interactions from my work

@@ -26,7 +26,6 @@ const items = [
 
 export default function HomeTestimonials() {
   const [active, setActive] = useState(0);
-  const current = items[active];
 
   return (
     <section className={styles.testimonialsSection}>

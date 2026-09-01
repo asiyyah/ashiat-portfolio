@@ -1,6 +1,7 @@
 import {
   getAllDesignSlugs,
   getDesignProject,
+  getDesignProjectModule,
   getCodeProject,
 } from "@/lib/projects";
 import Image from "next/image";
@@ -10,6 +11,7 @@ import { Heading, Body, Subheading } from "@/components/ui/Typography";
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import BackLink from "@/components/ui/BackLink";
+import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,8 +32,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const RICH_LAYOUT_SLUGS = ["revenue-management-platform", "spend-tool", "hirewise", "payup"];
-
 function backDestination(from: string | undefined): string {
   if (from === "home") return "/";
   return "/work";
@@ -45,18 +45,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
   const designProject = await getDesignProject(slug);
   const codeProject = await getCodeProject(slug);
 
-  if (!designProject && !codeProject) {
-    return (
-      <Section>
-        <div className="text-center max-w-3xl mx-auto">
-          <Heading as="h1">Project not found</Heading>
-          <BackLink to={backTo} className="mt-6 inline-block text-accent hover:underline">
-            &larr; Back to Work
-          </BackLink>
-        </div>
-      </Section>
-    );
-  }
+  if (!designProject && !codeProject) notFound();
 
   if (codeProject && !designProject) {
     return (
@@ -69,10 +58,11 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
 
   const project = designProject!;
 
-  const MdxContent = (await import(`@/content/design/${slug}/index.mdx`))
-    .default;
+  const projectModule = await getDesignProjectModule(slug);
+  if (!projectModule) notFound();
+  const MdxContent = projectModule.default;
 
-  const useRichLayout = RICH_LAYOUT_SLUGS.includes(slug);
+  const useRichLayout = project.caseStudyLayout === "rich";
 
   if (useRichLayout) {
     return (

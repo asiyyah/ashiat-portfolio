@@ -8,44 +8,10 @@ const rows: [string, string[]][] = [
   ["Collaboration", ["Notion", "Jira", "Linear", "Slack", "GitHub"]],
 ];
 
-const iconSlugs: Record<string, string> = {
-  Figma: "figma",
-  FigJam: "figjam",
-  Framer: "framer",
-  Miro: "miro",
-  React: "react",
-  TypeScript: "typescript",
-  "HTML / CSS": "html5",
-  "Node.js": "nodedotjs",
-  "Tailwind CSS": "tailwindcss",
-  Claude: "claude",
-  Cursor: "cursor",
-  ChatGPT: "openai",
-  "GitHub Copilot": "githubcopilot",
-  v0: "vercel",
-  Maze: "maze",
-  UserTesting: "usertesting",
-  Notion: "notion",
-  Jira: "jira",
-  Linear: "linear",
-  Slack: "slack",
-  GitHub: "github",
-};
-
 function ToolChip({ name }: { name: string }) {
-  const slug = iconSlugs[name];
-
   return (
     <span className={styles.toolChip}>
-      {slug && (
-        <img
-          src={`https://cdn.simpleicons.org/${slug}`}
-          alt=""
-          className={styles.toolIcon}
-          width={14}
-          height={14}
-        />
-      )}
+      <span className="h-2 w-2 rounded-full bg-current opacity-50" aria-hidden="true" />
       {name}
     </span>
   );

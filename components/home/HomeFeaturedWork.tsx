@@ -6,65 +6,20 @@ import { useState } from "react";
 import styles from "../Home.module.css";
 import workStyles from "../work/Work.module.css";
 import type { CodeProject, DesignProject, PortfolioProject, ProjectType } from "@/types/project";
-
-const tabs: Array<{ id: ProjectType; label: string }> = [
-  { id: "product-design", label: "Product Design" },
-  { id: "ui-design", label: "UI Design" },
-  { id: "code", label: "Built with Code" },
-];
-
-// Curated 12-column grid layout for visual rhythm (mirrors the Work page)
-const LAYOUT_PATTERN: Array<{
-  colSpanClass: string;
-  aspectClass: string;
-  imageSizes: string;
-}> = [
-  {
-    colSpanClass: workStyles.colSpan8,
-    aspectClass: workStyles.aspectWide,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw",
-  },
-  {
-    colSpanClass: workStyles.colSpan4,
-    aspectClass: workStyles.aspectPortrait,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
-  },
-  {
-    colSpanClass: workStyles.colSpan6,
-    aspectClass: workStyles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, 50vw",
-  },
-  {
-    colSpanClass: workStyles.colSpan6,
-    aspectClass: workStyles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, 50vw",
-  },
-];
-
-const CODE_LAYOUT_PATTERN = LAYOUT_PATTERN.map((layout) => ({
-  ...layout,
-  aspectClass: workStyles.aspectLandscape,
-}));
-
-const CODE_COVER_VARIANTS = [
-  workStyles.codeCoverCoral,
-  workStyles.codeCoverInk,
-  workStyles.codeCoverSage,
-  workStyles.codeCoverSand,
-];
+import {
+  CODE_COVER_VARIANTS,
+  CODE_LAYOUT_PATTERN,
+  DESIGN_LAYOUT_PATTERN,
+  PROJECT_TABS,
+  getLayoutConfig,
+} from "@/components/work/project-layout";
 
 function getHomeLayout(index: number, project?: DesignProject) {
-  const layout = LAYOUT_PATTERN[index % LAYOUT_PATTERN.length];
-  if (!project || project.projectType !== "ui-design" || !project.aspectRatio) return layout;
-
-  const aspectClasses = {
-    portrait: workStyles.aspectPortrait,
-    wide: workStyles.aspectWide,
-    square: workStyles.aspectSquare,
-    landscape: workStyles.aspectLandscape,
-  };
-
-  return { ...layout, aspectClass: aspectClasses[project.aspectRatio] };
+  return getLayoutConfig(
+    index,
+    DESIGN_LAYOUT_PATTERN.slice(0, 4),
+    project?.projectType === "ui-design" ? project.aspectRatio : undefined,
+  );
 }
 
 function HomeWorkCard({
@@ -205,9 +160,9 @@ export default function HomeFeaturedWork({ projects }: { projects: PortfolioProj
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
     const direction = event.key === "ArrowRight" ? 1 : -1;
-    const nextIndex = (index + direction + tabs.length) % tabs.length;
-    setActiveTab(tabs[nextIndex].id);
-    document.getElementById(`home-tab-${tabs[nextIndex].id}`)?.focus();
+    const nextIndex = (index + direction + PROJECT_TABS.length) % PROJECT_TABS.length;
+    setActiveTab(PROJECT_TABS[nextIndex].id);
+    document.getElementById(`home-tab-${PROJECT_TABS[nextIndex].id}`)?.focus();
   };
 
   return (
@@ -227,7 +182,7 @@ export default function HomeFeaturedWork({ projects }: { projects: PortfolioProj
           <div>
             {/* Tab switcher */}
             <div className={styles.tabContainer} role="tablist" aria-label="Featured work categories">
-              {tabs.map((tab, index) => (
+              {PROJECT_TABS.map((tab, index) => (
                 <button
                   key={tab.id}
                   id={`home-tab-${tab.id}`}
@@ -250,7 +205,7 @@ export default function HomeFeaturedWork({ projects }: { projects: PortfolioProj
         {activeProjects.length === 0 ? (
           <div id="home-work-panel" role="tabpanel" className={workStyles.emptyState}>
             <p className={workStyles.emptyText}>
-              {tabs.find((tab) => tab.id === activeTab)?.label} projects coming soon.
+              {PROJECT_TABS.find((tab) => tab.id === activeTab)?.label} projects coming soon.
             </p>
             <p className={workStyles.emptySubtext}>Selected work will appear here.</p>
           </div>

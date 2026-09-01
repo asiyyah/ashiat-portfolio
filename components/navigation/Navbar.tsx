@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { RESUME_URL } from "@/lib/site-links";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -28,7 +29,12 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
+      const handleEscape = (event: KeyboardEvent) => {
+        if (event.key === "Escape") setMobileOpen(false);
+      };
+      document.addEventListener("keydown", handleEscape);
       return () => {
+        document.removeEventListener("keydown", handleEscape);
         document.body.style.overflow = "";
       };
     }
@@ -74,7 +80,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
           <a
-            href="#"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-mono text-[11px] tracking-[1.5px] uppercase font-semibold bg-accent text-accent-foreground px-[18px] h-11 inline-flex items-center rounded cursor-pointer transition-opacity hover:opacity-90"
           >
             VIEW RESUME
@@ -101,10 +109,12 @@ export default function Navbar() {
 
       <div
         className={`md:hidden fixed inset-0 top-16 bg-background z-40 transition-transform duration-300 ${
-          mobileOpen ? "translate-x-0" : "translate-x-full"
+          mobileOpen ? "translate-x-0 visible" : "translate-x-full invisible pointer-events-none"
         }`}
         role="dialog"
         aria-modal="true"
+        aria-hidden={!mobileOpen}
+        inert={!mobileOpen}
         aria-label="Navigation menu"
       >
         <div className="flex flex-col items-center justify-center gap-8 h-full">
@@ -126,7 +136,9 @@ export default function Navbar() {
           })}
           <ThemeToggle />
           <a
-            href="#"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={closeMobile}
             className="font-mono text-[11px] tracking-[1.5px] uppercase font-semibold bg-accent text-accent-foreground px-[18px] h-11 inline-flex items-center rounded cursor-pointer transition-opacity hover:opacity-90"
           >

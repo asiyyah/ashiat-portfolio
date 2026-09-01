@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test('homepage loads', async ({ page }) => {
   await page.goto('/')
-  await expect(page.locator('h1')).toContainText('Product Designer')
+  await expect(page.locator('h1')).toContainText('clarity into complex digital products')
   await expect(page).toHaveTitle(/Product Designer/)
 })
 
@@ -15,10 +15,10 @@ test('navigation works', async ({ page }) => {
 
 test('work tabs switch correctly', async ({ page }) => {
   await page.goto('/work')
-  await page.getByRole('tab', { name: 'Code' }).click()
-  await expect(page.getByRole('tab', { name: 'Code' })).toHaveAttribute('aria-selected', 'true')
-  await page.getByRole('tab', { name: 'Design' }).click()
-  await expect(page.getByRole('tab', { name: 'Design' })).toHaveAttribute('aria-selected', 'true')
+  await page.getByRole('tab', { name: 'Built with Code' }).click()
+  await expect(page.getByRole('tab', { name: 'Built with Code' })).toHaveAttribute('aria-selected', 'true')
+  await page.getByRole('tab', { name: 'Product Design' }).click()
+  await expect(page.getByRole('tab', { name: 'Product Design' })).toHaveAttribute('aria-selected', 'true')
 })
 
 test('case study page renders', async ({ page }) => {
@@ -50,6 +50,23 @@ test('playground loads', async ({ page }) => {
   await expect(page.locator('h1')).toContainText('Playground')
 })
 
+test('playground cards open from the keyboard and close with Escape', async ({ page }) => {
+  await page.goto('/playground')
+  const card = page.getByRole('button', { name: 'Open EcoLife Blog' })
+  await card.focus()
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('dialog', { name: 'EcoLife Blog' })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('dialog', { name: 'EcoLife Blog' })).toBeHidden()
+  await expect(card).toBeFocused()
+})
+
+test('unknown projects return a 404 page', async ({ page }) => {
+  const response = await page.goto('/work/does-not-exist')
+  expect(response?.status()).toBe(404)
+  await expect(page.getByRole('heading', { name: 'Page not found' })).toBeVisible()
+})
+
 test('mobile navigation opens and closes', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 })
   await page.goto('/')
@@ -74,4 +91,8 @@ test('footer navigation is present', async ({ page }) => {
   await page.goto('/')
   const footer = page.locator('footer')
   await expect(footer.getByRole('link', { name: 'Contact' })).toBeVisible()
+  await expect(footer.getByRole('heading', { name: /let's make it clear/i })).toBeVisible()
+  await expect(footer.getByLabel('Your name')).toBeVisible()
+  await expect(footer.getByLabel('Email address')).toBeVisible()
+  await expect(footer.getByLabel('What are you working on?')).toBeVisible()
 })

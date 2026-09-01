@@ -1,21 +1,7 @@
 /* ─── Scroll Reveal ──────────────────────────────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
-}
-
-.revealUp {
-  opacity: 0;
-  animation: fadeUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.revealUp.visible {
-  opacity: 1;
 }
 
 /* ─── Layout ─────────────────────────────────────────────────────── */
@@ -181,33 +167,7 @@
   100% { transform: translateX(calc(-50% - 16px)); }
 }
 
-/* Hero project showcase animation */
-.heroScene {
-  max-width: 1280px;
-  width: 100%;
-  margin: 72px auto 0;
-  padding: 0 40px;
-}
-
-.heroSceneVideo {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-}
-
 /* ─── SECTION Shared ─────────────────────────────────────────────── */
-.section {
-  padding: 120px 0;
-  border-top: 1px solid var(--border);
-}
-
 .sectionNoTop {
   padding: 120px 0;
 }
@@ -248,150 +208,6 @@
   text-align: right;
 }
 
-/* ─── WORK GRID ──────────────────────────────────────────────────── */
-.workGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.workRow {
-  display: grid;
-  gap: 16px;
-}
-
-.workRowA {
-  grid-template-columns: 2fr 1fr;
-}
-
-.workRowB {
-  grid-template-columns: 1fr 2fr;
-}
-
-.workCard {
-  position: relative;
-  border-radius: 6px;
-  overflow: hidden;
-  cursor: pointer;
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  background: var(--surface);
-}
-
-.workCardLarge {
-  height: 480px;
-}
-
-.workCardSmall {
-  height: 480px;
-}
-
-.workCardImage {
-  position: absolute;
-  inset: 0;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.workCard:hover .workCardImage {
-  transform: scale(1.06);
-}
-
-.workCardOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.55) 0%,
-    rgba(0, 0, 0, 0.12) 35%,
-    rgba(0, 0, 0, 0.0) 60%
-  );
-  z-index: 1;
-  transition: opacity 300ms ease;
-}
-
-.workCardMeta {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 28px;
-  z-index: 2;
-  transform: translateY(8px);
-  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.workCard:hover .workCardMeta {
-  transform: translateY(0);
-}
-
-.workCardTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.workCardTag {
-  font-size: 10px;
-  font-family: var(--font-mono);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 3px 8px;
-  border-radius: 2px;
-  backdrop-filter: blur(4px);
-}
-
-.workCardTitle {
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin: 0 0 8px;
-}
-
-.workCardImpact {
-  font-size: 12px;
-  color: rgba(255,255,255,0.6);
-  font-family: var(--font-mono);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 350ms ease 50ms, transform 350ms ease 50ms;
-}
-
-.workCard:hover .workCardImpact {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.workCardArrow {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  z-index: 2;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: #fff;
-  opacity: 0;
-  transform: scale(0.8) rotate(-45deg);
-  transition: opacity 300ms ease, transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.workCard:hover .workCardArrow {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
 .workViewAll {
   margin-top: 40px;
   display: flex;
@@ -409,21 +225,6 @@
 .workViewAll:hover {
   color: var(--foreground);
   gap: 18px;
-}
-
-/* empty state */
-.emptyTab {
-  font-size: 14px;
-  color: var(--muted);
-  text-align: center;
-  padding: 64px 0;
-  line-height: 1.6;
-}
-
-.emptyTabLink {
-  color: var(--accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* ─── EXPERTISE ──────────────────────────────────────────────────── */
@@ -658,28 +459,14 @@
   border-radius: 100px;
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  transition: gap 200ms ease, border-color 200ms ease, color 200ms ease;
+  gap: 7px;
+  transition: border-color 200ms ease, color 200ms ease;
   cursor: default;
 }
 
 .toolChip:hover {
-  gap: 7px;
   border-color: var(--foreground);
   color: var(--foreground);
-}
-
-.toolIcon {
-  width: 0;
-  height: 14px;
-  opacity: 0;
-  transition: width 200ms ease, opacity 200ms ease;
-  flex-shrink: 0;
-}
-
-.toolChip:hover .toolIcon {
-  width: 14px;
-  opacity: 1;
 }
 
 /* ─── TESTIMONIALS ───────────────────────────────────────────────── */
@@ -779,161 +566,6 @@
   width: 48px;
 }
 
-/* ─── CTA BAND ───────────────────────────────────────────────────── */
-.ctaBand {
-  --cta-background: #0d0d0d;
-  --cta-foreground: #ffffff;
-  --cta-secondary: rgba(255, 255, 255, 0.8);
-  --cta-muted: rgba(255, 255, 255, 0.6);
-  --cta-glow: rgba(255, 255, 255, 0.15);
-  --cta-button-background: #ffffff;
-  --cta-button-foreground: #0d0d0d;
-  --cta-button-hover: #f0f0f0;
-  background: var(--cta-background);
-  color: var(--cta-foreground);
-  padding: 120px 0;
-  position: relative;
-  overflow: hidden;
-  border-top: 1px solid var(--border);
-}
-
-:global([data-theme="dark"]) .ctaBand {
-  --cta-background: #ffffff;
-  --cta-foreground: #111111;
-  --cta-secondary: rgba(17, 17, 17, 0.78);
-  --cta-muted: rgba(17, 17, 17, 0.58);
-  --cta-glow: rgba(17, 17, 17, 0.1);
-  --cta-button-background: #111111;
-  --cta-button-foreground: #ffffff;
-  --cta-button-hover: #292929;
-}
-
-.ctaBand::before {
-  content: '';
-  position: absolute;
-  top: -120px;
-  right: -80px;
-  width: 600px;
-  height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--cta-glow) 0%, transparent 72%);
-  filter: blur(50px);
-  opacity: 0.9;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.ctaBand::after {
-  content: '';
-  position: absolute;
-  top: -20px;
-  right: 10px;
-  width: 340px;
-  height: 340px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--cta-glow) 0%, transparent 70%);
-  filter: blur(30px);
-  opacity: 0.75;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.ctaBand .container {
-  position: relative;
-  z-index: 2;
-}
-
-.ctaBandEyebrow {
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--cta-secondary);
-  font-family: var(--font-mono);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.ctaBandDot {
-  width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.ctaBandTitle {
-  font-size: clamp(36px, 5.5vw, 80px);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.035em;
-  color: var(--cta-foreground) !important;
-  margin: 0 0 24px;
-  max-width: 800px;
-}
-
-.ctaBandTitleSerif {
-  font-family: var(--font-display);
-  font-style: italic;
-  color: var(--cta-foreground) !important;
-  font-weight: 700;
-}
-
-.ctaBandLead {
-  font-size: 15px;
-  color: var(--cta-secondary);
-  max-width: 440px;
-  margin-bottom: 40px;
-  line-height: 1.65;
-}
-
-.ctaBandBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  background: var(--cta-button-background);
-  color: var(--cta-button-foreground);
-  border: none;
-  padding: 16px 32px;
-  cursor: pointer;
-  transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
-  font-family: var(--font-mono);
-  border-radius: 2px;
-  text-decoration: none;
-}
-
-.ctaBandBtn:hover {
-  background: var(--cta-button-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px var(--cta-glow);
-}
-
-.ctaSocialLinks {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  margin-top: 32px;
-}
-
-.ctaSocialLink {
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--cta-muted);
-  text-decoration: none;
-  font-family: var(--font-mono);
-  transition: color 200ms ease;
-}
-
-.ctaSocialLink:hover {
-  color: var(--cta-foreground);
-}
-
 /* Tab styles kept for work section */
 .tabContainer {
   display: inline-flex;
@@ -985,16 +617,6 @@
     padding: 0 24px;
   }
 
-  .workRowA,
-  .workRowB {
-    grid-template-columns: 1fr;
-  }
-
-  .workCardLarge,
-  .workCardSmall {
-    height: 340px;
-  }
-
   .expertiseLayout {
     grid-template-columns: 1fr;
   }
@@ -1042,9 +664,6 @@
     gap: 24px;
   }
 
-  .ctaBand {
-    padding: 80px 0;
-  }
 }
 
 @media (max-width: 640px) {
@@ -1076,16 +695,10 @@
     gap: 18px;
   }
 
-  .heroScene {
-    padding: 0 20px;
-    margin-top: 48px;
-  }
-
   .hero {
     padding: 64px 0 96px;
   }
 
-  .section,
   .sectionNoTop,
   .sectionAlt,
   .processSection,
@@ -1106,16 +719,6 @@
 
   .toolItems {
     padding: 12px 16px;
-  }
-
-  .workCardImpact {
-    opacity: 1;
-    transform: none;
-  }
-
-  .workCardArrow {
-    opacity: 1;
-    transform: scale(1) rotate(0);
   }
 
   .processScroll {

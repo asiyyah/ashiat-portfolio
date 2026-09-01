@@ -26,6 +26,7 @@ export interface DesignProject {
   coverHeight?: number
   projectType: Exclude<ProjectType, 'code'>
   externalUrl?: string
+  caseStudyLayout?: 'standard' | 'rich'
 }
 
 export interface CodeProject {

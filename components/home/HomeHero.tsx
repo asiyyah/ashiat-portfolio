@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../Home.module.css";
+import { RESUME_URL } from "@/lib/site-links";
 
 const images = [
   { src: "/images/ticker-images/Rectangle 3.png", alt: "Design showcase 3" },
@@ -9,12 +10,6 @@ const images = [
   { src: "/images/ticker-images/Rectangle 2.png", alt: "Design showcase 2" },
   { src: "/images/ticker-images/Rectangle 6.png", alt: "Design showcase 6" },
   { src: "/images/ticker-images/Rectangle 4.png", alt: "Design showcase 4" },
-  { src: "/images/ticker-images/Rectangle 5.png", alt: "Design showcase 5" },
-  { src: "/images/ticker-images/Rectangle 3.png", alt: "Design showcase 3" },
-  { src: "/images/ticker-images/Rectangle 1.png", alt: "Design showcase 1" },
-  { src: "/images/ticker-images/Rectangle 6.png", alt: "Design showcase 6" },
-  { src: "/images/ticker-images/Rectangle 4.png", alt: "Design showcase 4" },
-  { src: "/images/ticker-images/Rectangle 2.png", alt: "Design showcase 2" },
 ];
 
 export default function HomeHero() {
@@ -28,22 +23,23 @@ export default function HomeHero() {
           </div>
 
           <h1 className={styles.heroTitle}>
-            Designing complex digital products that scale&nbsp;— from enterprise
-            platforms to AI-powered systems.
+I design clarity into complex digital products.
           </h1>
 
           <p className={styles.heroLead}>
-            A senior systems designer bridging the gap between product strategy,
-            rigorous UX architectures, and production-grade code. Decades spent
-            helping financial institutions, government agencies, and AI scale-ups
-            turn systemic chaos into precise interfaces.
+            I’m a Product Designer focused on enterprise, SaaS, fintech and AI-powered products. I combine systems thinking, product strategy and technical fluency to turn complex workflows, data and business requirements into intuitive experiences, and bring ideas closer to production.
           </p>
 
           <div className={styles.ctaRow}>
             <Link href="/work" className={styles.btnPrimary}>
               VIEW SELECTED WORK →
             </Link>
-            <a href="/contact" className={styles.btnOutline}>
+            <a
+              href={RESUME_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnOutline}
+            >
               DOWNLOAD RESUME ⬇
             </a>
           </div>
@@ -65,21 +61,6 @@ export default function HomeHero() {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Hero project showcase animation */}
-      <div className={styles.heroScene} hidden>
-        <video
-          className={styles.heroSceneVideo}
-          src="/hero-scene.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
       </div>
     </section>
   );

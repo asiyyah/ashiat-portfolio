@@ -6,6 +6,13 @@ import Link from "next/link";
 import styles from "./Work.module.css";
 import type { DesignProject, CodeProject, ProjectType } from "@/types/project";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import {
+  CODE_COVER_VARIANTS,
+  CODE_LAYOUT_PATTERN,
+  DESIGN_LAYOUT_PATTERN,
+  PROJECT_TABS,
+  getLayoutConfig,
+} from "./project-layout";
 
 interface WorkContentProps {
   designProjects: DesignProject[];
@@ -15,103 +22,6 @@ interface WorkContentProps {
 }
 
 type TabKey = ProjectType;
-
-const tabs: Array<{ id: TabKey; label: string }> = [
-  { id: "product-design", label: "Product Design" },
-  { id: "ui-design", label: "UI Design" },
-  { id: "code", label: "Built with Code" },
-];
-
-// Shared homepage rhythm: a balanced 8/4 lead row, three equal cards, then a
-// full-width closing card.
-interface CardLayoutConfig {
-  colSpanClass: string;
-  aspectClass: string;
-  imageSizes: string;
-}
-
-const DESIGN_LAYOUT_PATTERN: CardLayoutConfig[] = [
-  {
-    colSpanClass: styles.colSpan8,
-    aspectClass: styles.aspectWide,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw",
-  },
-  {
-    colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectPortrait,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
-  },
-  {
-    colSpanClass: styles.colSpan6,
-    aspectClass: styles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, 50vw",
-  },
-  {
-    colSpanClass: styles.colSpan6,
-    aspectClass: styles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, 50vw",
-  },
-  {
-    colSpanClass: styles.colSpan4,
-    aspectClass: styles.aspectSquare,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw",
-  },
-  {
-    colSpanClass: styles.colSpan12,
-    aspectClass: styles.aspectWide,
-    imageSizes: "(max-width: 768px) 100vw, 100vw",
-  },
-];
-
-const CODE_LAYOUT_PATTERN: CardLayoutConfig[] = [
-  {
-    colSpanClass: styles.colSpan7,
-    aspectClass: styles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 58vw",
-  },
-  {
-    colSpanClass: styles.colSpan5,
-    aspectClass: styles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 42vw",
-  },
-  {
-    colSpanClass: styles.colSpan6,
-    aspectClass: styles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, 50vw",
-  },
-  {
-    colSpanClass: styles.colSpan6,
-    aspectClass: styles.aspectLandscape,
-    imageSizes: "(max-width: 768px) 100vw, 50vw",
-  },
-];
-
-const CODE_COVER_VARIANTS = [
-  styles.codeCoverCoral,
-  styles.codeCoverInk,
-  styles.codeCoverSage,
-  styles.codeCoverSand,
-];
-
-function getLayoutConfig(
-  index: number,
-  pattern: CardLayoutConfig[],
-  projectAspect?: string
-): CardLayoutConfig {
-  const defaultPattern = pattern[index % pattern.length];
-  if (!projectAspect) return defaultPattern;
-
-  let aspectClass = defaultPattern.aspectClass;
-  if (projectAspect === "portrait") aspectClass = styles.aspectPortrait;
-  else if (projectAspect === "wide") aspectClass = styles.aspectWide;
-  else if (projectAspect === "square") aspectClass = styles.aspectSquare;
-  else if (projectAspect === "landscape") aspectClass = styles.aspectLandscape;
-
-  return {
-    ...defaultPattern,
-    aspectClass,
-  };
-}
 
 export default function WorkContent({
   designProjects,
@@ -125,9 +35,9 @@ export default function WorkContent({
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
     const direction = event.key === "ArrowRight" ? 1 : -1;
-    const nextIndex = (index + direction + tabs.length) % tabs.length;
-    setActiveTab(tabs[nextIndex].id);
-    document.getElementById(`tab-${tabs[nextIndex].id}`)?.focus();
+    const nextIndex = (index + direction + PROJECT_TABS.length) % PROJECT_TABS.length;
+    setActiveTab(PROJECT_TABS[nextIndex].id);
+    document.getElementById(`tab-${PROJECT_TABS[nextIndex].id}`)?.focus();
   };
 
   return (
@@ -152,7 +62,7 @@ export default function WorkContent({
               role="tablist"
               aria-label="Work categories"
             >
-              {tabs.map((tab, index) => (
+              {PROJECT_TABS.map((tab, index) => (
                 <button
                   key={tab.id}
                   id={`tab-${tab.id}`}
