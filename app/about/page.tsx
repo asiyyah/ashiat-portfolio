@@ -1,155 +1,111 @@
 import type { Metadata } from "next";
-import { Heading, Body, Caption, Subheading } from "@/components/ui/Typography";
-import Section from "@/components/ui/Section";
+import Image from "next/image";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import { RESUME_URL, SOCIAL_LINKS } from "@/lib/site-links";
+import styles from "./AboutPage.module.css";
 
 export const metadata: Metadata = {
-  title: "About — Product Designer",
-  description:
-    "Product designer specialising in enterprise SaaS, fintech, compliance platforms, and complex product workflows.",
+  title: "About Ashiat — Product Designer",
+  description: "The story, perspective, and interests of Ashiat Abdulkadir, a product designer working across complex digital products.",
 };
 
-const timeline = [
-  { year: "2024", event: "Led design for enterprise compliance platform" },
-  { year: "2022", event: "Senior Product Designer at fintech company" },
-  { year: "2020", event: "Started independent design practice" },
-  { year: "2018", event: "Product Designer at SaaS startup" },
-  { year: "2016", event: "Began career in product design" },
+const journey = [
+  { number: "01", title: "AI-powered fintech", description: "Learning how emerging technology can support better financial decisions and experiences." },
+  { number: "02", title: "Business fintech", description: "Working across POS, inventory management, payments, and collections in one connected product." },
+  { number: "03", title: "Superapp products", description: "Thinking through broad ecosystems where many everyday services need to feel like one experience." },
+  { number: "04", title: "Proptech and consulting", description: "Moving between focused product problems, different industries, and multidisciplinary teams." },
 ];
 
-const toolCategories = [
-  {
-    category: "Design",
-    tools: ["Figma", "Framer", "Principle", "After Effects"],
-  },
-  {
-    category: "Development",
-    tools: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    category: "AI",
-    tools: ["Claude", "ChatGPT", "Midjourney", "GitHub Copilot"],
-  },
-  {
-    category: "Productivity",
-    tools: ["Linear", "Notion", "Superhuman", "Arc"],
-  },
-];
-
-const workingStyles = [
-  {
-    title: "Collaborative",
-    description:
-      "I work embedded with engineering and product teams, not in isolation.",
-  },
-  {
-    title: "Systems-First",
-    description: "Every component is designed as part of a larger system.",
-  },
-  {
-    title: "AI-Enhanced",
-    description: "I use AI tools to accelerate exploration and implementation.",
-  },
-  {
-    title: "Outcome-Driven",
-    description: "Design decisions are measured by business and user impact.",
-  },
+const interests = [
+  { title: "Stories", description: "Reading webtoons and settling into a favourite drama." },
+  { title: "Sound", description: "Listening to music, often across languages and cultures." },
+  { title: "The sky", description: "Noticing light, clouds, colour, and landscapes—and stopping to photograph them." },
+  { title: "Languages", description: "Listening to how different languages sound through music, film, and everyday content." },
 ];
 
 export default function AboutPage() {
+  const linkedIn = SOCIAL_LINKS.find((link) => link.label === "LinkedIn");
+
   return (
-    <Section>
-      <div className="max-w-4xl mx-auto">
-        <ScrollReveal className="flex flex-col md:flex-row items-start gap-12 mb-24">
-          <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-surface-hover flex-shrink-0" />
-          <div>
-            <Heading as="h1" className="text-5xl md:text-6xl">
-              About
-            </Heading>
-            <Body className="mt-6" as="p">
-              I design complex products for enterprise, fintech, and compliance
-              platforms. My approach combines systems thinking with practical
-              implementation experience, bridging the gap between product
-              strategy and execution.
-            </Body>
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal className="mb-24">
-          <Heading className="mb-8">Career</Heading>
-          <div className="space-y-8">
-            {timeline.map((item) => (
-              <div key={item.year} className="flex gap-6 items-start">
-                <p className="text-sm text-muted w-16 flex-shrink-0">
-                  {item.year}
-                </p>
-                <div className="w-px h-full bg-border min-h-6" />
-                <p className="text-foreground">{item.event}</p>
+    <div className={styles.page}>
+      <ScrollReveal>
+        <header className={`${styles.container} ${styles.hero}`}>
+          <div className={styles.heroCopy}>
+            <div className={styles.eyebrow}><span className={styles.dot} aria-hidden="true" />A little about me</div>
+            <h1 className={styles.heroTitle}>
+              Hi, I&apos;m <span className={styles.inlinePortrait} aria-hidden="true"><Image src="/images/about/ashiat-avatar.jpg" alt="" fill sizes="120px" className={styles.photo} priority /></span> Ashiat. I followed <em>curiosity</em> into product design.
+            </h1>
+            <div className={styles.heroFooter}>
+              <p className={styles.heroIntro}>I design complex digital products, but the story started much more simply: I heard the words “product designer,” became curious, and kept following every question that came after.</p>
+              <div className={styles.heroActions}>
+                <a className={styles.textLink} href={RESUME_URL} target="_blank" rel="noopener noreferrer">View résumé ↗</a>
+                {linkedIn && <a className={styles.textLink} href={linkedIn.href} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>}
               </div>
+            </div>
+          </div>
+        </header>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <section className={styles.storySection}>
+          <div className={`${styles.container} ${styles.storyGrid}`}>
+            <p className={styles.sectionLabel}>How it started</p>
+            <div className={styles.storyCopy}>
+              <p className={styles.storyLead}>I wanted to understand how the products and apps I used every day were actually <em>made.</em></p>
+              <div className={styles.storyBody}>
+                <p>That curiosity turned into consuming everything I could find about product design. The more I learnt, the more interested I became—not only in how interfaces looked, but in how products worked, how decisions were made, and how many moving parts had to come together behind a seemingly simple experience.</p>
+                <p>I kept learning and somehow kept finding myself in teams building increasingly complex tools. Looking back, I don&apos;t think I chose one perfectly mapped path. It carved itself while I was busy following the next interesting problem.</p>
+                <p>Somewhere along the way I also explored Web3. Each environment added another way of thinking about systems, trust, behaviour, and the relationship people have with technology.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <section className={`${styles.container} ${styles.section}`}>
+          <div className={styles.sectionHeader}><p className={styles.sectionLabel}>The path so far</p><h2 className={styles.sectionTitle}>Different industries, one recurring theme: complexity.</h2></div>
+          <div className={styles.journeyGrid}>
+            {journey.map((item) => (
+              <article key={item.number} className={styles.journeyItem}><span className={styles.journeyNumber}>{item.number}</span><h3>{item.title}</h3><p>{item.description}</p></article>
             ))}
           </div>
-        </ScrollReveal>
+        </section>
+      </ScrollReveal>
 
-        <ScrollReveal className="mb-24">
-          <Heading className="mb-8">Design Philosophy</Heading>
-          <div className="space-y-6 text-muted leading-relaxed">
-            <Body as="p">
-              I approach every problem by first understanding the system it
-              lives in. Good design is not about screens; it is about how people
-              interact with complex information and make decisions.
-            </Body>
-            <Body as="p">
-              My process emphasises clarity, reducing cognitive load, and
-              creating interfaces that feel intuitive even when handling
-              sophisticated workflows.
-            </Body>
-            <Body as="p">
-              I work closely with engineering teams and use my understanding of
-              implementation to design solutions that are both elegant and
-              feasible.
-            </Body>
+      <ScrollReveal>
+        <section className={styles.lifeSection}>
+          <div className={styles.container}>
+            <div className={styles.sectionHeader}><p className={styles.sectionLabel}>Away from the screen</p><h2 className={styles.sectionTitle}>I&apos;m usually collecting stories, sounds, and bits of the sky.</h2></div>
+            <div className={styles.photoGrid} aria-label="Personal photographs by Ashiat">
+              <figure className={`${styles.photoFigure} ${styles.skyPlaceholder}`}>
+                <Image src="/images/about/sky-study.jpg" alt="A layered evening sky photographed by Ashiat" fill sizes="(max-width: 640px) 100vw, 52vw" className={styles.photo} />
+                <figcaption>Sky study · through my lens</figcaption>
+              </figure>
+              <figure className={`${styles.photoFigure} ${styles.landscapePlaceholder}`}>
+                <Image src="/images/about/landscape.jpg" alt="A flowering tree in a green landscape photographed by Ashiat" fill sizes="(max-width: 640px) 55vw, 28vw" className={styles.photo} />
+                <figcaption>Things I notice</figcaption>
+              </figure>
+              <figure className={`${styles.photoFigure} ${styles.memoryPlaceholder}`}>
+                <Image src="/images/about/personal-moment.jpg" alt="Ashiat visiting a colourful literary exhibition" fill sizes="(max-width: 640px) 40vw, 24vw" className={styles.photo} />
+                <figcaption>A moment worth keeping</figcaption>
+              </figure>
+            </div>
+            <div className={styles.interestsGrid}>
+              {interests.map((interest, index) => (
+                <article key={interest.title} className={styles.interest}><span>{String(index + 1).padStart(2, "0")}</span><h3>{interest.title}</h3><p>{interest.description}</p></article>
+              ))}
+            </div>
           </div>
-        </ScrollReveal>
+        </section>
+      </ScrollReveal>
 
-        <ScrollReveal className="mb-24">
-          <Heading className="mb-8">Working Style</Heading>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {workingStyles.map((item) => (
-              <div
-                key={item.title}
-                className="p-6 rounded-lg border border-border"
-              >
-                <Subheading as="h3" className="mb-2">
-                  {item.title}
-                </Subheading>
-                <Body className="text-sm" as="p">
-                  {item.description}
-                </Body>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <Heading className="mb-8">Tools &amp; Stack</Heading>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {toolCategories.map((cat) => (
-              <div key={cat.category}>
-                <Caption as="h3" className="mb-3">
-                  {cat.category}
-                </Caption>
-                <ul className="space-y-1">
-                  {cat.tools.map((tool) => (
-                    <li key={tool} className="text-foreground">
-                      {tool}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </ScrollReveal>
-      </div>
-    </Section>
+      <ScrollReveal>
+        <section className={`${styles.container} ${styles.closing}`}>
+          <p className={styles.sectionLabel}>What stays constant</p>
+          <p className={styles.closingStatement}>Whether I&apos;m untangling a product flow or framing a photograph, I&apos;m drawn to the same thing: noticing details and finding the clearest way to hold onto them.</p>
+        </section>
+      </ScrollReveal>
+    </div>
   );
 }

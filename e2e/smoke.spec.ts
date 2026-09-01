@@ -87,7 +87,7 @@ test('contact page loads', async ({ page }) => {
 
 test('about page loads', async ({ page }) => {
   await page.goto('/about')
-  await expect(page.locator('h1')).toContainText('About')
+  await expect(page.locator('h1')).toContainText("Hi, I'm Ashiat. I followed curiosity into product design.")
 })
 
 test('footer navigation is present', async ({ page }) => {
