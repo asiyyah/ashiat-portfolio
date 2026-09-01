@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Heading, Body } from "@/components/ui/Typography";
-import Section from "@/components/ui/Section";
-import ScrollReveal from "@/components/motion/ScrollReveal";
-import { CONTACT_EMAIL, RESUME_URL, SOCIAL_LINKS } from "@/lib/site-links";
+import FooterContactForm from "@/components/layout/FooterContactForm";
+import { CONTACT_EMAIL } from "@/lib/site-links";
+import styles from "./ContactPage.module.css";
 
 export const metadata: Metadata = {
   title: "Contact — Get in Touch",
@@ -12,44 +11,29 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <Section>
-      <ScrollReveal className="max-w-2xl mx-auto text-center">
-        <Heading as="h1" className="text-5xl md:text-6xl">
-          Get in Touch
-        </Heading>
-        <Body className="mt-6 text-lg" as="p">
-          Have a project, question, or just want to say hello? I&apos;d love to
-          hear from you.
-        </Body>
-
-        <div className="mt-12 flex flex-col items-center gap-6">
-          <a href={`mailto:${CONTACT_EMAIL}`} className="text-lg text-accent hover:underline">
+    <div className={styles.page}>
+      <section className={styles.inner} aria-labelledby="contact-page-heading">
+        <div className={styles.copy}>
+          <div className={styles.eyebrow}>
+            <span className={styles.dot} aria-hidden="true" />
+            Available for select projects
+          </div>
+          <h1 id="contact-page-heading" className={styles.title}>
+            Let&apos;s make it <em>clear.</em>
+          </h1>
+          <p className={styles.intro}>
+            Bring me the complicated part. Tell me what you&apos;re building, where it feels stuck, and what a useful outcome looks like.
+          </p>
+          <a className={styles.email} href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
-          {SOCIAL_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-lg text-accent hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {link.label}
-            </a>
-          ))}
         </div>
 
-        <div className="mt-16">
-          <a
-            href={RESUME_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary"
-          >
-            Download Resume
-          </a>
+        <div className={styles.formColumn}>
+          <p className={styles.formLabel}>Start a conversation</p>
+          <FooterContactForm variant="standalone" />
         </div>
-      </ScrollReveal>
-    </Section>
+      </section>
+    </div>
   );
 }

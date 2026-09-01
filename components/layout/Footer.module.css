@@ -1,4 +1,6 @@
 .footer {
+  --footer-frame: 16px;
+  --page-gutter: 40px;
   --footer-bg: #111111;
   --footer-fg: #ffffff;
   --footer-muted: rgba(255, 255, 255, 0.62);
@@ -9,7 +11,7 @@
   --field-bg: #f3f3f1;
   --field-line: #dededb;
   margin-top: auto;
-  padding: 16px;
+  padding: var(--footer-frame);
   color: var(--footer-fg);
   background: var(--background);
 }
@@ -45,18 +47,6 @@
   pointer-events: none;
 }
 
-.shell::after {
-  content: "";
-  position: absolute;
-  width: 560px;
-  height: 560px;
-  right: -180px;
-  top: -260px;
-  border-radius: 999px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--footer-fg) 18%, transparent), transparent 68%);
-  pointer-events: none;
-}
-
 .contact {
   position: relative;
   z-index: 1;
@@ -64,10 +54,13 @@
   grid-template-columns: minmax(0, 0.9fr) minmax(420px, 0.75fr);
   gap: clamp(48px, 8vw, 128px);
   align-items: center;
-  max-width: 1280px;
   min-height: 720px;
   margin: 0 auto;
-  padding: clamp(64px, 8vw, 116px) clamp(24px, 6vw, 88px);
+  padding-block: clamp(64px, 8vw, 116px);
+  padding-inline: max(
+    calc(var(--page-gutter) - var(--footer-frame)),
+    calc((100vw - 1200px) / 2 - var(--footer-frame))
+  );
 }
 
 .eyebrow {
@@ -130,19 +123,33 @@
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
 }
 
-.formTitle {
-  margin-bottom: 8px;
-  color: var(--card-fg);
-  font-size: clamp(26px, 3vw, 36px);
-  font-weight: 600;
-  letter-spacing: -0.035em;
+.formStandalone {
+  --card-bg: var(--background);
+  --card-fg: var(--foreground);
+  --card-muted: var(--muted);
+  --field-bg: transparent;
+  --field-line: var(--border);
+  padding: 0;
+  color: var(--foreground);
 }
 
-.formIntro {
-  margin-bottom: 30px;
-  color: var(--card-muted);
-  font-size: 14px;
-  line-height: 1.55;
+.formStandalone .form { gap: 26px; }
+
+.formStandalone .field {
+  border-width: 0 0 1px;
+  border-radius: 0;
+  padding: 12px 0 15px;
+}
+
+.formStandalone .field:focus {
+  box-shadow: none;
+}
+
+.formStandalone .message { min-height: 148px; }
+
+.formStandalone .submit {
+  margin-top: 8px;
+  padding-inline: 22px;
 }
 
 .form {
@@ -209,9 +216,11 @@
 .bottom {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 6vw, 88px) 36px;
+  padding: 0 max(
+    calc(var(--page-gutter) - var(--footer-frame)),
+    calc((100vw - 1200px) / 2 - var(--footer-frame))
+  ) 36px;
 }
 
 .bottomInner {
@@ -246,18 +255,26 @@
 }
 
 @media (max-width: 900px) {
+  .footer {
+    --footer-frame: 12px;
+    --page-gutter: 24px;
+  }
+
   .contact { grid-template-columns: 1fr; min-height: 0; }
   .intro { margin-top: 24px; }
   .formCard { max-width: 640px; }
 }
 
 @media (max-width: 640px) {
-  .footer { padding: 8px; }
+  .footer {
+    --footer-frame: 8px;
+    --page-gutter: 20px;
+  }
   .shell { border-radius: 20px; }
-  .contact { gap: 42px; padding: 64px 20px; }
+  .contact { gap: 42px; padding-block: 64px; }
   .title { font-size: clamp(48px, 16vw, 68px); }
   .formCard { padding: 24px 18px; border-radius: 16px; }
-  .bottom { padding: 0 20px 28px; }
+  .bottom { padding-bottom: 28px; }
   .bottomInner { grid-template-columns: 1fr; }
   .linkGroups { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
   .legal { flex-direction: column; margin-top: 42px; }

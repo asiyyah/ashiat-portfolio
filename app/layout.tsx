@@ -34,7 +34,7 @@ export default function RootLayout({
         <ThemeInit />
         <CustomCursor label="You" />
         <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
+        <main id="top" className="flex-1 pt-16">{children}</main>
         <Footer />
       </body>
     </html>

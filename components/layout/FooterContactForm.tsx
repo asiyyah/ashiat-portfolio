@@ -4,7 +4,11 @@ import type { FormEvent } from 'react'
 import { CONTACT_EMAIL } from '@/lib/site-links'
 import styles from './Footer.module.css'
 
-export default function FooterContactForm() {
+interface FooterContactFormProps {
+  variant?: 'card' | 'standalone'
+}
+
+export default function FooterContactForm({ variant = 'card' }: FooterContactFormProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
@@ -20,9 +24,7 @@ export default function FooterContactForm() {
   }
 
   return (
-    <div className={styles.formCard}>
-      <h3 className={styles.formTitle}>Have a project in mind?</h3>
-      <p className={styles.formIntro}>Share a few details and I&apos;ll respond with a clear next step.</p>
+    <div className={variant === 'standalone' ? styles.formStandalone : styles.formCard}>
       <form onSubmit={handleSubmit} className={styles.form}>
       <label className={styles.label}>
         Your name

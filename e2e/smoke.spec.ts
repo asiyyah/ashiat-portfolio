@@ -79,7 +79,10 @@ test('mobile navigation opens and closes', async ({ page }) => {
 
 test('contact page loads', async ({ page }) => {
   await page.goto('/contact')
-  await expect(page.locator('h1')).toContainText('Get in Touch')
+  await expect(page.locator('h1')).toContainText("Let's make it clear.")
+  await expect(page.getByLabel('Your name')).toHaveCount(1)
+  await expect(page.getByLabel('Email address')).toHaveCount(1)
+  await expect(page.getByLabel('What are you working on?')).toHaveCount(1)
 })
 
 test('about page loads', async ({ page }) => {
@@ -95,4 +98,9 @@ test('footer navigation is present', async ({ page }) => {
   await expect(footer.getByLabel('Your name')).toBeVisible()
   await expect(footer.getByLabel('Email address')).toBeVisible()
   await expect(footer.getByLabel('What are you working on?')).toBeVisible()
+
+  const backToTop = footer.getByRole('link', { name: 'Back to the top of this page' })
+  await backToTop.click()
+  await expect(page).toHaveURL(/#top$/)
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(2)
 })
