@@ -197,7 +197,7 @@
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
-  transition: border-color 250ms ease, box-shadow 250ms ease;
+  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
 }
 
 .payupBackdrop {
@@ -228,7 +228,7 @@
 
 .image {
   object-fit: cover;
-  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), filter 250ms ease;
 }
 
 .codeImage {
@@ -294,12 +294,13 @@
 }
 
 .cardLink:hover .codeImage {
-  transform: none;
+  transform: scale(1.025);
 }
 
 .cardLink:hover .imageWrapper {
   border-color: var(--card-hover-border);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  transform: translateY(-3px);
 }
 
 /* Overlay arrow indicator on hover */
@@ -550,7 +551,13 @@
     animation: none;
   }
 
-  .image {
+  .image,
+  .imageWrapper {
     transition: none;
+  }
+
+  .cardLink:hover .image,
+  .cardLink:hover .imageWrapper {
+    transform: none;
   }
 }
