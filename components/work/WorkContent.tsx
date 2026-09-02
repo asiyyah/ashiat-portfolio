@@ -254,7 +254,7 @@ export default function WorkContent({
                               alt={project.title}
                               fill
                               sizes={layout.imageSizes}
-                              className={styles.image}
+                              className={`${styles.image} ${styles.codeImage}`}
                               priority={index === 0}
                             />
                           ) : (

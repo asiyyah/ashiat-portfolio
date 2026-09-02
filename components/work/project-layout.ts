@@ -23,10 +23,10 @@ export const DESIGN_LAYOUT_PATTERN: CardLayoutConfig[] = [
 ]
 
 export const CODE_LAYOUT_PATTERN: CardLayoutConfig[] = [
-  { colSpanClass: styles.colSpan7, aspectClass: styles.aspectLandscape, imageSizes: '(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 58vw' },
-  { colSpanClass: styles.colSpan5, aspectClass: styles.aspectLandscape, imageSizes: '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 42vw' },
-  { colSpanClass: styles.colSpan6, aspectClass: styles.aspectLandscape, imageSizes: '(max-width: 768px) 100vw, 50vw' },
-  { colSpanClass: styles.colSpan6, aspectClass: styles.aspectLandscape, imageSizes: '(max-width: 768px) 100vw, 50vw' },
+  { colSpanClass: styles.colSpan7, aspectClass: styles.aspectCode, imageSizes: '(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 58vw' },
+  { colSpanClass: styles.colSpan5, aspectClass: styles.aspectCode, imageSizes: '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 42vw' },
+  { colSpanClass: styles.colSpan6, aspectClass: styles.aspectCode, imageSizes: '(max-width: 768px) 100vw, 50vw' },
+  { colSpanClass: styles.colSpan6, aspectClass: styles.aspectCode, imageSizes: '(max-width: 768px) 100vw, 50vw' },
 ]
 
 export const CODE_COVER_VARIANTS = [

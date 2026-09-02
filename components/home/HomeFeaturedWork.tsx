@@ -102,7 +102,7 @@ function HomeCodeCard({
               alt={project.title}
               fill
               sizes={layout.imageSizes}
-              className={workStyles.image}
+              className={`${workStyles.image} ${workStyles.codeImage}`}
               priority={index === 0}
             />
           ) : (

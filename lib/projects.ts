@@ -14,13 +14,9 @@ const designModule = (loader: () => Promise<unknown>) => async (): Promise<Desig
   (await loader()) as DesignModule
 
 const designProjectLoaders: Record<string, () => Promise<DesignModule>> = {
-  'compliance-system': designModule(() => import('@/content/design/compliance-system/index.mdx')),
-  'enterprise-dashboard': designModule(() => import('@/content/design/enterprise-dashboard/index.mdx')),
-  'fintech-payment-platform': designModule(() => import('@/content/design/fintech-payment-platform/index.mdx')),
   hirewise: designModule(() => import('@/content/design/hirewise/index.mdx')),
   payup: designModule(() => import('@/content/design/payup/index.mdx')),
   'revenue-management-platform': designModule(() => import('@/content/design/revenue-management-platform/index.mdx')),
-  'saas-administration-system': designModule(() => import('@/content/design/saas-administration-system/index.mdx')),
   'spend-tool': designModule(() => import('@/content/design/spend-tool/index.mdx')),
 }
 
