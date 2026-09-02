@@ -69,59 +69,39 @@
   margin: 0 0 28px;
 }
 
-.ctaRow {
-  display: flex;
-  gap: 12px;
+.heroSocials {
+  display: inline-flex;
+  gap: 16px;
   align-items: center;
-  flex-wrap: wrap;
+  width: fit-content;
 }
 
-.btnPrimary {
+.heroSocialLink {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  background: var(--foreground);
-  color: var(--background);
-  border: none;
-  padding: 12px 22px;
-  cursor: pointer;
-  transition: opacity 200ms ease, transform 200ms ease;
-  font-family: var(--font-mono);
-  border-radius: 4px;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  color: var(--muted);
   text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
-.btnPrimary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+.heroSocialLink svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
-.btnOutline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  background: transparent;
+.heroSocialLink:hover {
   color: var(--foreground);
-  border: 1px solid var(--border);
-  padding: 12px 22px;
-  cursor: pointer;
-  transition: border-color 200ms ease, transform 200ms ease;
-  font-family: var(--font-mono);
-  border-radius: 4px;
-  text-decoration: none;
+  transform: translateY(-2px);
 }
 
-.btnOutline:hover {
-  border-color: var(--foreground);
-  transform: translateY(-1px);
+.heroSocialLink:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
 }
 
 /* Hero image ticker */
@@ -210,21 +190,35 @@
 
 .workViewAll {
   margin-top: 40px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1px solid var(--foreground);
+  border-radius: 999px;
+  background: var(--foreground);
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--background);
   text-decoration: none;
-  transition: color 200ms ease, gap 200ms ease;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--foreground) 14%, transparent);
+  transition: transform 180ms ease, box-shadow 180ms ease, gap 180ms ease;
 }
 
 .workViewAll:hover {
-  color: var(--foreground);
-  gap: 18px;
+  gap: 14px;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--foreground) 20%, transparent);
+}
+
+.workViewAll:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 4px;
 }
 
 /* ─── EXPERTISE ──────────────────────────────────────────────────── */
@@ -522,7 +516,7 @@
   height: 40px;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-foreground);
   font-weight: 700;
   font-size: 14px;
   display: flex;
@@ -539,10 +533,15 @@
 }
 
 .testimonialRole {
+  display: inline-block;
   font-size: 12px;
   color: var(--muted);
   margin-top: 2px;
+  text-decoration: none;
+  transition: color 180ms ease;
 }
+
+.testimonialRole:hover { color: var(--foreground); }
 
 .testimonialNav {
   display: flex;

@@ -5,24 +5,18 @@ import styles from "../Home.module.css";
 
 const items = [
   {
-    q: "Ashiat completely transformed how our technical team views design. She brought absolute senior-level precision to our compliance dashboards, eliminating interface latency from our developer handoffs entirely.",
-    name: "Marcus Vance",
-    role: "CTO, Fintech Platform",
-    initials: "MV",
+    q: "I’ve worked with Ashiat on multiple projects, and she’s been an absolute delight. She consistently turns rough ideas into clean, intuitive, and thoughtful designs. She’s collaborative, open to feedback, and very dependable with timelines and handoffs. Beyond her strong UI/UX skills, she brings great energy and professionalism to every project. I’d happily recommend her to any product team.",
+    name: "Gad Jacobs",
+    initials: "GJ",
   },
   {
-    q: "Most designers struggle inside enterprise security environments. Ashiat thrived here. She navigated intricate citizen data-flow regulations to design a portal that now effortlessly serves 2 million citizens.",
-    name: "Hon. Sarah Davies",
-    role: "Chief of Product, Government Digital Services",
-    initials: "SD",
-  },
-  {
-    q: "A rare hybrid talent. Ashiat operates like a senior software engineer while maintaining an impeccable eye for typographic hierarchy, grid systems, and spacing scale. Her design system saved us over 400 dev hours.",
-    name: "Dr. Arthur Pemberton",
-    role: "VP of Engineering, Design Systems & Token Engine",
-    initials: "AP",
+    q: "Ashiat is a product designer who understands how design meets implementation. Her designs are well-structured, consistent, and developer-friendly, making them easy to translate into code. She pays close attention to UX details, edge cases, and states, and is always open to feedback and iteration. Her collaborative approach and design thinking consistently improved the product experience.",
+    name: "Rotimi Bolorunduro",
+    initials: "RB",
   },
 ];
+
+const recommendationsUrl = "https://ashiatabdulkadir.contra.com/#recommendations";
 
 export default function HomeTestimonials() {
   const [active, setActive] = useState(0);
@@ -56,7 +50,9 @@ export default function HomeTestimonials() {
                 </div>
                 <div>
                   <div className={styles.testimonialName}>{item.name}</div>
-                  <div className={styles.testimonialRole}>{item.role}</div>
+                  <a className={styles.testimonialRole} href={recommendationsUrl} target="_blank" rel="noopener noreferrer">
+                    Recommended on Contra ↗
+                  </a>
                 </div>
               </div>
             </div>

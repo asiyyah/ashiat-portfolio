@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Suspense } from "react";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "@fontsource/playfair-display/latin-400.css";
 import "@fontsource/playfair-display/latin-400-italic.css";
 import Navbar from "@/components/navigation/Navbar";
-import Footer from "@/components/layout/Footer";
+import ConditionalFooter from "@/components/layout/ConditionalFooter";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ThemeInit from "./ThemeInit";
 import "./globals.css";
@@ -35,7 +36,9 @@ export default function RootLayout({
         <CustomCursor label="You" />
         <Navbar />
         <main id="top" className="flex-1 pt-16">{children}</main>
-        <Footer />
+        <Suspense fallback={null}>
+          <ConditionalFooter />
+        </Suspense>
       </body>
     </html>
   );
