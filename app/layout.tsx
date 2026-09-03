@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "@fontsource/playfair-display/latin-400.css";
@@ -55,6 +56,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <ConditionalFooter />
         </Suspense>
+        <Analytics />
       </body>
     </html>
   );
