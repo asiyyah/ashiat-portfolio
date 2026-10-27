@@ -15,6 +15,7 @@ const securityHeaders = [
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
       "media-src 'self'",
+      "worker-src 'self' blob: data:",
       "connect-src 'self'",
       "upgrade-insecure-requests",
     ].join('; '),
@@ -30,6 +31,15 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]
   },
+  // PostHog reverse proxy
+  async rewrites() {
+    return [
+      { source: '/ingest/static/:path*', destination: 'https://us-assets.i.posthog.com/static/:path*' },
+      { source: '/ingest/array/:path*', destination: 'https://us-assets.i.posthog.com/array/:path*' },
+      { source: '/ingest/:path*', destination: 'https://us.i.posthog.com/:path*' },
+    ]
+  },
+  skipTrailingSlashRedirect: true,
 };
 
 const withMDX = createMDX({})
