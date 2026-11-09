@@ -390,77 +390,56 @@
   border-top: 1px solid var(--border);
 }
 
-.toolkitIntro {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 48px;
-  gap: 40px;
-}
-
-.toolkitLead {
-  font-size: 15px;
-  color: var(--muted);
-  max-width: 380px;
-  line-height: 1.65;
-  text-align: right;
-}
-
-.toolTable {
-  border: 1px solid var(--border);
-  background: var(--background);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.toolRow {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  border-bottom: 1px solid var(--border);
-  min-height: 60px;
-}
-
-.toolRow:last-child {
-  border-bottom: none;
-}
-
-.toolCategory {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 18px 24px;
-  border-right: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  font-family: var(--font-mono);
-}
-
-.toolItems {
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.toolChip {
-  font-size: 12px;
-  color: var(--text-secondary);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 5px 11px;
-  border-radius: 100px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  transition: border-color 200ms ease, color 200ms ease;
-  cursor: default;
-}
-
-.toolChip:hover {
-  border-color: var(--foreground);
+.toolkitHeading {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   color: var(--foreground);
+  margin: 0 0 40px;
+}
+
+.toolGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Cards stay white in both themes so the (mostly black) logos remain legible */
+.toolCard {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.toolCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.toolLogo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toolCard {
+    transition: none;
+  }
+
+  .toolCard:hover {
+    transform: none;
+  }
 }
 
 /* ─── TESTIMONIALS ───────────────────────────────────────────────── */
@@ -641,15 +620,6 @@
     max-width: 100%;
   }
 
-  .toolkitIntro {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .toolkitLead {
-    text-align: left;
-  }
-
   .heroTitle {
     font-size: 28px;
   }
@@ -721,18 +691,19 @@
     padding: 28px 36px 40px;
   }
 
-  .toolRow {
-    grid-template-columns: 1fr;
+  .toolGrid {
+    gap: 16px;
   }
 
-  .toolCategory {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding: 14px 16px;
+  .toolCard {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
   }
 
-  .toolItems {
-    padding: 12px 16px;
+  .toolLogo {
+    width: 36px;
+    height: 36px;
   }
 
   .processScroll {

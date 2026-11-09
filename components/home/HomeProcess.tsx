@@ -37,10 +37,6 @@ export default function HomeProcess() {
   return (
     <section className={styles.processSection}>
       <div className={styles.container}>
-        <div className={styles.eyebrow}>
-          <span className={styles.eyebrowDot} />
-          03 · Process
-        </div>
         <h2 className={styles.sectionTitle}>
           How I <em className={styles.sectionTitleSerif}>work</em>
         </h2>

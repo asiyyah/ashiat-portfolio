@@ -26,10 +26,6 @@ export default function HomeTestimonials() {
       <div className={styles.container}>
         <div className={styles.sectionHeaderRow}>
           <div>
-            <div className={styles.eyebrow}>
-              <span className={styles.eyebrowDot} />
-              05 · Testimonials
-            </div>
             <h2 className={styles.sectionTitle}>
               Validated in <em className={styles.sectionTitleSerif}>production</em>
             </h2>

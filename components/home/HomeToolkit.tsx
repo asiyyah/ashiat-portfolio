@@ -1,51 +1,42 @@
+import Image from "next/image";
 import styles from "../Home.module.css";
 
-const rows: [string, string[]][] = [
-  ["Design", ["Figma", "FigJam", "Framer"]],
-  ["Development", ["React", "TypeScript", "HTML / CSS", "Node.js", "Tailwind CSS"]],
-  ["AI", ["Claude", "Cursor", "ChatGPT", "GitHub Copilot", "v0"]],
-  ["Research", ["Maze", "Miro", "UserTesting"]],
-  ["Collaboration", ["Notion", "Jira", "Linear", "Slack", "GitHub"]],
+const tools = [
+  { name: "Figma", src: "/images/tools/figma.svg", width: 256, height: 384 },
+  { name: "Claude", src: "/images/tools/claude.svg", width: 256, height: 257 },
+  { name: "ChatGPT", src: "/images/tools/chatgpt.svg", width: 256, height: 260 },
+  { name: "Antigravity", src: "/images/tools/antigravity.svg", width: 24, height: 24 },
+  { name: "VS Code", src: "/images/tools/vscode.svg", width: 256, height: 254 },
+  { name: "Framer", src: "/images/tools/framer.svg", width: 256, height: 384 },
+  { name: "JavaScript", src: "/images/tools/javascript.svg", width: 256, height: 256 },
+  { name: "PostHog", src: "/images/tools/posthog.svg", width: 256, height: 142 },
+  { name: "Jira", src: "/images/tools/jira.svg", width: 256, height: 256 },
+  { name: "Notion", src: "/images/tools/notion.svg", width: 256, height: 268 },
 ];
-
-function ToolChip({ name }: { name: string }) {
-  return (
-    <span className={styles.toolChip}>
-      <span className="h-2 w-2 rounded-full bg-current opacity-50" aria-hidden="true" />
-      {name}
-    </span>
-  );
-}
 
 export default function HomeToolkit() {
   return (
-    <section className={styles.toolkitSection}>
+    <section className={styles.toolkitSection} aria-labelledby="toolkit-heading">
       <div className={styles.container}>
-        <div className={styles.toolkitIntro}>
-          <div>
-            <div className={styles.eyebrow}><span className={styles.eyebrowDot} />04 · Tools &amp; Stack</div>
-            <h2 className={styles.sectionTitle}>
-              The <em className={styles.sectionTitleSerif}>toolkit</em>
-            </h2>
-          </div>
-          <p className={styles.toolkitLead}>
-            Tools are means, not ends. I am fluent across the design-to-production
-            pipeline — from whiteboard sketch to deployed component.
-          </p>
-        </div>
+        <h2 id="toolkit-heading" className={styles.toolkitHeading}>
+          Tools I use in my workflow
+        </h2>
 
-        <div className={styles.toolTable}>
-          {rows.map(([label, tools], i) => (
-            <div key={i} className={styles.toolRow}>
-              <div className={styles.toolCategory}>{label}</div>
-              <div className={styles.toolItems}>
-                {tools.map((t) => (
-                  <ToolChip key={t} name={t} />
-                ))}
-              </div>
-            </div>
+        <ul className={styles.toolGrid}>
+          {tools.map((tool) => (
+            <li key={tool.name} className={styles.toolCard} title={tool.name}>
+              {/* SVG logos are already optimal, so skip the image optimizer */}
+              <Image
+                src={tool.src}
+                alt={tool.name}
+                width={tool.width}
+                height={tool.height}
+                unoptimized
+                className={styles.toolLogo}
+              />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

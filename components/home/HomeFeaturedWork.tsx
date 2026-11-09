@@ -170,10 +170,6 @@ export default function HomeFeaturedWork({ projects }: { projects: PortfolioProj
       <div className={styles.container}>
         <div className={styles.sectionHeaderRow}>
           <div>
-            <div className={styles.eyebrow}>
-              <span className={styles.eyebrowDot} />
-              01 · Selected Work
-            </div>
             <h2 className={styles.sectionTitle}>
               Designed and built with <em className={styles.sectionTitleSerif}>intent</em>
             </h2>
