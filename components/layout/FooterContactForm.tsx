@@ -2,6 +2,7 @@
 
 import type { FormEvent } from 'react'
 import { CONTACT_EMAIL } from '@/lib/site-links'
+import { capture } from '@/lib/analytics'
 import styles from './Footer.module.css'
 
 interface FooterContactFormProps {
@@ -20,6 +21,10 @@ export default function FooterContactForm({ variant = 'card' }: FooterContactFor
       [`Hi Ashiat,`, '', message, '', `From: ${name}`, `Email: ${email}`].join('\n'),
     )
 
+    capture('contact_form_submitted', {
+      location: variant === 'standalone' ? 'contact_page' : 'footer',
+      page: window.location.pathname,
+    })
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
   }
 

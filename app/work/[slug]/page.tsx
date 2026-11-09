@@ -11,6 +11,7 @@ import { Heading, Body, Subheading } from "@/components/ui/Typography";
 import Button from "@/components/ui/Button";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import BackLink from "@/components/ui/BackLink";
+import CaseStudyTracker from "@/components/analytics/CaseStudyTracker";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -41,6 +42,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
   const { slug } = await params;
   const { from } = await searchParams;
   const backTo = backDestination(from);
+  const source = from ?? "direct";
 
   const designProject = await getDesignProject(slug);
   const codeProject = await getCodeProject(slug);
@@ -52,6 +54,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
       <CodeProjectLayout
         project={codeProject}
         backTo={backTo}
+        source={source}
       />
     );
   }
@@ -70,6 +73,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
         project={project}
         MdxContent={MdxContent}
         backTo={backTo}
+        source={source}
       />
     );
   }
@@ -125,6 +129,7 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
         <div className="case-study-content mt-16">
           <MdxContent />
         </div>
+        <CaseStudyTracker slug={project.slug} title={project.title} type="design" source={source} />
       </div>
     </Section>
   );
@@ -134,10 +139,12 @@ function RichCaseStudyLayout({
   project,
   MdxContent,
   backTo,
+  source,
 }: {
   project: NonNullable<Awaited<ReturnType<typeof getDesignProject>>>;
   MdxContent: React.ComponentType;
   backTo: string;
+  source: string;
 }) {
   return (
     <article>
@@ -221,6 +228,7 @@ function RichCaseStudyLayout({
 
       <div className="case-study-content max-w-3xl mx-auto px-6">
         <MdxContent />
+        <CaseStudyTracker slug={project.slug} title={project.title} type="design" source={source} />
       </div>
 
     </article>
@@ -230,9 +238,11 @@ function RichCaseStudyLayout({
 function CodeProjectLayout({
   project,
   backTo,
+  source,
 }: {
   project: NonNullable<Awaited<ReturnType<typeof getCodeProject>>>;
   backTo: string;
+  source: string;
 }) {
   return (
     <Section>
@@ -282,6 +292,7 @@ function CodeProjectLayout({
             </Button>
           )}
         </div>
+        <CaseStudyTracker slug={project.slug} title={project.title} type="code" source={source} />
       </article>
     </Section>
   );
