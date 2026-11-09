@@ -13,6 +13,7 @@ import ScrollReveal from "@/components/motion/ScrollReveal";
 import BackLink from "@/components/ui/BackLink";
 import CaseStudyTracker from "@/components/analytics/CaseStudyTracker";
 import { notFound } from "next/navigation";
+import { pageMetadata } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,12 +26,31 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const path = `/work/${slug}`;
+
   const project = await getDesignProject(slug);
-  if (!project) return {};
-  return {
-    title: `${project.title} — Work`,
-    description: project.summary,
-  };
+  if (project) {
+    return pageMetadata({
+      title: `${project.title} — Work`,
+      description: project.summary,
+      path,
+      image: project.coverImage,
+      imageAlt: `${project.title} case study cover`,
+    });
+  }
+
+  const codeProject = await getCodeProject(slug);
+  if (codeProject) {
+    return pageMetadata({
+      title: `${codeProject.title} — Code project`,
+      description: codeProject.summary,
+      path,
+      image: codeProject.coverImage,
+      imageAlt: `${codeProject.title} preview`,
+    });
+  }
+
+  return {};
 }
 
 function backDestination(from: string | undefined): string {

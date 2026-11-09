@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import Image from "next/image";
 import ScrollReveal from "@/components/motion/ScrollReveal";
 import { RESUME_URL, SOCIAL_LINKS } from "@/lib/site-links";
 import styles from "./AboutPage.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Ashiat — Product Designer",
-  description: "The story, perspective, and interests of Ashiat Abdulkadir, a product designer working across complex digital products.",
-};
+  description:
+    "The story, perspective, and interests of Ashiat Abdulkadir, a product designer working across complex digital products.",
+  path: "/about",
+});
 
 const journey = [
   { number: "01", title: "AI-powered fintech", description: "Learning how emerging technology can support better financial decisions and experiences." },

@@ -1,11 +1,12 @@
-import { getAllDesignSlugs } from '@/lib/projects'
+import { getAllCodeSlugs, getAllDesignSlugs } from '@/lib/projects'
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/site'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const slugs = getAllDesignSlugs()
+  const slugs = [...getAllDesignSlugs(), ...getAllCodeSlugs()]
 
   const projectEntries: MetadataRoute.Sitemap = slugs.map((slug) => ({
-    url: `https://example.com/work/${slug}`,
+    url: `${SITE_URL}/work/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
@@ -13,31 +14,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: 'https://example.com',
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: 'https://example.com/work',
+      url: `${SITE_URL}/work`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: 'https://example.com/playground',
+      url: `${SITE_URL}/playground`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: 'https://example.com/about',
+      url: `${SITE_URL}/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
-      url: 'https://example.com/contact',
+      url: `${SITE_URL}/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,

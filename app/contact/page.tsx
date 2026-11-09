@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import FooterContactForm from "@/components/layout/FooterContactForm";
 import { CONTACT_EMAIL } from "@/lib/site-links";
 import styles from "./ContactPage.module.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact — Get in Touch",
   description:
     "Have a project or question? Get in touch to discuss how I can help with your product design needs.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

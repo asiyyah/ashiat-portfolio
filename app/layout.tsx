@@ -6,6 +6,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "@fontsource/playfair-display/latin-400.css";
 import "@fontsource/playfair-display/latin-400-italic.css";
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME, SITE_URL } from "@/lib/site";
 import Navbar from "@/components/navigation/Navbar";
 import ConditionalFooter from "@/components/layout/ConditionalFooter";
 import CustomCursor from "@/components/ui/CustomCursor";
@@ -13,9 +14,25 @@ import ThemeInit from "./ThemeInit";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ashiat Abdulkadir — Product Designer & Design Engineer",
-  description:
-    "Portfolio of a product designer specialising in enterprise SaaS, fintech, compliance platforms, and complex product workflows.",
+  metadataBase: new URL(SITE_URL),
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_US",
+    url: "/",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
   icons: {
     icon: [
       {

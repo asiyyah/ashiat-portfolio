@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/site";
 import { getAllPortfolioProjects } from "@/lib/projects";
 import type { CodeProject, DesignProject, ProjectType } from "@/types/project";
 import WorkContent from "@/components/work/WorkContent";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Work — Product Design & Code Projects",
   description:
     "Selected work across enterprise SaaS, fintech platforms, compliance systems, and code projects.",
-};
+  path: "/work",
+});
 
 export default async function WorkPage({
   searchParams,

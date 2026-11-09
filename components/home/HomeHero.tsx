@@ -50,17 +50,23 @@ I design clarity into complex digital products.
       {/* Full-width image ticker */}
       <div className={styles.tickerWrapper}>
         <div className={styles.tickerTrack}>
-          {[...images, ...images].map((img, i) => (
-            <div key={i} className={styles.tickerItem}>
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                sizes="(max-width: 640px) 220px, (max-width: 960px) 260px, 300px"
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          ))}
+          {[...images, ...images].map((img, i) => {
+            // Second copy only exists to make the marquee loop seamlessly:
+            // hide it from assistive tech and don't load it eagerly.
+            const isDuplicate = i >= images.length;
+            return (
+              <div key={i} className={styles.tickerItem} aria-hidden={isDuplicate || undefined}>
+                <Image
+                  src={img.src}
+                  alt={isDuplicate ? "" : img.alt}
+                  fill
+                  loading={isDuplicate ? "lazy" : undefined}
+                  sizes="(max-width: 640px) 220px, (max-width: 960px) 260px, 300px"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
