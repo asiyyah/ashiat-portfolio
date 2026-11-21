@@ -21,7 +21,7 @@ export default function CalloutBox({
       >
         {title}
       </h4>
-      <div className="text-muted leading-relaxed text-sm">{children}</div>
+      <div className="callout-body leading-relaxed">{children}</div>
     </div>
   );
 }

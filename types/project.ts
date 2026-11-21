@@ -27,6 +27,10 @@ export interface DesignProject {
   projectType: Exclude<ProjectType, 'code'>
   externalUrl?: string
   caseStudyLayout?: 'standard' | 'rich'
+  /** Shown as a locked card with no page: NDA work shared on request. */
+  locked?: boolean
+  /** Labels above the title on project cards. Defaults to industry and role; the case study page still shows the role. */
+  cardTags?: string[]
 }
 
 export interface CodeProject {

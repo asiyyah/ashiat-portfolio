@@ -561,3 +561,40 @@
     transform: none;
   }
 }
+
+/* Locked (NDA) card: not a link, so no hover lift, arrow or pointer */
+.cardStatic {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: default;
+}
+
+.lockedMedia .image {
+  transform: scale(1.06);
+}
+
+.lockedScrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 10, 20, 0.22);
+}
+
+.lockPill {
+  position: absolute;
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}

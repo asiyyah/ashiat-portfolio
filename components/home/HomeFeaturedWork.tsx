@@ -13,8 +13,22 @@ import {
   PROJECT_TABS,
   getLayoutConfig,
 } from "@/components/work/project-layout";
+import CardTags from "@/components/work/CardTags";
+import LockedProjectCard from "@/components/work/LockedProjectCard";
+
+// Product design rows: two landscape cards, then the mobile project (portrait) beside a wide card,
+// so every image shows uncropped and each row's cards are the same height.
+const HOME_DESIGN_LAYOUT = [
+  DESIGN_LAYOUT_PATTERN[2],
+  DESIGN_LAYOUT_PATTERN[3],
+  DESIGN_LAYOUT_PATTERN[1],
+  DESIGN_LAYOUT_PATTERN[0],
+];
 
 function getHomeLayout(index: number, project?: DesignProject) {
+  if (project?.projectType === "product-design") {
+    return getLayoutConfig(index, HOME_DESIGN_LAYOUT);
+  }
   return getLayoutConfig(
     index,
     DESIGN_LAYOUT_PATTERN.slice(0, 4),
@@ -31,6 +45,20 @@ function HomeWorkCard({
   layout: { colSpanClass: string; aspectClass: string; imageSizes: string };
   index: number;
 }) {
+  if (study.locked) {
+    return (
+      <div className={layout.colSpanClass}>
+        <LockedProjectCard
+          project={study}
+          aspectClass={layout.aspectClass}
+          imageSizes={layout.imageSizes}
+          roleFirst
+          headingLevel="h3"
+        />
+      </div>
+    );
+  }
+
   const href = `/work/${study.slug}?from=home`;
   const cardContent = (
     <>
@@ -51,15 +79,7 @@ function HomeWorkCard({
       </div>
 
       <div className={workStyles.cardMeta}>
-        <div className={workStyles.cardTagRow}>
-          <span className={workStyles.cardCategory}>{study.role}</span>
-          {study.industry && (
-            <>
-              <span className={workStyles.cardDivider}>·</span>
-              <span className={workStyles.cardRole}>{study.industry}</span>
-            </>
-          )}
-        </div>
+        <CardTags project={study} roleFirst />
         <h3 className={workStyles.cardTitle}>{study.title}</h3>
         {study.impact && <p className={workStyles.cardImpact}>{study.impact}</p>}
       </div>
@@ -137,10 +157,11 @@ function HomeCodeCard({
 
 export default function HomeFeaturedWork({ projects }: { projects: PortfolioProject[] }) {
   const [activeTab, setActiveTab] = useState<ProjectType>("product-design");
-  const featuredOrder = ["revenue-management-platform", "spend-tool", "hirewise", "payup"];
+  // Follows HOME_DESIGN_LAYOUT. The locked case study is left off the home page.
+  const featuredOrder = ["hirewise", "iyemoja-workspace", "spend-tool", "payup"];
   const designProjects = projects
     .filter((project): project is DesignProject => project.projectType === activeTab)
-    .filter((project) => project.featured !== false)
+    .filter((project) => project.featured !== false && !project.locked)
     .sort((a, b) => {
       const aIndex = featuredOrder.indexOf(a.slug);
       const bIndex = featuredOrder.indexOf(b.slug);

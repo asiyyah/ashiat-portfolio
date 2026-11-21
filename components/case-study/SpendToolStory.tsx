@@ -30,6 +30,7 @@ export function StoryVisual({
   caption,
   wide = false,
   dark = false,
+  background,
 }: {
   src: string;
   alt: string;
@@ -38,10 +39,13 @@ export function StoryVisual({
   caption?: string;
   wide?: boolean;
   dark?: boolean;
+  /** Optional frame fill, e.g. to match the image's own background. */
+  background?: string;
 }) {
   return (
     <figure
       className={`${styles.visual} ${wide ? styles.visualWide : ""} ${dark ? styles.visualDark : ""}`}
+      style={background ? { background } : undefined}
     >
       <Image
         src={src}

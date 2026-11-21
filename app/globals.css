@@ -8,6 +8,8 @@
   --border: #e0e0e0;
   --muted: #888888;
   --text-secondary: #333333;
+  /* Descriptive text on grey surfaces: ~6:1 on --surface, so hierarchy comes from size and weight */
+  --text-soft: #595959;
   --accent: #111111;
   --accent-foreground: #ffffff;
 
@@ -33,6 +35,8 @@
   --border: #333333;
   --muted: #888888;
   --text-secondary: #cccccc;
+  /* ~8:1 on --surface */
+  --text-soft: #b8b8b8;
   --accent: #ededed;
   --accent-foreground: #0a0a0a;
   --card-hover-border: #707070;
@@ -164,64 +168,218 @@ body {
   font-size: 0.9rem;
 }
 
-/* Case study content styles */
+/* Case study content styles
+   Readability: body text is full-contrast and capped to a comfortable line length.
+   Hierarchy: h2 (section) > h3 (topic) > h4 (small label) differ clearly in size, weight and spacing.
+   Rhythm: each h2 starts a new section behind a rule and generous space. */
+.case-study-content {
+  font-size: 1.0625rem;
+}
 .case-study-content h2 {
-  font-weight: var(--font-weight-heading);
-  font-size: clamp(1.375rem, 2.2vw, 2.25rem);
-  line-height: 1.08;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+  margin-top: 5rem;
+  padding-top: 3rem;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+/* first section after the header needs no divider */
+.case-study-content > div:first-child h2:first-child,
+.case-study-content > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 .case-study-content h3 {
-  font-weight: 600;
-  font-size: 1.25rem;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  font-weight: 650;
+  font-size: clamp(1.375rem, 2.2vw, 1.625rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   color: var(--foreground);
 }
 .case-study-content h4 {
+  font-family: var(--font-mono);
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--foreground);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2.25rem;
+  margin-bottom: 0.625rem;
+  color: var(--muted);
 }
 .case-study-content p {
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text-secondary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  max-width: 68ch;
+}
+.case-study-content strong {
+  color: var(--foreground);
+  font-weight: 650;
 }
 .case-study-content ul {
   list-style: disc;
   padding-left: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: var(--text-secondary);
+  max-width: 68ch;
 }
 .case-study-content ul li {
   line-height: 1.7;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.6rem;
 }
 .case-study-content ol {
   list-style: decimal;
   padding-left: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: var(--text-secondary);
+  max-width: 68ch;
 }
 .case-study-content ol li {
   line-height: 1.7;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 .case-study-content ol li strong {
   color: var(--foreground);
 }
 .case-study-content ol li ul {
   list-style: disc;
-  margin-top: 0.35rem;
-  margin-bottom: 0.35rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 .case-study-content ol li ul li {
-  margin-bottom: 0.25rem;
-  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+}
+/* pull quotes (the "It feels like / It actually is" blocks) */
+.case-study-content blockquote {
+  margin: 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid var(--foreground);
+}
+.case-study-content blockquote p {
+  color: var(--foreground);
+  margin-bottom: 0.5rem;
+}
+
+/* Callouts: full-contrast text at a readable size */
+.callout-body {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+.callout-body ul {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+.callout-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Screenshot affordance and full-size viewer */
+.screenshot-trigger {
+  position: relative;
+  cursor: zoom-in;
+}
+.screenshot-trigger:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+.screenshot-hint {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--foreground);
+  color: var(--background);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  opacity: 0.92;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .screenshot-hint {
+    opacity: 0;
+    transition: opacity 180ms ease;
+  }
+  .screenshot-trigger:hover .screenshot-hint,
+  .screenshot-trigger:focus-visible .screenshot-hint {
+    opacity: 0.92;
+  }
+}
+.screenshot-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--background);
+  color: var(--foreground);
+}
+.screenshot-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+.screenshot-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.screenshot-dialog-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.screenshot-dialog-title {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.screenshot-dialog-close {
+  flex-shrink: 0;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
+  font-weight: 600;
+  cursor: pointer;
+}
+.screenshot-dialog-scroll {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+/* On phones the image keeps a readable minimum width and can be panned */
+.screenshot-dialog-image {
+  display: block;
+  width: 100%;
+  min-width: min(1100px, 280vw);
+  max-width: none;
+  height: auto;
+  margin: 0 auto;
+}
+@media (min-width: 1200px) {
+  .screenshot-dialog-image {
+    min-width: 0;
+    max-width: 1600px;
+  }
 }
 
 /* Hero tags row */

@@ -6,6 +6,8 @@ import Link from "next/link";
 import styles from "./Work.module.css";
 import type { DesignProject, CodeProject, ProjectType } from "@/types/project";
 import ScrollReveal from "@/components/motion/ScrollReveal";
+import CardTags from "./CardTags";
+import LockedProjectCard from "./LockedProjectCard";
 import {
   CODE_COVER_VARIANTS,
   CODE_LAYOUT_PATTERN,
@@ -100,6 +102,22 @@ export default function WorkContent({
                     DESIGN_LAYOUT_PATTERN
                   );
 
+                  if (project.locked) {
+                    return (
+                      <ScrollReveal
+                        key={project.slug}
+                        className={layout.colSpanClass}
+                        delay={(index % 2) * 0.06}
+                      >
+                        <LockedProjectCard
+                          project={project}
+                          aspectClass={layout.aspectClass}
+                          imageSizes={layout.imageSizes}
+                        />
+                      </ScrollReveal>
+                    );
+                  }
+
                   return (
                     <ScrollReveal
                       key={project.slug}
@@ -131,15 +149,7 @@ export default function WorkContent({
                         </div>
 
                         <div className={styles.cardMeta}>
-                          <div className={styles.cardTagRow}>
-                            <span className={styles.cardCategory}>
-                              {project.industry}
-                            </span>
-                            <span className={styles.cardDivider}>·</span>
-                            <span className={styles.cardRole}>
-                              {project.role}
-                            </span>
-                          </div>
+                          <CardTags project={project} />
 
                           <h2 className={styles.cardTitle}>{project.title}</h2>
 

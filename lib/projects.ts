@@ -18,6 +18,7 @@ const designProjectLoaders: Record<string, () => Promise<DesignModule>> = {
   payup: designModule(() => import('@/content/design/payup/index.mdx')),
   'revenue-management-platform': designModule(() => import('@/content/design/revenue-management-platform/index.mdx')),
   'spend-tool': designModule(() => import('@/content/design/spend-tool/index.mdx')),
+  'iyemoja-workspace': designModule(() => import('@/content/design/iyemoja-workspace/index.mdx')),
 }
 
 export function getAllDesignSlugs(): string[] {
@@ -44,10 +45,43 @@ export async function getDesignProject(slug: string): Promise<DesignProject | nu
   }
 }
 
+/**
+ * Locked (NDA) projects only expose what the card needs. Listing pages pass projects to
+ * client components, so anything left on the object would be sent to every visitor.
+ */
+function redactLocked(project: DesignProject): DesignProject {
+  if (!project.locked) return project
+  return {
+    title: project.title,
+    slug: project.slug,
+    industry: project.industry,
+    role: project.role,
+    duration: '',
+    year: project.year,
+    summary: '',
+    challenge: '',
+    approach: '',
+    solution: '',
+    impact: '',
+    coverImage: project.coverImage,
+    gallery: [],
+    aspectRatio: project.aspectRatio,
+    featured: project.featured,
+    projectType: project.projectType,
+    locked: true,
+  }
+}
+
 export async function getAllDesignProjects(): Promise<DesignProject[]> {
   const slugs = getAllDesignSlugs()
   const projects = await Promise.all(slugs.map(getDesignProject))
-  return projects.filter((p): p is DesignProject => p !== null)
+  return projects.filter((p): p is DesignProject => p !== null).map(redactLocked)
+}
+
+/** Slugs of case studies that have a public page (locked ones don't). */
+export async function getPublicDesignSlugs(): Promise<string[]> {
+  const projects = await Promise.all(getAllDesignSlugs().map(getDesignProject))
+  return projects.filter((p): p is DesignProject => p !== null && !p.locked).map((p) => p.slug)
 }
 
 export async function getCodeProject(slug: string): Promise<CodeProject | null> {

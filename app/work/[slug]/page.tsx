@@ -1,5 +1,5 @@
 import {
-  getAllDesignSlugs,
+  getPublicDesignSlugs,
   getDesignProject,
   getDesignProjectModule,
   getCodeProject,
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return getAllDesignSlugs().map((slug) => ({ slug }));
+  return (await getPublicDesignSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,6 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const path = `/work/${slug}`;
 
   const project = await getDesignProject(slug);
+  // Locked projects have no public page, so keep their details out of metadata
+  if (project?.locked) return { robots: { index: false, follow: false } };
   if (project) {
     return pageMetadata({
       title: `${project.title} — Work`,
@@ -68,6 +70,8 @@ export default async function CaseStudyPage({ params, searchParams }: Props) {
   const codeProject = await getCodeProject(slug);
 
   if (!designProject && !codeProject) notFound();
+  // Locked (NDA) case studies are shown as a card only; the page is never served
+  if (designProject?.locked) notFound();
 
   if (codeProject && !designProject) {
     return (

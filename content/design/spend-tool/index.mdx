@@ -36,9 +36,13 @@ export const metadata = {
 
 <StoryChapter number="01 · Context and framing" title="Why spend management—and why the admin side." />
 
-Spend management products have a well-documented employee-experience problem: most attention goes to expense submission. The admin side is consistently underserved, even though that is where financial control lives.
+In the spend management products I looked at, most attention goes to employees submitting expenses. The admin side is consistently underserved, even though that is where financial control lives.
 
-The African B2B context sharpens the problem. Corporate-card penetration is lower, teams often share a single card, and the resulting trust, fraud, and control implications are real. SpendTool explores an admin experience from the ground up—mobile first and grounded in that operational context.
+{/* NEEDS INPUT: the products you reviewed, or a source, for the employee-focus claim. */}
+
+The African B2B context sharpens the problem. Corporate-card penetration is lower, teams often share a single card, and the resulting trust, fraud, and control implications are real. I designed SpendTool's admin experience from the ground up: mobile first and grounded in that operational context.
+
+{/* NEEDS INPUT: where the shared-card and card-penetration context comes from (a source, or conversations with finance teams). */}
 
 <StoryPrinciples items={[
   { title: 'Reimbursement model', description: 'The employee spends first, submits later, and policy violations surface after the fact. Control is retrospective.' },
@@ -62,7 +66,7 @@ Treating Requests and Approvals as interchangeable creates an information archit
   { title: 'Approvals · Structural', description: 'The engine that determines who approves what, escalation triggers, and sign-off rules. It is configuration, not an inbox.' },
 ]} />
 
-Requests therefore earn a permanent bottom-navigation destination. Approval logic appears inside each request as context—such as “Triggered by: Spend above ₦50k rule”—while full workflow configuration remains on the web.
+So I gave Requests a permanent bottom-navigation destination. Approval logic appears inside each request as context—such as “Triggered by: Spend above ₦50k rule”—while full workflow configuration remains on the web.
 
 </StorySection>
 
@@ -80,6 +84,8 @@ Requests therefore earn a permanent bottom-navigation destination. Approval logi
 
   Urgency determines the order. Financial health and decisions come first; reflective reporting comes last.
 </StorySplit>
+
+{/* NEEDS INPUT: System diagram. A two-column map of mobile and web: Requests, Cards, Budgets, Team (limited) on mobile; approval rules, workflow setup and full team management on web, with the "Triggered by" rule crossing from web into a mobile request. Could replace the question-led phone frame, which reads like a screen. */}
 
 <StoryPrinciples items={[
   { title: 'Home', description: 'Wallet balance, budget utilisation, and pending work provide financial health in under five seconds.' },
@@ -119,6 +125,8 @@ Requests therefore earn a permanent bottom-navigation destination. Approval logi
 
 <StoryVisual src="/images/Spend-tool/pending-request.png" alt="SpendTool request detail showing transaction context and approval actions" width={2288} height={2200} caption="Transaction context is visible before approve or decline" wide />
 
+{/* NEEDS INPUT: re-export screens before publishing. pending-request.png says "Aprove" and shows the Uber logo for the X request; budgets.png shows Operations and Software both at "78% used, N1,200,000 left" though their budgets differ, and the top-up sheet shows Marketing at N704,000 while the list says N1,200,000 left; the Requests subtitle reads "Manage your finance modules". */}
+
 </StorySection>
 
 <StorySection>
@@ -139,7 +147,7 @@ Requests therefore earn a permanent bottom-navigation destination. Approval logi
 
 <StoryChapter number="07 · Card issuance" title="One action becomes five isolated decisions." />
 
-Issuing a company card combines identity, card type, budget, spend limits, and final verification. Compressing these decisions into a single form would increase cognitive load and make costly mistakes easier.
+Issuing a company card combines identity, card type, budget, spend limits, and final verification. I considered a single form, but compressing these decisions into one screen would increase cognitive load and make costly mistakes easier.
 
 <StoryPrinciples items={[
   { title: '01 · Assignee', description: 'Search and filter the team rather than relying on a list that fails as the organisation grows.' },
@@ -188,6 +196,8 @@ The wallet establishes the available pool before the administrator considers dep
 
 <StoryVisual src="/images/Spend-tool/budget-config.png" alt="SpendTool budget detail, pause confirmation, and paused budget states" width={2662} height={2124} caption="Before, confirmation, and resulting state for pausing a department budget" wide />
 
+{/* NEEDS INPUT: Edge states. A budget top-up larger than the unallocated wallet balance, and the Requests tab with nothing pending. */}
+
 </StorySection>
 
 <StorySection>
@@ -220,6 +230,12 @@ The work was shaped by questions that precede interface styling: what belongs on
   The best fintech UX is not invisible. It is legible—the administrator always knows what state things are in, what they can do, and what will happen when they do it.
 </StoryQuote>
 
+{/* NEEDS INPUT: validation. Any feedback from finance administrators or a usability test; if none, say plainly that the concept is untested. */}
+
+{/* NEEDS INPUT: one or two signals you would measure, for example time from request to decision on mobile. */}
+
 Natural extensions include the employee-side mobile experience, a deeper Analysis module, and the full web counterpart where the configuration deliberately excluded from mobile would live.
+
+{/* NEEDS INPUT: "What I'd do differently". One specific change, for example checking the Requests and Approvals split with two or three finance admins before designing the screens, and why. */}
 
 </StorySection>

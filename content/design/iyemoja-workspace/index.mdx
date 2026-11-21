@@ -1,0 +1,211 @@
+import CalloutBox from "@/components/ui/CalloutBox";
+import ScrollReveal from "@/components/motion/ScrollReveal";
+import { StoryVisual } from "@/components/case-study/SpendToolStory";
+
+export const metadata = {
+  title: 'Iyemoja Workspace: Booking Platform',
+  industry: 'Coworking · Bookings and payments',
+  role: 'Product Designer at INITS Limited, the only designer on the project',
+  // Cards show the industry only; the INITS role stays on the case study page.
+  cardTags: ['Coworking', 'Bookings and payments'],
+  duration: '1 week of design, October 2026',
+  year: 2026,
+  summary: 'A mobile-first booking site for a Lagos coworking space, designed in 1 week and built around a live floor plan and a checkout that holds your desk while you pay.',
+  challenge: 'Iyemoja Workspace took bookings by phone call, WhatsApp and walk-in, so visitors could not see what was free and staff had no single record of who had booked what. The business rules were strict: no guest bookings, a 10-minute hold with no extension, and no refunds.',
+  approach: 'Reviewed a competitor\'s booking process, found its sign-up wall, and moved account creation to after a space is chosen. Designed one responsive app, mobile first, with edge states for every floor plan and payment problem.',
+  solution: 'A live floor plan of every desk and room, one checkout flow for every plan that holds the space for 10 minutes while you pay with Paystack, and a small member portal for rescheduling and receipts, on a token-based design system.',
+  impact: 'Built and shipped; in UAT with the client.',
+  coverImage: '/images/Iyemoja/cs-01-hero.webp',
+  thumbnailImage: '/images/Iyemoja/iyemoja-card.webp',
+  coverWidth: 2400,
+  coverHeight: 1490,
+  gallery: [],
+  aspectRatio: 'wide',
+  featured: true,
+  team: 'A lean team, one person per role: me, a PM, a QA engineer, a frontend developer and a backend developer',
+  platforms: 'Responsive web, phone first',
+  tools: 'Figma, Claude',
+  tags: ['Booking flows', 'Responsive web', 'Design systems'],
+  projectType: 'product-design',
+  caseStudyLayout: 'rich',
+}
+
+<ScrollReveal>
+
+*Work done as a Product Designer at INITS Limited, for Iyemoja Workspace.*
+
+**TL;DR:** Iyemoja Workspace took bookings by phone call, WhatsApp and walk-in. In 1 week, as the only designer, I designed the responsive web platform that replaces that: a live floor plan of every desk and room, one checkout flow for every plan that holds the space for 10 minutes while you pay, and a small member portal for rescheduling and receipts. The hardest parts were making a strict set of business rules (no guest bookings, no refunds, no extensions) feel fair on a phone, and building a design system that survived four colour directions. The platform has been built and shipped, and is now in UAT with the client.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Booking a desk meant sending a WhatsApp and waiting
+
+Iyemoja is a coworking space in Victoria Island, Lagos, with 17 desks downstairs, 2 conference rooms upstairs, a small team workspace, a private office and a podcast room. Every booking went through phone calls, WhatsApp messages or walk-ins, so a visitor could not see what was free, and staff had no single record of who had booked what.
+
+{/* NEEDS INPUT: what this cost, for example how long a booking took to confirm, double bookings, or missed enquiries, and where you heard it. */}
+
+The client had looked at an off-the-shelf booking product and decided not to use it. That set the brief: a platform built around Iyemoja's own plans, from an hourly room booking to a company plan for up to 10 staff, where most people would book from their phones. It also set the pace: the client wanted the system barely a month before their launch, so design had 1 week.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## What the competitor review showed
+
+Before designing, we reviewed how a competitor handles booking. Their flow asks you to create an account before you can see or choose a space, so the first thing a visitor meets is a form, not a desk. That was the gap we set out to close, and it shaped the first decision below.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## The rules were fixed. The experience around them was not.
+
+<CalloutBox title="The requirements came with rules the design could not soften">
+
+- **No guest path.** Every booking, even a single day pass, needs a member account.
+- **A 10-minute hold, no extension.** The space is reserved while you pay, then released.
+- **No cancellations or refunds.** You can only reschedule, and only until 24 hours before.
+
+</CalloutBox>
+
+Each of these protects the business, and each one is a reason to abandon a booking on a phone. My job was to put them where they help the user instead of where they block them.
+
+{/* NEEDS INPUT: any client conversations or user feedback that showed you which rule worried people most. */}
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Decision 1: Choose your space first, create the account later
+
+Where the competitor asks you to sign up before you see anything, I moved account creation to after you have picked a space, plan, date and time, so by the time we ask for your name, email, phone and password you already have something to lose. Email is verified with a one-time code, and resending it shows a clear "code sent again" confirmation.
+
+Returning customers were the edge case. If someone enters an email that already has an account, I show an Alert banner with a Sign In link rather than an error beside the field, because the email is not wrong; the person just needs a different path, and their hold keeps running while they take it. New accounts land on a dashboard that shows the held reservation and its timer, with Complete payment as the next step. Existing members skip that and go straight to review and pay.
+
+<StoryVisual
+  src="/images/Iyemoja/cs-02-space-first.webp"
+  alt="Two mobile screens: the You already have an account alert with a Sign In link on the details form, and a new member's dashboard showing the reservation held with 09:42 remaining"
+  width={2400}
+  height={1680}
+  wide
+  background="#EBEBEB"
+  caption="Left: a returning customer gets a way in, not an error. Right: a new account sees its held space and how long is left before anything else."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Decision 2: The floor plan is the booking page
+
+The brief asked for a to-scale plan where every desk and room is clickable, not a list. I treated it as the entry point to booking rather than a picture on the Home page. Held spaces look exactly like booked ones, so no one waits on a desk that might free up.
+
+Most of the work was in the states nobody plans for. I designed what happens when a space is taken between your tap and Book (the plan refreshes and checkout does not start), when a whole floor is fully booked, and when nothing is free on your date. I treated it as one responsive app, not two: the same states exist on mobile and desktop, with the Alert above the controls on a phone and inside the right-hand panel on desktop, where your eyes already are. When I found the desktop versions of "Space taken" and "Nothing available" were missing, I added them before handoff.
+
+<StoryVisual
+  src="/images/Iyemoja/cs-03-floor-plan-states.webp"
+  alt="Three floor plan states: space taken on mobile, downstairs fully booked on mobile with a View Upstairs button, and space taken on desktop with the alert in the side panel"
+  width={2400}
+  height={1399}
+  wide
+  background="#EBEBEB"
+  caption="The same rule, three situations. A fully booked floor points you upstairs or to another date instead of a dead end."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Decision 3: Two pieces of client feedback, two targeted fixes
+
+The client flagged two things. First, the payment countdown was easy to miss. In my earlier version it sat in a thin bar under the header, and the PM pointed out that on desktop that bar is far from the form you are filling in. Before changing anything, I asked the PM which screen and device the client meant, whether they saw the prototype or static screens, whether the problem was noticing the timer or not feeling the urgency, and whether they had suggested a fix. I wanted to fix the actual problem, not just make the timer bigger.
+
+I moved the timer into the form column, directly above the step indicator, as a solid block with a much larger countdown. The client accepted the change.
+
+<StoryVisual
+  src="/images/Iyemoja/cs-04-timer.webp"
+  alt="Before and after of the Your details step on desktop: the countdown in a thin black bar under the header, then a solid black block with a large countdown inside the form column"
+  width={2400}
+  height={1121}
+  wide
+  background="#EBEBEB"
+  caption="Before: the countdown sat at the far right of a thin bar, away from the form. After: it sits where you are working."
+/>
+
+Second, a signed-in member still saw the public site's Home link first in the navigation instead of their dashboard. Once you are signed in, Dashboard now replaces Home and shows as the active link, so the way back to your bookings is always the first item in the header.
+
+<StoryVisual
+  src="/images/Iyemoja/cs-05-signed-in-nav.webp"
+  alt="Before and after of the signed-in desktop header: Home as the first nav item, then Dashboard in its place as the active link with a red underline"
+  width={2400}
+  height={1160}
+  wide
+  background="#EBEBEB"
+  caption="A signed-in member's first nav item now takes them to their bookings, not back to the marketing site."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Decision 4: No refunds, said early and said plainly
+
+Because there are no refunds, the worst outcome is someone discovering it after they have paid. The policy appears in four places: the FAQs, the Spaces & Plans page, the review step before payment, and the Reschedule screen. At review, a tick box ("I understand this booking cannot be refunded or cancelled") sits above Pay with Paystack. I added it to make sure people have read and agreed to the terms before they book. Until it is ticked, you cannot go on to the next step, so if the policy does not work for someone, they find out before they pay, not after. It costs one extra tap at the most sensitive moment in the flow, and I decided that was worth it for a policy with no way back.
+
+New accounts land on a dashboard that shows their held reservation, so I made review and pay a popup over it instead of a separate page. The held booking and its timer stay right behind the summary, paying feels like confirming something you already have, and closing the popup brings you back to your hold, not out of the flow.
+
+In the member portal there is no Cancel button anywhere, and booking status tags are only Upcoming, Rescheduled and Completed. I left out "Confirmed" because payment is what confirms a booking, so the tag would say nothing. Rescheduling reuses a single date and time picker instead of repeating the billing-unit pickers from the booking flow. Inside 24 hours, the screen says the booking can no longer be changed online and points to Front Desk.
+
+<StoryVisual
+  src="/images/Iyemoja/cs-06-reschedule-only.webp"
+  alt="Two mobile screens: booking detail with Download receipt and Reschedule as the only actions, and the Too late to reschedule warning with Front Desk contact details"
+  width={2400}
+  height={1680}
+  wide
+  background="#EBEBEB"
+  caption="Rescheduling is the only change on offer. Inside 24 hours, the screen sends you to a person."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Decision 5: A design system that could change colour without breaking
+
+The colour direction changed four times: purple, teal placeholders, monochrome greys at the PM's request (I dropped a cream tone because it was too close to a competitor's palette), and finally the client's brand red, #C0392B. Components bind to semantic tokens, so each change meant re-pointing tokens, not repainting screens.
+
+Red raised a real problem: it is also the colour of errors. I limited brand red to calls to action and selected states (the active nav link, chosen calendar days, time slots, plan cards and floor plan spaces) and kept black for text, borders and dark surfaces. Errors kept their own red and always come with words: alert banners add an icon and a light red background, and field errors pair a red border with a message under the field, so an error never relies on colour alone to look different from a selected desk. The system is documented in Figma, with a contrast check table for the token pairs, and a shared copy kept in step for the developers.
+
+<StoryVisual
+  src="/images/Iyemoja/cs-07-selected-vs-error.webp"
+  alt="Three close-ups: a calendar with the selected day in solid brand red, an alert banner with an icon and light red background, and a field error with a red border and a message"
+  width={2400}
+  height={1154}
+  wide
+  background="#EBEBEB"
+  caption="Brand red marks a choice. Errors always say what went wrong in words."
+/>
+
+{/* NEEDS INPUT: Options explored visual. The same plan card and time slot in the four colour directions (purple, teal, monochrome, brand red), side by side. Needs the purple and teal hex values. */}
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Where it landed
+
+The designs were handed off to development, built and shipped, and the platform is now in user acceptance testing with the client.
+
+{/* NEEDS INPUT: anything notable from UAT so far. */}
+
+The handoff covered every billing unit (hourly, half day, daily, weekly, monthly, day pack and company plan), the payment problems (payment not completed, hold expired, space no longer available, late payment), and member states down to staff-booked bookings awaiting payment, all laid out in labelled flow rows in the order a user clicks through them.
+
+{/* NEEDS INPUT: one line on how you worked with QA and the developers. */}
+
+Once it is live, success will be measured three ways: the share of bookings made online versus by WhatsApp, how many holds turn into payments, and how many reschedules are handled without Front Desk.
+
+</ScrollReveal>
+
+{/* NEEDS INPUT: "What I'd do differently" section. Two candidates from this project: in a 1 week design window, testing the checkout with even a few real Iyemoja customers on their phones, which might have caught the countdown issue before client review; and pushing for the real floor plan and brand colour on day one, since both arrived after screens were built. Add a "## What I'd do differently" heading inside a ScrollReveal once chosen. */}

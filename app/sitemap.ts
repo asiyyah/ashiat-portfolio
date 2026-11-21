@@ -1,9 +1,9 @@
-import { getAllCodeSlugs, getAllDesignSlugs } from '@/lib/projects'
+import { getAllCodeSlugs, getPublicDesignSlugs } from '@/lib/projects'
 import type { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/site'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const slugs = [...getAllDesignSlugs(), ...getAllCodeSlugs()]
+  const slugs = [...(await getPublicDesignSlugs()), ...getAllCodeSlugs()]
 
   const projectEntries: MetadataRoute.Sitemap = slugs.map((slug) => ({
     url: `${SITE_URL}/work/${slug}`,
