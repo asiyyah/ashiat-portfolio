@@ -18,8 +18,9 @@ export default async function Page() {
       <HomeHero />
       <ScrollReveal><HomeFeaturedWork projects={projects} /></ScrollReveal>
       <ScrollReveal><HomeExpertise /></ScrollReveal>
-      <ScrollReveal><HomeProcess /></ScrollReveal>
-      <ScrollReveal><HomeToolkit /></ScrollReveal>
+      {/* Not wrapped in ScrollReveal: the pinned section must not fade or shift while it sticks. */}
+      <HomeProcess />
+      <ScrollReveal y={0}><HomeToolkit /></ScrollReveal>
       <ScrollReveal><HomeTestimonials /></ScrollReveal>
     </div>
   );

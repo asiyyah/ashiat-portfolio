@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import styles from "../Home.module.css";
 
 const steps = [
@@ -41,6 +41,8 @@ const steps = [
  * On large screens with motion allowed, the section pins while the page scrolls and the cards
  * slide sideways until the last one is in view. Everywhere else it stays a normal swipeable row.
  */
+/** Share of the pinned scroll spent resting at each end. */
+const HOLD = 0.08;
 const PIN_QUERY = "(min-width: 1025px) and (hover: hover) and (prefers-reduced-motion: no-preference)";
 
 export default function HomeProcess() {
@@ -77,7 +79,11 @@ export default function HomeProcess() {
     target: sectionRef,
     offset: ["start start", "end end"],
   });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+  // Smooth out stepped mouse-wheel input so the cards glide instead of jumping.
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.25, restDelta: 0.0001 });
+  // The cards rest briefly at the start and end of the pinned scroll, so the hand-off to the
+  // normal page scroll isn't abrupt.
+  const x = useTransform(smoothProgress, [HOLD, 1 - HOLD], [0, -distance], { clamp: true });
 
   const isPinned = pinned && distance > 0;
 
@@ -94,7 +100,7 @@ export default function HomeProcess() {
     <section
       ref={sectionRef}
       className={`${styles.processSection} ${isPinned ? styles.processPinned : ""}`}
-      style={isPinned ? { height: `calc(100vh + ${distance}px)` } : undefined}
+      style={isPinned ? { height: `calc(100vh + ${distance / (1 - 2 * HOLD)}px)` } : undefined}
     >
       <div className={isPinned ? styles.processSticky : undefined}>
         <div className={styles.container}>
