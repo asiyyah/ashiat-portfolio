@@ -66,7 +66,7 @@ function HomeWorkCard({
         className={`${workStyles.imageWrapper} ${layout.aspectClass} ${study.slug === "payup" ? workStyles.payupBackdrop : ""}`}
       >
         <Image
-          src={study.thumbnailImage ?? study.coverImage}
+          src={study.slug === "iyemoja-workspace" ? study.coverImage : (study.thumbnailImage ?? study.coverImage)}
           alt={study.title}
           fill
           sizes={layout.imageSizes}
@@ -157,11 +157,12 @@ function HomeCodeCard({
 
 export default function HomeFeaturedWork({ projects }: { projects: PortfolioProject[] }) {
   const [activeTab, setActiveTab] = useState<ProjectType>("product-design");
-  // Follows HOME_DESIGN_LAYOUT. The locked case study is left off the home page.
-  const featuredOrder = ["hirewise", "iyemoja-workspace", "spend-tool", "payup"];
+  // Follows HOME_DESIGN_LAYOUT. PayUp stays on the Work page only.
+  const featuredOrder = ["hirewise", "iyemoja-workspace", "spend-tool", "revenue-management-platform"];
   const designProjects = projects
     .filter((project): project is DesignProject => project.projectType === activeTab)
-    .filter((project) => project.featured !== false && !project.locked)
+    .filter((project) => project.featured !== false)
+    .filter((project) => activeTab !== "product-design" || featuredOrder.includes(project.slug))
     .sort((a, b) => {
       const aIndex = featuredOrder.indexOf(a.slug);
       const bIndex = featuredOrder.indexOf(b.slug);
