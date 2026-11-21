@@ -65,14 +65,14 @@ export const DESIGN_CARD_ORDER = [
 
 /**
  * Card shapes for DESIGN_CARD_ORDER: two landscape cards, then the mobile project (portrait)
- * beside a wide card, then a full-width card. Images show uncropped and each row is even.
+ * beside a wide card, then a half-width card. Images show uncropped and each row is even.
  */
 export const DESIGN_CARD_LAYOUT: CardLayoutConfig[] = [
   DESIGN_LAYOUT_PATTERN[2],
   DESIGN_LAYOUT_PATTERN[3],
   DESIGN_LAYOUT_PATTERN[1],
   DESIGN_LAYOUT_PATTERN[0],
-  DESIGN_LAYOUT_PATTERN[5],
+  DESIGN_LAYOUT_PATTERN[2],
 ]
 
 /** Image used on project cards. Iyemoja uses its case study hero. */
