@@ -322,6 +322,35 @@
   display: none;
 }
 
+/* Pinned mode (large screens): the section sticks while the cards slide sideways */
+.processPinned {
+  overflow: visible;
+  padding: 0;
+}
+
+.processSticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.processTrack {
+  display: flex;
+  margin-top: 48px;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+
+.processTrack .processCard {
+  width: 280px;
+  flex: 0 0 auto;
+}
+
 .processCard {
   background: var(--surface);
   border: 1px solid var(--border);
