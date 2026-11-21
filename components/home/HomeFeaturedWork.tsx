@@ -9,25 +9,19 @@ import type { CodeProject, DesignProject, PortfolioProject, ProjectType } from "
 import {
   CODE_COVER_VARIANTS,
   CODE_LAYOUT_PATTERN,
+  DESIGN_CARD_LAYOUT,
+  DESIGN_CARD_ORDER,
   DESIGN_LAYOUT_PATTERN,
+  getDesignCardImage,
   PROJECT_TABS,
   getLayoutConfig,
 } from "@/components/work/project-layout";
 import CardTags from "@/components/work/CardTags";
 import LockedProjectCard from "@/components/work/LockedProjectCard";
 
-// Product design rows: two landscape cards, then the mobile project (portrait) beside a wide card,
-// so every image shows uncropped and each row's cards are the same height.
-const HOME_DESIGN_LAYOUT = [
-  DESIGN_LAYOUT_PATTERN[2],
-  DESIGN_LAYOUT_PATTERN[3],
-  DESIGN_LAYOUT_PATTERN[1],
-  DESIGN_LAYOUT_PATTERN[0],
-];
-
 function getHomeLayout(index: number, project?: DesignProject) {
   if (project?.projectType === "product-design") {
-    return getLayoutConfig(index, HOME_DESIGN_LAYOUT);
+    return getLayoutConfig(index, DESIGN_CARD_LAYOUT);
   }
   return getLayoutConfig(
     index,
@@ -66,7 +60,7 @@ function HomeWorkCard({
         className={`${workStyles.imageWrapper} ${layout.aspectClass} ${study.slug === "payup" ? workStyles.payupBackdrop : ""}`}
       >
         <Image
-          src={study.slug === "iyemoja-workspace" ? study.coverImage : (study.thumbnailImage ?? study.coverImage)}
+          src={getDesignCardImage(study)}
           alt={study.title}
           fill
           sizes={layout.imageSizes}
@@ -157,12 +151,11 @@ function HomeCodeCard({
 
 export default function HomeFeaturedWork({ projects }: { projects: PortfolioProject[] }) {
   const [activeTab, setActiveTab] = useState<ProjectType>("product-design");
-  // Follows HOME_DESIGN_LAYOUT. PayUp stays on the Work page only.
-  const featuredOrder = ["hirewise", "iyemoja-workspace", "spend-tool", "revenue-management-platform"];
+  // Same cards and order as the Work page; the home page shows the first four.
+  const featuredOrder = DESIGN_CARD_ORDER;
   const designProjects = projects
     .filter((project): project is DesignProject => project.projectType === activeTab)
     .filter((project) => project.featured !== false)
-    .filter((project) => activeTab !== "product-design" || featuredOrder.includes(project.slug))
     .sort((a, b) => {
       const aIndex = featuredOrder.indexOf(a.slug);
       const bIndex = featuredOrder.indexOf(b.slug);

@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/site";
 import { getAllPortfolioProjects } from "@/lib/projects";
 import type { CodeProject, DesignProject, ProjectType } from "@/types/project";
 import WorkContent from "@/components/work/WorkContent";
+import { DESIGN_CARD_ORDER } from "@/components/work/project-layout";
 
 export const metadata: Metadata = pageMetadata({
   title: "Work — Product Design & Code Projects",
@@ -21,7 +22,7 @@ export default async function WorkPage({
   const initialTab: ProjectType = requestedTab === "code" || requestedTab === "ui-design"
     ? requestedTab
     : "product-design";
-  const featuredOrder = ["revenue-management-platform", "spend-tool", "hirewise", "payup"];
+  const featuredOrder = DESIGN_CARD_ORDER;
   const orderedDesignProjects = projects
     .filter((project): project is DesignProject => project.projectType === "product-design")
     .sort((a, b) => {

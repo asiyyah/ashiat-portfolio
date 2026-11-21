@@ -11,7 +11,9 @@ import LockedProjectCard from "./LockedProjectCard";
 import {
   CODE_COVER_VARIANTS,
   CODE_LAYOUT_PATTERN,
+  DESIGN_CARD_LAYOUT,
   DESIGN_LAYOUT_PATTERN,
+  getDesignCardImage,
   PROJECT_TABS,
   getLayoutConfig,
 } from "./project-layout";
@@ -97,10 +99,7 @@ export default function WorkContent({
             {designProjects.length > 0 ? (
               <div className={styles.grid}>
                 {designProjects.map((project, index) => {
-                  const layout = getLayoutConfig(
-                    index,
-                    DESIGN_LAYOUT_PATTERN
-                  );
+                  const layout = getLayoutConfig(index, DESIGN_CARD_LAYOUT);
 
                   if (project.locked) {
                     return (
@@ -133,7 +132,7 @@ export default function WorkContent({
                           className={`${styles.imageWrapper} ${layout.aspectClass} ${project.slug === "payup" ? styles.payupBackdrop : ""}`}
                         >
                           <Image
-                            src={project.thumbnailImage ?? project.coverImage}
+                            src={getDesignCardImage(project)}
                             alt={project.title}
                             fill
                             sizes={layout.imageSizes}
