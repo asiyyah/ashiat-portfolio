@@ -8,9 +8,9 @@ export interface CardLayoutConfig {
 }
 
 export const PROJECT_TABS: Array<{ id: ProjectType; label: string }> = [
-  { id: 'product-design', label: 'Product Design' },
+  { id: 'product-design', label: 'Case Studies' },
   { id: 'ui-design', label: 'UI Design' },
-  { id: 'code', label: 'Built with Code' },
+  { id: 'code', label: 'Built with AI' },
 ]
 
 export const DESIGN_LAYOUT_PATTERN: CardLayoutConfig[] = [

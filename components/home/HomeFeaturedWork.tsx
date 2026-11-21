@@ -236,7 +236,7 @@ export default function HomeFeaturedWork({ projects }: { projects: PortfolioProj
             </div>
 
             <Link href={`/work?tab=${activeTab}`} className={styles.workViewAll}>
-              View all projects →
+              View all projects
             </Link>
           </>
         ) : (
@@ -253,7 +253,7 @@ export default function HomeFeaturedWork({ projects }: { projects: PortfolioProj
             </div>
 
             <Link href="/work?tab=code" className={styles.workViewAll}>
-              View all projects →
+              View all projects
             </Link>
           </>
         )}
