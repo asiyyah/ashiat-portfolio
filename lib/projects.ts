@@ -19,6 +19,7 @@ const designProjectLoaders: Record<string, () => Promise<DesignModule>> = {
   'revenue-management-platform': designModule(() => import('@/content/design/revenue-management-platform/index.mdx')),
   'spend-tool': designModule(() => import('@/content/design/spend-tool/index.mdx')),
   'iyemoja-workspace': designModule(() => import('@/content/design/iyemoja-workspace/index.mdx')),
+  'opportunity-hq': designModule(() => import('@/content/design/opportunity-hq/index.mdx')),
 }
 
 export function getAllDesignSlugs(): string[] {

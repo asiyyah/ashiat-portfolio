@@ -4,7 +4,6 @@ import {
   HomeFeaturedWork,
   HomeExpertise,
   HomeProcess,
-  HomeToolkit,
   HomeTestimonials,
 } from "@/components/home";
 import ScrollReveal from "@/components/motion/ScrollReveal";
@@ -18,9 +17,9 @@ export default async function Page() {
       <HomeHero />
       <ScrollReveal><HomeFeaturedWork projects={projects} /></ScrollReveal>
       <ScrollReveal><HomeExpertise /></ScrollReveal>
-      {/* Not wrapped in ScrollReveal: the pinned section must not fade or shift while it sticks. */}
+      {/* No section-level fade here: the intro and each step card fade in on their own,
+          so the card animation is visible on tablet and mobile too. Tools now live inside this section. */}
       <HomeProcess />
-      <ScrollReveal y={0}><HomeToolkit /></ScrollReveal>
       <ScrollReveal><HomeTestimonials /></ScrollReveal>
     </div>
   );

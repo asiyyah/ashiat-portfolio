@@ -56,16 +56,17 @@ export function getLayoutConfig(
 
 /** Case study order on the home and Work pages, so both show the same cards in the same order. */
 export const DESIGN_CARD_ORDER = [
-  'hirewise',
+  'opportunity-hq',
   'iyemoja-workspace',
   'spend-tool',
   'revenue-management-platform',
   'payup',
+  'hirewise',
 ]
 
 /**
  * Card shapes for DESIGN_CARD_ORDER: two landscape cards, then the mobile project (portrait)
- * beside a wide card, then a half-width card. Images show uncropped and each row is even.
+ * beside a wide card, then two half-width cards. Images show uncropped and each row is even.
  */
 export const DESIGN_CARD_LAYOUT: CardLayoutConfig[] = [
   DESIGN_LAYOUT_PATTERN[2],
@@ -73,6 +74,7 @@ export const DESIGN_CARD_LAYOUT: CardLayoutConfig[] = [
   DESIGN_LAYOUT_PATTERN[1],
   DESIGN_LAYOUT_PATTERN[0],
   DESIGN_LAYOUT_PATTERN[2],
+  DESIGN_LAYOUT_PATTERN[3],
 ]
 
 /** Image used on project cards. Iyemoja uses its case study hero. */

@@ -256,6 +256,36 @@ body {
   margin-bottom: 0.3rem;
   font-size: 1rem;
 }
+/* simple data tables inside case studies */
+.case-study-content .case-study-table {
+  overflow-x: auto;
+  margin: 0 0 1.75rem;
+  max-width: 68ch;
+}
+.case-study-content .case-study-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+.case-study-content .case-study-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--foreground);
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.case-study-content .case-study-table td {
+  padding: 0.6rem 0.75rem 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.case-study-content .case-study-table td:nth-child(2),
+.case-study-content .case-study-table th:nth-child(2) {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 /* pull quotes (the "It feels like / It actually is" blocks) */
 .case-study-content blockquote {
   margin: 2rem 0;

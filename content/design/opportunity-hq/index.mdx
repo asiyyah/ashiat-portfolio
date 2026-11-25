@@ -1,0 +1,274 @@
+import ScrollReveal from "@/components/motion/ScrollReveal";
+import { StoryVisual } from "@/components/case-study/SpendToolStory";
+
+export const metadata = {
+  title: 'Opportunity HQ: Job Search Workspace',
+  industry: 'Job search · Career tools',
+  role: 'Product designer and product owner: research, specs, IA, UI system, build direction, QA',
+  cardTags: ['Job search', 'Career tools'],
+  duration: '24 September – 26 October 2026 (about 5 weeks, 9 phases plus a post-launch pass)',
+  year: 2026,
+  summary: 'A private job-search workspace that finds design roles for me every morning, tells me why each one fits or doesn\'t, and carries a role from first look to tracked application.',
+  challenge: 'My job search spans Nigeria, Africa, EMEA, Canada, worldwide remote and relocation-friendly roles. No single board covers that, so every morning meant opening several sites, searching the same titles, and reading descriptions to answer the same three questions by hand.',
+  approach: 'I wrote four rules on day one and used them to settle every later trade-off: jobs arrive without me asking, no AI and no paid services, honest uncertainty, and private by construction.',
+  solution: 'A scheduled discovery run, a fixed and explainable match score, and a workspace that carries a role from first look to tracked application, including resume tailoring that uses only my own words.',
+  impact: 'In five weeks the product went from a spec to a working, tested workspace that runs discovery on its own every day.',
+  reflection: 'Trust is designed in the rules, not only the screens.',
+  coverImage: '/images/Opportunity-HQ/ohq-01-hero.webp',
+  thumbnailImage: '/images/Opportunity-HQ/ohq-card.webp',
+  coverWidth: 2400,
+  coverHeight: 1500,
+  gallery: [],
+  aspectRatio: 'wide',
+  featured: true,
+  team: 'Just me, pairing with an AI coding agent in the editor',
+  platforms: 'Web app',
+  tools: 'Next.js, TypeScript, Supabase (Postgres, Auth, Storage), GitHub Actions; all free tiers',
+  tags: ['Product Design', 'Systems Thinking', 'Design to Build'],
+  projectType: 'product-design',
+  caseStudyLayout: 'rich',
+}
+
+<ScrollReveal>
+
+Opportunity HQ is a private job-search workspace that finds design roles for me every morning, tells me why each one fits or doesn't, and carries a role from first look to tracked application. I designed it, wrote the product and UI specs, and directed the build end to end, pairing with an AI coding agent in the editor.
+
+**Scope:** 7 modules: Overview, Jobs, Companies, Applications, Resume tailoring, Search Profile, Sources.<br />
+**Status:** Phases 1–9 done; discovery runs live every day. Production deploy (Phase 10) not started.
+
+*All screens in this case study show sample data, not my real job search.*
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## The problem
+
+My job search spans Nigeria, Africa, EMEA, Canada, worldwide remote and relocation-friendly roles. No single board covers that, so every morning meant opening several sites, searching the same titles, and reading descriptions to answer the same three questions by hand.
+
+- **Is this actually a design role?** Boards return "Recruiter, Design" and engineering roles at design-tool companies for a "designer" search.
+- **Can I even apply?** "Remote" often means "remote in the US". Location and work-authorization limits hide deep in the description.
+- **Is it worth my time?** A "5+ years" line makes most boards and most people skip a role, even when the skills match.
+
+Once I did apply, the record lived in my head, a spreadsheet and my inbox. Tailoring a resume meant copying my master file and editing it from scratch for each role.
+
+The design question became: **how might jobs come to me already sorted, with the reasoning shown, so my time goes into deciding and applying instead of searching?**
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Principles I set before building
+
+I wrote four rules on day one and used them to settle every later trade-off.
+
+1. **Jobs arrive without me asking.** Discovery runs on a schedule. Manual entry exists only as a fallback.
+2. **No AI, no paid services.** Scoring, resume tailoring and cover letters run on fixed rules and only my own words. The result is free, repeatable and explainable.
+3. **Honest uncertainty.** If a fact is unknown, the app says so. It never guesses my years of experience, residence or work authorization, and it labels a score "provisional" when inputs are missing.
+4. **Private by construction.** One owner, row-level security on every table, no scraping of people's data, no automated messages.
+
+The non-goals mattered as much: no auto-apply, no AI-written text, no email finders, no multi-user accounts. Each one closed a door that would have made the product noisier or less trustworthy.
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-02-principles.webp"
+  alt="Four principle cards: Jobs arrive without me asking, No AI no paid services, Honest uncertainty, and Private by construction, each with the decision it settled, such as the discovery runner living in GitHub Actions and a weighted 35/25/20/10/10 match formula"
+  width={2400}
+  height={1500}
+  wide
+  caption="Four rules, written on day one, each with one decision it settled."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Designing a score I could trust
+
+A match score is only useful if I can see why it says what it says, so I designed it as a fixed, weighted formula rather than a black box. The same job and profile always give the same score, and every score breaks down into its parts.
+
+<div className="case-study-table">
+<table>
+  <thead>
+    <tr><th>Factor</th><th>Weight</th><th>What it checks</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Skills</td><td>35</td><td>How many of the job's required and preferred skills I have</td></tr>
+    <tr><td>Role</td><td>25</td><td>Exact title, related title, ambiguous hybrid, or unrelated</td></tr>
+    <tr><td>Location and eligibility</td><td>20</td><td>Stated restrictions, my residence, work authorization, target regions</td></tr>
+    <tr><td>Experience</td><td>10</td><td>Years asked for; never a hard filter</td></tr>
+    <tr><td>Domain and arrangement</td><td>10</td><td>Industry overlap and remote, hybrid or on-site preference</td></tr>
+  </tbody>
+</table>
+</div>
+
+Three decisions shaped how the score feels to use:
+
+- **Eligibility sits apart from fit.** A job is eligible, needs review, or ineligible. An ineligible job keeps its record and the reason, but gets no score, so a great-looking role I can't legally take never tops my list.
+- **Experience never disqualifies.** A 5+ year role stays visible when my skill alignment is 60% or more. That is how I actually search, and boards don't allow it.
+- **Words, not just numbers.** Scores fall into bands (80+ Strong, 60–79 Good, 40–59 Possible, under 40 Low) and always show as "82% · Strong Match", never colour alone. Each job carries a fit summary: matched and missing skills with the exact source line, gaps, and a priority label like "Stretch — apply if the role excites you".
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-03-fit-and-eligibility.webp"
+  alt="Fit and eligibility card for a sample job showing 86% Strong Match, an Eligible badge, the priority label Apply — strong fit, matched and missing skills, experience and domain gaps, and a factor table adding up to 86, with six numbered annotations"
+  width={2400}
+  height={1500}
+  wide
+  caption="Every score shows its working: the band in words, eligibility apart from fit, and the five factors that add up to the number."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Designing discovery that never lies
+
+The feed is only trustworthy if a job never disappears or shows up wrongly because a source had a bad day. So I treated the data rules as part of the user experience, not as backend detail.
+
+Every morning, jobs are found, filtered and scored before I open the app:
+
+1. **Find boards.** Verify new employer boards, with a 90-second cap.
+2. **Fetch.** 32 reviewed boards plus 4 job sites.
+3. **Filter and dedupe.** Keep design roles, merge duplicates.
+4. **Score.** Same rules every run, with a 12-minute budget.
+
+A scheduled run reads public job APIs (Greenhouse, Lever and Ashby employer boards, plus Himalayas, We Work Remotely, Jobicy and Remotive) every morning at 08:00 Lagos time, whether or not my laptop is on.
+
+- **Nothing closes on one bad read.** A listing is marked closed only after two complete, trusted snapshots at least 24 hours apart confirm it is gone. A partial or suspiciously small snapshot never closes anything, and closing a listing never deletes my saved jobs or application history.
+- **Failures stay visible, not destructive.** A failing source keeps its jobs, retries after 24 hours (72 after seven failures), and shows up in Needs attention and Settings → Sources with recovery steps.
+- **Trust is labelled.** Employer boards are authoritative. Job-site listings are lower trust, link back to the original, and hide after 7 days unseen. Boards the app found by itself say "Found automatically" and can be paused. Manual jobs are labelled unverified.
+- **Freshness is stated.** The Overview tells me when jobs last refreshed and warns after 48 hours without a successful run.
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-04-discovery-sources.webp"
+  alt="Settings Sources table listing employer boards and job sites with type, health badges such as Healthy, Rarely matches and Failing, last success, open jobs, strong matches and a Pause control, with four numbered annotations"
+  width={2400}
+  height={1500}
+  wide
+  caption="Data rules, made visible: a source can fail, go quiet or flood the feed, and the table says which without deleting anything."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## From feed to decision
+
+I organised the product around the six things I actually do: **Discover → Evaluate → Decide → Prepare → Apply → Track**. Primary navigation is just four items (Overview, Jobs, Companies, Applications); everything else lives in Settings.
+
+**Overview: one decision at a time.** The Best new match card shows a single strong, eligible, open role with its strengths and gaps, and three keyboard-friendly actions: Start application, Later, Skip. Each is undoable and moves to the next role. Next to it, Needs attention collects follow-ups, deadlines within 7 days, new roles at watched companies and broken sources. The counters at the top reuse the exact queries behind the Jobs lists, so the number on a card always equals the list it opens.
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-05-overview.webp"
+  alt="Overview screen with a freshness line, four counters, the Best new match card with Start application, Later and Skip buttons, a Needs attention list, new high matches and discovery source health, with five numbered annotations"
+  width={2400}
+  height={1500}
+  wide
+  caption="One decision at a time: the best new match, what needs attention, and counters that always equal the lists they open."
+/>
+
+**Job detail: the reasoning, then the action.** The page leads with fit and eligibility, then source and freshness (posted, discovered, last verified, source authority). "Apply externally" opens the employer's page but does not mark the job as applied; only "Mark as applied" records a submission. I separated the two because opening a link is not the same as sending an application, and the tracker should never claim otherwise.
+
+**Applications: a pipeline with memory.** Stages run preparing → applied → interviewing → offer, plus four end states. Corrections are allowed and logged on a timeline, with notes, follow-ups and linked contacts. Personal state (saved, applied, dismissed) is kept separate from listing state (open, closed), so a closed listing never erases my history.
+
+**Resume tailoring without AI.** I upload my master resume once; the app proposes a structure and I confirm it. For each application, it lists the job's requirements beside my existing bullets, shows coverage and gaps, and lets me include, reorder and reword bullets. A reworded bullet stays linked to its original. The cover letter fills my own template. When I mark an application as applied, the materials freeze exactly as sent.
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-06-resume-tailoring.webp"
+  alt="Resume tailoring screen showing 90% requirement coverage with Motion design marked as a gap, experience bullets that can be included, reordered and reworded, a skills order list and output buttons, with five numbered annotations"
+  width={2400}
+  height={1500}
+  wide
+  caption="Only my own words, rearranged: coverage against the job's requirements, gaps named rather than filled, and rewordings linked to their originals."
+/>
+
+**Companies and contacts.** Watching a company means "tell me when it posts a design role". If the app can't read that company's board, it says "Discovery not connected" instead of implying coverage, and "Find its job board" tries to connect it. Contacts are entered by me; the app gives LinkedIn and web search links but fetches no personal data and sends no messages.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## When the product pushed back
+
+Using the app on real data exposed two problems that changed the design. Both came from the same mistake: treating "more" as "better".
+
+**1. The 83% problem (2 October).** A CTO role, an Office Manager role and non-design roles at Figma were scoring up to 83%. The cause was a default: any title that wasn't explicitly excluded counted as an "ambiguous" role and got half credit, and strong skill overlap did the rest. I changed the rule so a role must earn relevance with positive evidence: a design term in the title, one of my target titles, or a design-focused hybrid. "Recruiter, Design" and non-product design disciplines now count as unrelated. The trade-off is that an oddly titled design role can be missed, which I accepted and documented.
+
+**2. "Not another bloated job board" (26 October).** I had added four job sites to get more design roles quickly. They did add volume, but mostly noise, and the Jobs page started to feel like the boards I built this to replace. I reset the product around fewer, better roles:
+
+- Jobs opens on **Matches** (open, 60+, eligible or needs review), not All.
+- Only design-relevant roles are stored at all; every posting ID is still checked so closure stays accurate.
+- Each source shows its open and strong-match counts, gets a "Rarely matches" flag, and can be paused.
+- Instead of hand-picking more boards, the app now finds employer boards itself, starting from companies I watch, apply to, or see in strong matches, and only connects a board after verifying it belongs to that company.
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-07-focused-feed.webp"
+  alt="Before and after of the Jobs list: before, it opened on All jobs with the one strong match third under a recruiter role and two job-site listings; after, it opens on Matches with 12 open roles scoring 60 or more"
+  width={2400}
+  height={1500}
+  wide
+  caption="Before: every role stored, the strong match buried. After: the feed opens on matches and stores only design roles."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## One interface from one system
+
+The first working screens were built feature by feature and it showed: olive-tinted surfaces, an active nav item barely darker than the pale sidebar around it, text symbols (◫ ⌕ ▦ ▤) standing in for icons, 48px page headings and spacing that changed from page to page. Rather than restyling screens one at a time, I wrote a UI spec and ran the cleanup system-first.
+
+- **Audit, then tokens, then components, then screens.** Semantic colour tokens, a 4px spacing scale, a fixed radius scale (6, 8, 12, 16) and one icon library (Remix Icon at 14, 16, 20, 24px) came before any page was touched. Pages then consumed shared primitives such as Button, Badge, Card, EmptyState and Skeleton.
+- **Green as a signal, not a wallpaper.** Neutral near-white surfaces for the workspace; the brand green is kept for primary actions, selected states and focus. The sidebar's active item uses two cues, a contrasting background and a changed icon and text colour.
+- **Never colour alone.** Match bands, application stages, errors and disabled states always carry a word or number. The target is WCAG AA.
+- **States that tell you what is safe.** Empty states say what is empty, why, and what to do. Errors say what failed and whether my data is safe, for example "Couldn't refresh jobs. Your existing opportunities are still available."
+
+<StoryVisual
+  src="/images/Opportunity-HQ/ohq-08-one-system.webp"
+  alt="Before and after of the sidebar and a job card: before, pale-on-pale navigation with text symbols for icons; after, a dark green sidebar with a contrasting active item, one icon set and a written score band, above a strip of colour, spacing, radius and type tokens"
+  width={2400}
+  height={1500}
+  wide
+  caption="Tokens first, then screens: contrast for the active state, one icon set, and written bands."
+/>
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Outcome and what's next
+
+In five weeks the product went from a spec to a working, tested workspace that runs discovery on its own every day.
+
+- 9 build phases complete, each closed with a review and written evidence
+- 32 hand-verified employer boards plus automatic board discovery, and 4 job sites
+- 109 unit and database tests run against the real migrations; 12 browser tests against a mock server, so tests never hit real job boards
+- 28 logged product decisions, each with its reason and trade-off
+
+In the 30 days after the focused-feed change (26 October – 24 November):
+
+- 787 new design roles discovered; about 11–13 a day once the first week's backlog from newly connected boards had arrived
+- 38 employer boards connected automatically
+- 28 of 30 daily discovery runs succeeded
+
+{/* NEEDS INPUT: how many applications you have made through it, and the strong-match total if you want it here. */}
+
+**Known limits**
+
+- Not yet deployed to production (Phase 10): security and UX pass, backups and an operator guide remain.
+- Coverage is limited to Greenhouse, Lever and Ashby boards plus four job sites. Workable, Recruitee and custom careers pages aren't read, and Nigerian employer coverage is thin.
+- The title filter can drop design roles with unusual names such as "Experience Architect".
+- Resume parsing is rule-based, so complex layouts need manual correction and scanned PDFs can't be read.
+
+</ScrollReveal>
+
+<ScrollReveal>
+
+## Reflection
+
+**Trust is designed in the rules, not only the screens.** The decisions that mattered most were invisible ones: when a job may close, what counts as a design role, what happens when a source fails. Each one decided whether I could believe what the interface showed me.
+
+**Being the user is a strength and a trap.** I caught the bloated feed because I lived in it every morning. But I also added the job sites because I wanted more roles, before asking whether more roles would help. Next time I'd define the success signal (strong matches per week, not jobs per run) before adding a source.
+
+**Directing a build is design work.** Working with an AI coding agent, my job was to write precise specs, set non-negotiables, review every phase against evidence, and keep a decision log. Clear specs produced predictable software; vague ones produced the 83% problem.
+
+</ScrollReveal>

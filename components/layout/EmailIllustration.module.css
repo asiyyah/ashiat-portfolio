@@ -1,0 +1,151 @@
+/* Colours come from the footer tokens (--card-*, --footer-*), so light and dark both work. */
+.illustration {
+  /* softer shadow and glow; lighter still on the light footer (site dark mode) where they read heavy */
+  --ei-shadow: 0.2;
+  --ei-glow: 0.08;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+:global([data-theme="dark"]) .illustration {
+  --ei-shadow: 0.1;
+  --ei-glow: 0.05;
+}
+
+.glowStart { stop-color: var(--footer-fg); stop-opacity: var(--ei-glow); }
+.glowEnd { stop-color: var(--footer-fg); stop-opacity: 0; }
+
+.shadowStart { stop-color: #000000; stop-opacity: var(--ei-shadow); }
+.shadowEnd { stop-color: #000000; stop-opacity: 0; }
+
+.backTop { stop-color: color-mix(in srgb, var(--card-bg) 80%, var(--card-fg)); }
+.backBottom { stop-color: color-mix(in srgb, var(--card-bg) 70%, var(--card-fg)); }
+
+.flapOpen,
+.flapClosed {
+  fill: color-mix(in srgb, var(--card-bg) 84%, var(--card-fg));
+  stroke: color-mix(in srgb, var(--card-bg) 84%, var(--card-fg));
+  /* the flap hinges on its top edge (closed) or bottom edge (open) */
+  transform-box: fill-box;
+}
+
+.flapOpen { transform-origin: 50% 100%; }
+
+.flapClosed {
+  transform-origin: 50% 0%;
+  opacity: 0; /* the finished still image has no closed flap */
+}
+
+.paper {
+  fill: var(--card-bg);
+  stroke: color-mix(in srgb, var(--card-bg) 88%, var(--card-fg));
+  stroke-width: 1;
+}
+
+.hello {
+  fill: var(--card-fg);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.line { fill: var(--card-fg); opacity: 0.16; }
+
+.seal { fill: var(--card-fg); }
+
+.sealMark {
+  fill: var(--card-bg);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.frontTop { stop-color: var(--card-bg); }
+.frontBottom { stop-color: color-mix(in srgb, var(--card-bg) 90%, var(--card-fg)); }
+
+.fold {
+  stroke: color-mix(in srgb, var(--card-bg) 82%, var(--card-fg));
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.edge {
+  stroke: color-mix(in srgb, var(--card-bg) 86%, var(--card-fg));
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+/* ─── Motion ────────────────────────────────────────────────────────
+   Default (no JS, reduced motion): the finished still image.
+   data-anim="ready": hidden start state. data-anim="play": runs once. */
+.letterLift,
+.float,
+.shadow {
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* start state */
+  .illustration[data-anim="ready"] .stage { opacity: 0; transform: translateY(28px); }
+  .illustration[data-anim="ready"] .flapClosed { opacity: 1; }
+  .illustration[data-anim="ready"] .flapOpen { transform: scaleY(0); }
+  .illustration[data-anim="ready"] .letterRise { transform: translateY(140px); }
+  .illustration[data-anim="ready"] .shadow,
+  .illustration[data-anim="ready"] .glow { opacity: 0; }
+
+  /* play */
+  .illustration[data-anim="play"] .stage { animation: eiAppear 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .illustration[data-anim="play"] .glow,
+  .illustration[data-anim="play"] .shadow { animation: eiFade 900ms ease-out both; }
+  .illustration[data-anim="play"] .flapClosed { animation: eiFlapClose 260ms ease-in 700ms both; }
+  .illustration[data-anim="play"] .flapOpen { animation: eiFlapOpen 380ms cubic-bezier(0.22, 1, 0.36, 1) 940ms both; }
+  .illustration[data-anim="play"] .letterRise { animation: eiLetterRise 900ms cubic-bezier(0.34, 1.35, 0.64, 1) 1250ms both; }
+  .illustration[data-anim="play"] .float { animation: eiFloat 3.6s ease-in-out 2.4s infinite alternate; }
+  .illustration[data-anim="play"] .shadow { animation: eiFade 900ms ease-out both, eiShadow 3.6s ease-in-out 2.4s infinite alternate; }
+}
+
+@keyframes eiAppear {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes eiFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes eiFlapClose {
+  from { opacity: 1; transform: scaleY(1); }
+  99% { opacity: 1; transform: scaleY(0); }
+  to { opacity: 0; transform: scaleY(0); }
+}
+
+@keyframes eiFlapOpen {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes eiLetterRise {
+  from { transform: translateY(140px); }
+  to { transform: translateY(0); }
+}
+
+@keyframes eiFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(-9px); }
+}
+
+@keyframes eiShadow {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.92); opacity: 0.8; }
+}

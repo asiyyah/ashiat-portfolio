@@ -15,6 +15,10 @@ import CaseStudyTracker from "@/components/analytics/CaseStudyTracker";
 import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/site";
 
+// Outline tags: all the same, so none of them looks like a button or a selected filter
+const TAG_CLASS =
+  "text-xs px-3 py-1 rounded-full border border-border bg-transparent text-[var(--text-soft)]";
+
 interface Props {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ from?: string }>;
@@ -182,17 +186,10 @@ function RichCaseStudyLayout({
             <p className="caption mb-4">{project.year}</p>
             <Heading as="h1">{project.title}</Heading>
             <div className="hero-tags mt-4">
-              <span className="text-xs px-3 py-1 rounded-full bg-foreground text-background font-medium">
-                Case Study
-              </span>
-              <span className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border">
-                {project.industry}
-              </span>
+              <span className={TAG_CLASS}>Case Study</span>
+              <span className={TAG_CLASS}>{project.industry}</span>
               {(project.tags ?? ["Enterprise Design", "UI/UX Design"]).map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border"
-                >
+                <span key={tag} className={TAG_CLASS}>
                   {tag}
                 </span>
               ))}
@@ -281,10 +278,7 @@ function CodeProjectLayout({
           </Body>
           <div className="mt-6 flex flex-wrap gap-2">
             {project.stack?.map((tech) => (
-              <span
-                key={tech}
-                className="text-xs px-3 py-1 rounded-full bg-surface text-muted border border-border"
-              >
+              <span key={tech} className={TAG_CLASS}>
                 {tech}
               </span>
             ))}

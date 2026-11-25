@@ -45,16 +45,18 @@ export function StoryVisual({
   return (
     <figure
       className={`${styles.visual} ${wide ? styles.visualWide : ""} ${dark ? styles.visualDark : ""}`}
-      style={background ? { background } : undefined}
     >
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className={styles.image}
-        sizes={wide ? "(max-width: 768px) 100vw, 1120px" : "(max-width: 768px) 100vw, 768px"}
-      />
+      {/* The frame holds only the image; the caption sits below it as supporting text. */}
+      <div className={styles.frame} style={background ? { background } : undefined}>
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className={styles.image}
+          sizes={wide ? "(max-width: 768px) 100vw, 1120px" : "(max-width: 768px) 100vw, 768px"}
+        />
+      </div>
       {caption && <figcaption className={styles.caption}>{caption}</figcaption>}
     </figure>
   );

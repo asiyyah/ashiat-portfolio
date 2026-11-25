@@ -1,4 +1,5 @@
-import FooterContactForm from "./FooterContactForm";
+import CopyEmailButton from "./CopyEmailButton";
+import EmailIllustration from "./EmailIllustration";
 import { CONTACT_EMAIL } from "@/lib/site-links";
 import styles from "./Footer.module.css";
 
@@ -16,11 +17,11 @@ export default function ContactPanel() {
         <p className={styles.intro}>
           Bring me the complicated part. Tell me what you&apos;re building, where it feels stuck, and what a useful outcome looks like.
         </p>
-        <a className={styles.emailLink} href={`mailto:${CONTACT_EMAIL}`}>
-          {CONTACT_EMAIL}
-        </a>
+        <CopyEmailButton email={CONTACT_EMAIL} />
       </div>
-      <FooterContactForm />
+      <div className={styles.illustration} aria-hidden="true">
+        <EmailIllustration />
+      </div>
     </section>
   );
 }
